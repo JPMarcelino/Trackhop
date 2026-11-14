@@ -111,6 +111,42 @@ object MusicBrainz {
         return ids
     }
 
+    private const val TITLES = "musicbrainz_isrc_titles"
+
+    /**
+     * The other names of the piece recorded under [isrc]: the title of its MusicBrainz work and the
+     * work's aliases ("Les Chants magnétiques, Part 4" → "Magnetic Fields, Part 4"). For a song a
+     * service lists in another language than the library (#57, Spotify's China 1981 concert in
+     * French). Two more requests the first time (the recording's work, then its names), remembered
+     * like the recordings; empty when MusicBrainz knows none or did not answer. Never throws.
+     */
+    suspend fun otherTitles(env: Env, isrc: String): List<String> {
+        val k = isrc.trim().uppercase().replace("-", "")
+        if (!ISRC.matches(k)) return emptyList()
+        val prefs = env.keyValues(TITLES)
+        prefs[k]?.let { saved ->
+            val titles = saved.substringBefore('|').split('\u001F').filter { it.isNotEmpty() }
+            val at = saved.substringAfter('|', "0").toLongOrNull() ?: 0
+            if (now() - at < (if (titles.isEmpty()) NEGATIVE_TTL_MS else TTL_MS)) return titles
+        }
+        if (now() < restUntil) return emptyList()
+        val recording = recordings(env, k).firstOrNull() ?: return emptyList()
+        val rec = get("recording/$recording?inc=work-rels&fmt=json") ?: return emptyList()
+        val works = runCatching { parseJson(rec)["relations"].arr }.getOrDefault(emptyList())
+            .filter { it["target-type"].str == "work" }.mapNotNull { mbid(it["work"]["id"].str) }.distinct().take(2)
+        val titles = ArrayList<String>()
+        for (w in works) {
+            val body = get("work/$w?inc=aliases&fmt=json") ?: return emptyList()
+            val j = runCatching { parseJson(body) }.getOrNull() ?: continue
+            j["title"].str?.let { titles += it }
+            j["aliases"].arr.mapNotNullTo(titles) { it["name"].str }
+        }
+        val found = titles.map { it.trim() }.filter { it.isNotEmpty() && '\u001F' !in it && '|' !in it }.distinct().take(8)
+        if (prefs.size >= MAX) prefs.clear()
+        prefs[k] = "${found.joinToString("\u001F")}|${now()}"
+        return found
+    }
+
     /** What this device already knows of an ISRC from earlier lookups: the recordings and their artists. */
     data class Known(val recordings: List<String>, val artists: List<String>)
 

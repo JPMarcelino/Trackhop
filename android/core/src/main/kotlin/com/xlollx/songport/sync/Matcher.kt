@@ -175,6 +175,9 @@ object Matcher {
         return sb.toString()
     }
 
+    /** [title]'s subtitle as written (" - Live", " (Remastered)"), or "" when it has none. */
+    fun subtitleOf(title: String): String = SUBTITLE.find(title)?.value.orEmpty()
+
     /** A subtitle as written: from the first bracket or spaced dash on ("Song (Live)", "Song - Mono"). */
     private val SUBTITLE = Regex("""\s*(?:[(\[]|\s[-–—]\s).*$""")
     /** A numbered part as written, with what follows: ", Pt. 4", " Part IV", " - Teil 2". */

@@ -1096,10 +1096,10 @@ class SyncEngine(
         var runnerUp: Matcher.Scored? = null
         var sawCandidates = false
         var sawTags = false
-        fun consider(found: List<Track>): Matcher.Scored? {
+        fun consider(found: List<Track>, against: Track = s): Matcher.Scored? {
             if (found.isNotEmpty()) sawCandidates = true
             if (found.any { it.mbids.isNotEmpty() }) sawTags = true
-            val best = Matcher.bestScored(s, found, 0.0, policy) ?: return null
+            val best = Matcher.bestScored(against, found, 0.0, policy) ?: return null
             if (best.score >= policy.acceptThreshold) return best
             if (best.score > (runnerUp?.score ?: 0.0)) runnerUp = best
             return null
@@ -1127,6 +1127,19 @@ class SyncEngine(
             for (v in variants) {
                 if (!tried.add(key(v))) continue
                 consider(dst.searchFor(env, v, targetId))?.let { return it }
+            }
+            // The piece under another of its names, on a personal server: the source lists it in another
+            // language than the library ("Chants Magnetiques, Pt. 4 - Live" for "Magnetic Fields, Part 4",
+            // #57). Asked of MusicBrainz by the ISRC, each name keeps the source's subtitle ("- Live").
+            val isrc = s.isrcNorm
+            if (s.kind.isEmpty() && dst.matchesByMbid && isrc != null) {
+                val own = Matcher.normalizeTitle(s.title)
+                val sub = Matcher.subtitleOf(s.title)
+                for (name in MusicBrainz.otherTitles(env, isrc).filter { Matcher.normalizeTitle(it) != own }.take(4)) {
+                    val other = s.copy(title = name + sub, isrc = null, mbids = emptyList())
+                    if (!tried.add(key(other))) continue
+                    consider(dst.searchFor(env, other, targetId), against = other.copy(isrc = s.isrc, mbids = s.mbids))?.let { return it }
+                }
             }
             // Last resort, where the service has one: a wider catalogue (YouTube videos for YouTube Music).
             if (s.kind.isEmpty()) consider(dst.searchWide(env, s))?.let { return it }
