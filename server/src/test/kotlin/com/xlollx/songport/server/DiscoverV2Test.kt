@@ -209,7 +209,9 @@ class DiscoverV2Test {
         assertEquals("Band A", o["lineup"]!!.jsonArray[0].jsonPrimitive.content)
         assertTrue(o["palette"]!!.jsonObject.s("ground")!!.matches(Regex("#[0-9A-F]{6}")))
         assertTrue(o.s("note")!!.contains("Connect a listening service"))
-        assertTrue(o.s("coverPrompt")!!.contains("\"Mix\""))
+        // The name as a theme, never quoted: image models write out quoted text.
+        assertTrue(o.s("coverPrompt")!!.contains("inspired by: mix."))
+        assertFalse(o.s("coverPrompt")!!.contains("\""))
         assertEquals(400, api("GET", "poster?service=csv&playlist=Mix&layout=huge").code)
         assertEquals(404, api("GET", "poster?service=csv&playlist=Nope").code)
         assertEquals(400, api("GET", "poster?service=csv").code)
