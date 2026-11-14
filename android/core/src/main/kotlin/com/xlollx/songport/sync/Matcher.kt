@@ -253,6 +253,12 @@ object Matcher {
 
     private fun partOf(t: String): String? = PART_N.find(t)?.groupValues?.get(1)
 
+    /** The part a title names ("Oxygene, Pt. 4", "Magnetic Fields III" → "4", "3"), or null when it names none. */
+    fun partNumber(title: String): String? {
+        val n = normalizeTitle(title)
+        return partOf(n) ?: TRAILING_N.matchEntire(n)?.groupValues?.get(2)?.let { it.toIntOrNull()?.toString() ?: roman(it)?.toString() }
+    }
+
     /** The numbers in a normalised title, as words: two titles with different ones are different pieces. */
     private fun numbers(t: String): Set<String> = t.split(' ').filter { w -> w.isNotEmpty() && w.all { it.isDigit() } }.toSet()
 

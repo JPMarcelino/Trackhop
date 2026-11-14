@@ -1131,14 +1131,27 @@ class SyncEngine(
             // The piece under another of its names, on a personal server: the source lists it in another
             // language than the library ("Chants Magnetiques, Pt. 4 - Live" for "Magnetic Fields, Part 4",
             // #57). Asked of MusicBrainz by the ISRC, each name keeps the source's subtitle ("- Live").
+            // Stricter than a search by the source's own title, never instead of it: only after every one
+            // of those found nothing; a name must say the same part as the source; the file must be by
+            // the same artist and, where both lengths are known, within a fifth of it; and what comes
+            // close but not enough is not offered either.
             val isrc = s.isrcNorm
             if (s.kind.isEmpty() && dst.matchesByMbid && isrc != null) {
                 val own = Matcher.normalizeTitle(s.title)
                 val sub = Matcher.subtitleOf(s.title)
-                for (name in MusicBrainz.otherTitles(env, isrc).filter { Matcher.normalizeTitle(it) != own }.take(4)) {
+                val part = Matcher.partNumber(s.title)
+                val names = MusicBrainz.otherTitles(env, isrc)
+                    .filter { Matcher.normalizeTitle(it) != own && Matcher.partNumber(it) == part }.take(4)
+                for (name in names) {
                     val other = s.copy(title = name + sub, isrc = null, mbids = emptyList())
                     if (!tried.add(key(other))) continue
-                    consider(dst.searchFor(env, other, targetId), against = other.copy(isrc = s.isrc, mbids = s.mbids))?.let { return it }
+                    val found = dst.searchFor(env, other, targetId)
+                    if (found.isNotEmpty()) sawCandidates = true
+                    val best = Matcher.bestScored(other.copy(isrc = s.isrc, mbids = s.mbids), found, 0.0, policy) ?: continue
+                    val sameArtist = Matcher.artistScore(s.artists, best.track.artists) >= 0.9
+                    val sameLength = s.durationMs <= 0 || best.track.durationMs <= 0 ||
+                        kotlin.math.abs(s.durationMs - best.track.durationMs) * 5 <= maxOf(s.durationMs, best.track.durationMs)
+                    if (best.score >= policy.acceptThreshold && sameArtist && sameLength) return best
                 }
             }
             // Last resort, where the service has one: a wider catalogue (YouTube videos for YouTube Music).

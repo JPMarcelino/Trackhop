@@ -32,7 +32,7 @@ class OtherTitlesTest {
             val body = when {
                 p.endsWith("/isrc/FRZ118100004") -> """{"recordings":[{"id":"$rec","title":"Les Chants magnétiques, Part 4"}]}"""
                 p.endsWith("/recording/$rec") -> """{"id":"$rec","relations":[{"target-type":"work","type":"performance","work":{"id":"$work","title":"Les Chants magnétiques, Part 4"}}]}"""
-                p.endsWith("/work/$work") -> """{"id":"$work","title":"Les Chants magnétiques, Part 4","aliases":[{"name":"Magnetic Fields, Part 4"}]}"""
+                p.endsWith("/work/$work") -> """{"id":"$work","title":"Les Chants magnétiques, Part 4","aliases":[{"name":"Magnetic Fields, Part 4"},{"name":"Magnetic Fields"}]}"""
                 else -> null
             }
             val bytes = (body ?: """{"error":"x"}""").toByteArray()
@@ -93,5 +93,27 @@ class OtherTitlesTest {
         assertEquals(1, r.unmatchedTracks.size)
         // And "Equinoxe" is not offered as the closest.
         assertTrue(r.suggestions.isEmpty())
+    }
+
+    @Test fun anotherSongWithTheSameNameIsNeverTaken() {
+        val src = MemoryService("msrc"); val dst = Library("mdst")
+        src.lists["p"] = mutableListOf(Track("s1", "Chants Magnetiques, Pt. 4 - Live", listOf("Jean-Michel Jarre"), "Les concerts en Chine 1981 (Live)", 380_000, isrc = "FRZ118100004"))
+        // The English name, by another artist; another part of the piece; the right name but far too long.
+        dst.catalogue += Track("cover", "Magnetic Fields, Part 4 (Live)", listOf("Some Tribute Band"), "Covers", 380_000)
+        dst.catalogue += Track("part1", "Magnetic Fields (Live)", listOf("Jean-Michel Jarre"), "The Concerts in China", 380_000)
+        dst.catalogue += Track("p1", "Magnetic Fields, Part 1 (Live)", listOf("Jean-Michel Jarre"), "The Concerts in China", 380_000)
+        dst.catalogue += Track("long", "Magnetic Fields, Part 4 (Live) [Extended]", listOf("Jean-Michel Jarre"), "Remixes", 900_000)
+        val r = sync(src, dst)
+        assertTrue(dst.lists["t"]!!.map { it.id }.toString(), dst.lists["t"]!!.isEmpty())
+        assertEquals(1, r.unmatchedTracks.size)
+    }
+
+    @Test fun aSongFoundByItsOwnTitleNeverAsksForOtherNames() {
+        val src = MemoryService("msrc"); val dst = Library("mdst")
+        src.lists["p"] = mutableListOf(Track("s1", "Oxygene, Pt. 4", listOf("Jean-Michel Jarre"), "Oxygène", 240_000, isrc = "FRZ118100004"))
+        dst.catalogue += Track("d", "Oxygène, Part IV", listOf("Jean-Michel Jarre"), "Oxygène", 240_000)
+        sync(src, dst)
+        assertEquals(listOf("d"), dst.lists["t"]!!.map { it.id })
+        assertTrue(hits.toString(), hits.none { "/work/" in it || "/recording/" in it })
     }
 }
