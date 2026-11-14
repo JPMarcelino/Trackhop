@@ -2703,4 +2703,5 @@
     <string name="own_image_note">Gratis, sin clave: Trackhop escribe la petición y abre ChatGPT o Gemini. Crea la imagen con tu cuenta, guárdala y elígela aquí.</string>
     <string name="own_image_copied">Petición copiada: pégala si no está, luego guarda la imagen y elígela aquí.</string>
     <string name="own_image_copied_only">Petición copiada: abre ChatGPT o Gemini, pégala, guarda la imagen y elígela aquí.</string>
+    <string name="own_image_preparing">Leyendo la playlist para escribir la petición…</string>
 </resources>

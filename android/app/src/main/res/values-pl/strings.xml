@@ -2803,4 +2803,5 @@
     <string name="own_image_note">Za darmo, bez klucza: Trackhop pisze prośbę i otwiera ChatGPT lub Gemini. Utwórz obraz na swoim koncie, zapisz go i wybierz tutaj.</string>
     <string name="own_image_copied">Prośba skopiowana: wklej ją, jeśli jej nie ma, zapisz obraz i wybierz go tutaj.</string>
     <string name="own_image_copied_only">Prośba skopiowana: otwórz ChatGPT lub Gemini, wklej ją, zapisz obraz i wybierz go tutaj.</string>
+    <string name="own_image_preparing">Czytam playlistę, by napisać prośbę…</string>
 </resources>

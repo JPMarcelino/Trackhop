@@ -2697,4 +2697,5 @@
     <string name="own_image_note">Free, no key: Trackhop writes the request and opens ChatGPT or Gemini. Make the picture with your own account, save it, then choose it here.</string>
     <string name="own_image_copied">Request copied: paste it if it is not there yet, then save the picture and choose it here.</string>
     <string name="own_image_copied_only">Request copied: open ChatGPT or Gemini, paste it, then save the picture and choose it here.</string>
+    <string name="own_image_preparing">Reading the playlist to write the request…</string>
 </resources>

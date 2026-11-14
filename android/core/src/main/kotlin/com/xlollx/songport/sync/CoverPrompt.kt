@@ -142,7 +142,10 @@ object CoverPrompt {
         val ss = songs.map { theme(it.take(60)) }.filter { it.isNotEmpty() }.take(6)
         if (ss.isNotEmpty()) append(" Its songs include ").append(ss.joinToString(", ")).append(" (use them as mood, never as written words).")
         decades?.let { append(" Era of the music: ").append(it).append('.') }
-        append(" Style: bold, modern, abstract, music-poster.")
-        append(" A clean image with blank space instead of any lettering, logos or brand marks; no real people's faces.")
+        // The look of the covers the app draws itself (GeneratedCovers), so a cover made elsewhere sits with them (owner, 14/11).
+        append(" Style: flat, minimal and graphic, like a modern streaming playlist cover: soft gradient shapes melting into each other")
+        append(" and a few bold geometric forms, a palette of three or four harmonious colours, a light film grain,")
+        append(" one clear central motif and calm empty space around it. No photorealism, no people, no faces, no figures.")
+        append(" A clean image with blank space instead of any lettering, logos or brand marks.")
     }
 }

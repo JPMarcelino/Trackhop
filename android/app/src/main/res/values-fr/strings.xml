@@ -2703,4 +2703,5 @@
     <string name="own_image_note">Gratuit, sans clé : Trackhop écrit la demande et ouvre ChatGPT ou Gemini. Crée l\'image avec ton compte, enregistre-la, puis choisis-la ici.</string>
     <string name="own_image_copied">Demande copiée : colle-la si elle n\'y est pas, puis enregistre l\'image et choisis-la ici.</string>
     <string name="own_image_copied_only">Demande copiée : ouvre ChatGPT ou Gemini, colle-la, enregistre l\'image et choisis-la ici.</string>
+    <string name="own_image_preparing">Lecture de la playlist pour écrire la demande…</string>
 </resources>

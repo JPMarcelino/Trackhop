@@ -2642,4 +2642,5 @@
     <string name="own_image_note">免费，无需密钥：Trackhop 写好请求并打开 ChatGPT 或 Gemini。用你自己的账户生成图片，保存后在这里选择。</string>
     <string name="own_image_copied">请求已复制：如果没有自动填入就粘贴，然后保存图片并在这里选择。</string>
     <string name="own_image_copied_only">请求已复制：打开 ChatGPT 或 Gemini 粘贴，保存图片后在这里选择。</string>
+    <string name="own_image_preparing">正在读取歌单以写出请求…</string>
 </resources>

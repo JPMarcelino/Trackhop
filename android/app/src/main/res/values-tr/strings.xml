@@ -2693,4 +2693,5 @@
     <string name="own_image_note">Ücretsiz, anahtarsız: Trackhop isteği yazar ve ChatGPT ya da Gemini\'yi açar. Görseli kendi hesabınla oluştur, kaydet ve burada seç.</string>
     <string name="own_image_copied">İstek kopyalandı: yoksa yapıştır, sonra görseli kaydet ve burada seç.</string>
     <string name="own_image_copied_only">İstek kopyalandı: ChatGPT ya da Gemini\'yi aç, yapıştır, görseli kaydet ve burada seç.</string>
+    <string name="own_image_preparing">İsteği yazmak için çalma listesi okunuyor…</string>
 </resources>

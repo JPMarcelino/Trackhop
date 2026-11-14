@@ -34,7 +34,8 @@ class CoverPromptTest {
         assertTrue(p.contains("Metallica, Avenged Sevenfold"))
         assertTrue(p.contains("Mood: late night drive."))
         assertTrue(p.contains("without any typography"))
-        assertTrue(p.contains("no real people's faces"))
+        assertTrue(p.contains("no people, no faces"))
+        assertTrue(p.contains("soft gradient shapes"))
         assertTrue(p.startsWith("A wordless square illustration"))
     }
 

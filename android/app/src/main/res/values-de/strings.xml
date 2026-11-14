@@ -2695,4 +2695,5 @@
     <string name="own_image_note">Kostenlos, ohne Schlüssel: Trackhop schreibt die Anfrage und öffnet ChatGPT oder Gemini. Erstelle das Bild mit deinem Konto, speichere es und wähle es hier.</string>
     <string name="own_image_copied">Anfrage kopiert: füge sie ein, falls sie fehlt, speichere dann das Bild und wähle es hier.</string>
     <string name="own_image_copied_only">Anfrage kopiert: öffne ChatGPT oder Gemini, füge sie ein, speichere das Bild und wähle es hier.</string>
+    <string name="own_image_preparing">Die Playlist wird gelesen, um die Anfrage zu schreiben…</string>
 </resources>

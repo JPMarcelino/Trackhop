@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -95,6 +96,11 @@ fun OwnImagePanel(coverPrompt: suspend () -> String, enabled: Boolean, onPicked:
             Button(enabled = enabled, onClick = { pick.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }, modifier = Modifier.heightIn(min = 48.dp)) {
                 Text(stringResource(R.string.own_image_pick))
             }
+        }
+        // Reading a long playlist to write the request takes a few seconds: said, so nothing looks stuck.
+        if (asking) {
+            WorkBar(null, Modifier.fillMaxWidth())
+            Text(stringResource(R.string.own_image_preparing), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
