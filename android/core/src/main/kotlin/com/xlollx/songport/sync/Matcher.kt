@@ -366,7 +366,11 @@ object Matcher {
         if (s.track.mbids.isNotEmpty() && c.track.mbids.any { it in s.track.mbids }) return 1.0 * policyFactor(s.track, c.track, policy)
         // "Magnetic Fields III" against "Magnetic Fields, Pt. 2": the bare number is the part (#57).
         val st = asPart(s.title, c.title); val ct = asPart(c.title, s.title)
-        val title = similarity(st, ct)
+        // Two numbered parts: "part 4" on both says nothing of the piece. "Chants Magnetiques, Pt. 4" is
+        // not "Equinoxe, Part 4", not even as the closest one (#57, 14/11): the titles are compared without it.
+        val title = if (partOf(st) != null && partOf(ct) != null) similarity(PART_N.replace(st, " ").trim(), PART_N.replace(ct, " ").trim()).let { bare ->
+            if (bare >= 1.0 && partOf(st) == partOf(ct)) similarity(st, ct) else minOf(similarity(st, ct), bare)
+        } else similarity(st, ct)
         val artist = artistScoreN(s.artists, c.artists)
         val artistKnown = s.artists.isNotEmpty() && c.artists.isNotEmpty()
         val base = if (artistKnown) 0.6 * title + 0.4 * artist else 0.85 * title + 0.15 * artist

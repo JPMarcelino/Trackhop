@@ -438,4 +438,14 @@ class Part57BoundsTest {
         assertEquals(1.0, Matcher.versionFactor("En Vivo", "En Vivo"), 0.0)
         assertEquals(1.0, Matcher.versionFactor("Live Forever", "Live Forever - Remastered"), 0.0)
     }
+
+    @Test fun aSharedPartNumberIsNotASharedTitle() {
+        // #57: Spotify lists the 1981 China concert in French; "Equinoxe, Part 4" was proposed as the closest.
+        val src = Track("s", "Chants Magnetiques, Pt. 4 - Live", listOf("Jean-Michel Jarre"), "Les concerts en Chine 1981 (Live)", 380_000)
+        val other = Track("e", "Equinoxe, Part 4", listOf("Jean-Michel Jarre"), "Equinoxe", 380_000)
+        assertTrue("${Matcher.score(src, other)}", Matcher.score(src, other) < 0.45)
+        // The same piece in other spellings still matches.
+        val same = Track("o", "Oxygène, Part IV", listOf("Jean-Michel Jarre"), "Oxygène", 300_000)
+        assertTrue(Matcher.score(Track("x", "Oxygene, Pt. 4", listOf("Jean-Michel Jarre"), "Oxygène", 300_000), same) >= Matcher.DEFAULT_THRESHOLD)
+    }
 }
