@@ -58,7 +58,8 @@ class DiscoverV2Test {
     private val auth = "Basic " + Base64.getEncoder().encodeToString("any:sekret".toByteArray())
 
     @Before fun start() {
-        // Off by default until 1.18 (Features.DEFAULT): these tests turn it on, withTheSwitchOff… turns it off again.
+        // On by default from 2.0 (Features.DEFAULT), but the test JVM starts with it off (server/build.gradle):
+        // these tests turn it on, withTheSwitchOff… turns it off again.
         Features.v2 = true
         data = tmp.newFolder("data")
         installServerConnectors()
@@ -374,13 +375,14 @@ class DiscoverV2Test {
         assertEquals(200, api("GET", "groups").code)
     }
 
-    @Test fun theSwitchIsOffUnlessTheEnvironmentTurnsItOn() {
-        assertFalse(Features.DEFAULT)
-        assertFalse(Features.fromEnvironment(emptyMap()))
+    @Test fun theSwitchIsOnUnlessTheEnvironmentTurnsItOff() {
+        assertTrue(Features.DEFAULT)
+        assertTrue(Features.fromEnvironment(emptyMap()))
         assertTrue(Features.fromEnvironment(mapOf("TRACKHOP_PREVIEW_2" to "1")))
         assertTrue(Features.fromEnvironment(mapOf("TRACKHOP_PREVIEW_2" to "true")))
         assertFalse(Features.fromEnvironment(mapOf("TRACKHOP_PREVIEW_2" to "0")))
-        assertFalse(Features.fromEnvironment(mapOf("TRACKHOP_PREVIEW_2" to "")))
+        // Blank says nothing: the default.
+        assertTrue(Features.fromEnvironment(mapOf("TRACKHOP_PREVIEW_2" to "")))
         // The Java property wins over the environment.
         assertTrue(Features.fromEnvironment(emptyMap(), "yes"))
         assertFalse(Features.fromEnvironment(mapOf("TRACKHOP_PREVIEW_2" to "1"), "off"))

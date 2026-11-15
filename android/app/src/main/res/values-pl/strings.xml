@@ -2804,4 +2804,18 @@
     <string name="own_image_copied">Prośba skopiowana: wklej ją, jeśli jej nie ma, zapisz obraz i wybierz go tutaj.</string>
     <string name="own_image_copied_only">Prośba skopiowana: otwórz ChatGPT lub Gemini, wklej ją, zapisz obraz i wybierz go tutaj.</string>
     <string name="own_image_preparing">Czytam playlistę, by napisać prośbę…</string>
+    <string name="whats_new_20_celebrate_title">Trackhop jest w Google Play!</string>
+    <string name="whats_new_20_celebrate_body">Z tej okazji wersja 2.0 przychodzi wcześniej. Oto co przynosi.</string>
+    <string name="whats_new_20_wrapped_title">Twój Wrapped z tego, czego naprawdę słuchasz</string>
+    <string name="whats_new_20_wrapped_body">Z Last.fm, ListenBrainz, Spotify, Deezer, TIDAL, Apple Music albo z własnego serwera, za miesiąc, pół roku lub rok. Plakat playlisty stawia na początku utwory, których słuchasz najczęściej.</string>
+    <string name="whats_new_20_alerts_title">Obserwuj swoich wykonawców</string>
+    <string name="whats_new_20_alerts_body">Stuknij dzwonek obok wykonawcy w Odkrywaj: raz dziennie dowiesz się o nowych wydaniach, koncertach w pobliżu, płytach i merchu.</string>
+    <string name="whats_new_20_podcasts_title">Podcasty</string>
+    <string name="whats_new_20_podcasts_body">Obserwowane podcasty wyeksportowane do OPML dla dowolnej aplikacji, a audycje rozpoznawane po kanale przy przenoszeniu.</string>
+    <string name="whats_new_20_covers_title">Okładki wszędzie</string>
+    <string name="whats_new_20_covers_body">Synchronizacja kopiuje teraz okładkę playlisty także do YouTube, TIDAL, Jellyfin, Emby i Plex.</string>
+    <string name="whats_new_20_library_title">Więcej z Twojej biblioteki</string>
+    <string name="whats_new_20_library_body">Polubione utwory z TIDAL, ulubione i ostatnio odtwarzane z Apple Music oraz playlisty stworzone dla Ciebie przez ListenBrainz jako źródła synchronizacji.</string>
+    <string name="whats_new_20_backup_title">Szyfrowana pełna kopia</string>
+    <string name="whats_new_20_backup_body">Kopia zapasowa i przywracanie może zapisać też Twoje logowania i zaplanowane synchronizacje, chronione Twoim hasłem. Ten sam plik działa w aplikacji, w Desktop i w Dockerze.</string>
 </resources>

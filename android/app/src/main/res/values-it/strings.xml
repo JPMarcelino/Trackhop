@@ -2696,4 +2696,18 @@
     <string name="own_image_copied">Richiesta copiata: incollala se non c\'è già, poi salva l\'immagine e sceglila qui.</string>
     <string name="own_image_copied_only">Richiesta copiata: apri ChatGPT o Gemini, incollala, poi salva l\'immagine e sceglila qui.</string>
     <string name="own_image_preparing">Leggo la playlist per scrivere la richiesta…</string>
+    <string name="whats_new_20_celebrate_title">Trackhop è su Google Play!</string>
+    <string name="whats_new_20_celebrate_body">Per festeggiare, la 2.0 arriva in anticipo. Ecco cosa porta.</string>
+    <string name="whats_new_20_wrapped_title">Il tuo Wrapped, da ciò che ascolti davvero</string>
+    <string name="whats_new_20_wrapped_body">Fallo da Last.fm, ListenBrainz, Spotify, Deezer, TIDAL, Apple Music o dal tuo server, per il mese, il semestre o l\'anno. Il poster della playlist mette prima i brani che ascolti di più.</string>
+    <string name="whats_new_20_alerts_title">Segui i tuoi artisti</string>
+    <string name="whats_new_20_alerts_body">Tocca la campanella accanto a un artista in Scopri: una volta al giorno ti arrivano le sue nuove uscite, i concerti vicino a te, i dischi e il merch.</string>
+    <string name="whats_new_20_podcasts_title">Podcast</string>
+    <string name="whats_new_20_podcasts_body">I podcast che segui esportati in OPML per qualsiasi app di podcast, e programmi riconosciuti dal loro feed quando li sposti.</string>
+    <string name="whats_new_20_covers_title">Copertine ovunque</string>
+    <string name="whats_new_20_covers_body">Una sync ora copia la copertina della playlist anche su YouTube, TIDAL, Jellyfin, Emby e Plex.</string>
+    <string name="whats_new_20_library_title">Più della tua libreria</string>
+    <string name="whats_new_20_library_body">I brani preferiti di TIDAL, i preferiti e gli ascolti recenti di Apple Music e le playlist fatte per te da ListenBrainz, come sorgenti per le tue sync.</string>
+    <string name="whats_new_20_backup_title">Backup completo cifrato</string>
+    <string name="whats_new_20_backup_body">Backup e ripristino può salvare anche i tuoi accessi e le sync programmate, protetti da una tua password. Lo stesso file passa tra l\'app, Desktop e Docker.</string>
 </resources>

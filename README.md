@@ -41,9 +41,9 @@ On your phone, on a schedule. No account, no server, no subscription.</p>
 <p align="center">
   <b>On a computer or a server?</b> <sub>(Docker and Azure: beta)</sub><br>
   <a href="https://apps.microsoft.com/detail/9PFX74Q2XN9P"><img src="docs/assets/badges/msstore.svg" height="56" alt="Get it from the Microsoft Store"></a>
-  <a href="https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-windows.msi"><img src="docs/assets/badges/windows.svg" height="56" alt="Get it for Windows"></a>
-  <a href="https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-macos-arm64.dmg"><img src="docs/assets/badges/macos.svg" height="56" alt="Get it for macOS"></a>
-  <a href="https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-linux.deb"><img src="docs/assets/badges/linux.svg" height="56" alt="Get it for Linux"></a>
+  <a href="https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-windows.msi"><img src="docs/assets/badges/windows.svg" height="56" alt="Get it for Windows"></a>
+  <a href="https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-macos-arm64.dmg"><img src="docs/assets/badges/macos.svg" height="56" alt="Get it for macOS"></a>
+  <a href="https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-linux.deb"><img src="docs/assets/badges/linux.svg" height="56" alt="Get it for Linux"></a>
   <a href="https://trackhop.org/guide/docker"><img src="docs/assets/badges/docker.svg" height="56" alt="Run it on Docker"></a>
   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fxlollx%2FTrackhop%2Fmain%2Fpackaging%2Fazure%2Fazuredeploy.json"><img src="docs/assets/badges/azure.svg" height="56" alt="Deploy on Azure (beta)"></a>
 </p>
@@ -58,11 +58,11 @@ THE ICON · Michel Henke · Pisqui❤️ · BjörnH. · Bougtib · Anonymous Mix
 
 <p align="center"><img src="docs/store/screenshots.png" width="100%" alt="Syncs with their numbers, a new sync, the Discover tab, a shared track going into a playlist, how compatible two playlists are, unplayable tracks and their replacements"></p>
 
-<p align="center"><sub>More pictures, upcoming features included: <a href="#gallery">Gallery</a>.</sub></p>
+<p align="center"><sub>More pictures: <a href="#gallery">Gallery</a>.</sub></p>
 
 Trackhop keeps playlists identical across Spotify, Apple Music, YouTube Music, Amazon Music, TIDAL,
 Deezer, SoundCloud, LiveOne, Subsonic/Navidrome, Jellyfin, Emby, Plex, Lyrion Music Server and Mopidy, with Last.fm, ListenBrainz and public NetEase
-Cloud Music, QQ Music and JioSaavn links as sources and playlist files (CSV, TSV, M3U, iTunes XML, JSON, pasted text) as a bridge to everything else. Coming in the next update:
+Cloud Music, QQ Music and JioSaavn links as sources and playlist files (CSV, TSV, M3U, iTunes XML, JSON, pasted text) as a bridge to everything else. New in 2.0:
 playlists shared by a group whose members each use their own service, and Discover pages that follow a playlist's artists: new releases, concerts,
 setlists, records and merch. Everything runs
 on the phone: there is no Trackhop server, and access tokens never leave the device. Free, no ads in
@@ -136,14 +136,14 @@ move. Trackhop is for keeping playlists in step over time, without handing your 
   built in. [Which Trackhop?](https://trackhop.org/guide/versions) compares them.
 - **Desktop (Windows, macOS, Linux)**: the same engine as a program on your
   computer, with its own Java runtime (no Java or Docker to install, no administrator rights), an icon
-  next to the clock and the same web page as the server. Version 1.9.2 ([what's in it](https://github.com/xlollx/Trackhop/releases/tag/server-v1.9.2)):
-  [Windows installer](https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-windows.msi) ·
-  [Windows, no install (.zip)](https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-windows.zip) ·
-  [macOS, Apple silicon](https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-macos-arm64.dmg) ·
-  [macOS, Intel](https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-macos-x64.dmg) ·
-  [Linux .deb](https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-linux.deb) ·
-  [Linux .tar.gz](https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-linux.tar.gz) ·
-  [Linux Flatpak](https://github.com/xlollx/Trackhop/releases/download/server-v1.9.2/Trackhop-Desktop-v1.9.2-linux.flatpak). See the
+  next to the clock and the same web page as the server. Version 2.0.0 ([what's in it](https://github.com/xlollx/Trackhop/releases/tag/server-v2.0.0)):
+  [Windows installer](https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-windows.msi) ·
+  [Windows, no install (.zip)](https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-windows.zip) ·
+  [macOS, Apple silicon](https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-macos-arm64.dmg) ·
+  [macOS, Intel](https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-macos-x64.dmg) ·
+  [Linux .deb](https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-linux.deb) ·
+  [Linux .tar.gz](https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-linux.tar.gz) ·
+  [Linux Flatpak](https://github.com/xlollx/Trackhop/releases/download/server-v2.0.0/Trackhop-Desktop-v2.0.0-linux.flatpak). See the
   [Desktop guide](https://trackhop.org/guide/desktop); every version is in the
   [Desktop & Server releases](https://github.com/xlollx/Trackhop/releases?q=server-v&expanded=true) (`server-v…`).
   With [Scoop](https://github.com/xlollx/scoop-bucket): `scoop bucket add xlollx https://github.com/xlollx/scoop-bucket`
@@ -174,7 +174,7 @@ move. Trackhop is for keeping playlists in step over time, without handing your 
 - And a **command line**, `trackhop`: `trackhop run --all --wait`, `trackhop add spotify Focus "Bonobo - Kerala"`,
   from a terminal, cron or Task Scheduler, with nothing to set up on the same machine or in the
   container (`docker exec trackhop trackhop syncs`). See [the trackhop command](https://trackhop.org/guide/cli).
-- Desktop and Docker have their **own version** (now 1.9.2), separate from the app's.
+- Desktop and Docker have their **own version** (now 2.0.0), separate from the app's.
 
 Android 8.0 or newer. Languages: English, Italian, French, German, Spanish, Portuguese (Brazil), Polish,
 Russian, Turkish, Chinese, Japanese, Korean.
@@ -249,7 +249,7 @@ reports are what make it better: if something does not work as it should, say so
 - [Follow Trackhop](#follow-trackhop)
 - [Feedback](#feedback)
 - [Features](#features)
-- [Coming in the next update](#coming-in-the-next-update)
+- [New in 2.0](#new-in-20)
 - [Gallery](#gallery)
 - [Supported services and their limits](#supported-services-and-their-limits)
 - [Connector plugins](#connector-plugins)
@@ -328,9 +328,9 @@ reports are what make it better: if something does not work as it should, say so
 | Security | Connections log | Settings › Developer options lists every host the app has contacted and how often, so "no Trackhop server" is something to check, not to believe. |
 | | Info sheet before every login, encrypted tokens, fingerprint or PIN lock | See [How logins are protected](#how-logins-are-protected). |
 
-## Coming in the next update
+## New in 2.0
 
-In the code already, and switched on with the next update of the app and of Desktop and Docker.
+Switched on in Trackhop 2.0, in the app and in Desktop and Docker 2.0.0.
 
 | Area | Feature | Notes |
 |------|---------|-------|
@@ -346,13 +346,15 @@ In the code already, and switched on with the next update of the app and of Desk
 | | Records & merch | CDs, vinyl and cassettes from Discogs (a personal token adds copies for sale and the lowest price), official sites and shops, shop searches; links only. [Guide](https://trackhop.org/guide/records). |
 | | Followed artists | Tap the bell next to an artist and hear once a day about their new releases, concerts near you, merch and records. [Guide](https://trackhop.org/guide/artist-alerts). |
 | | Pictures | Pictures from Ticketmaster and Discogs in Concerts and Records & merch, that can be turned off or kept to Wi‑Fi. |
-| | Wrapped from what you really play | Last.fm, ListenBrainz, your own server's play counts, Spotify, Deezer, TIDAL, YouTube Music and Apple Music's recent plays, for the month, the half year or the year. Today's Wrapped reads your playlists. |
+| | Wrapped from what you really play | Last.fm, ListenBrainz, your own server's play counts, Spotify, Deezer, TIDAL, YouTube Music and Apple Music's recent plays, for the month, the half year or the year. Without one, the Wrapped reads your playlists as before. |
 | | Playlist poster | The songs you play most first, and the drawn cover put on your own playlist where the service takes covers. |
+| Tools | Synced lyrics | The songs on your Navidrome, Jellyfin, Emby, Plex or Lyrion server without lyrics, looked up on LRCLIB; on Jellyfin they are added after you see what was found. Lyrics already there are never changed. |
+| Backup | Encrypted full backup | Backup & restore can include the sign-ins, client secrets, web sign-ins and scheduled syncs in the `.trackhop` file, locked with a password of yours (AES-256-GCM); restoring asks whether this device replaces the other one. The same file moves between the app, Desktop and Docker. |
 | Notifications | New releases event | A message when a weekly New releases sync finds new music. |
 
 ## Gallery
 
-<p align="center"><img src="docs/assets/gallery/01.jpg" width="150" alt="Trackhop: keep your playlists identical across music services"> <img src="docs/assets/gallery/02.jpg" width="150" alt="Your playlists, in sync everywhere"> <img src="docs/assets/gallery/03.jpg" width="150" alt="See every change before it happens"> <img src="docs/assets/gallery/04.jpg" width="150" alt="Nothing goes missing quietly: the review"> <img src="docs/assets/gallery/05.jpg" width="150" alt="Discover, from your own music"> <img src="docs/assets/gallery/06.jpg" width="150" alt="Your Wrapped, whenever you want"> <img src="docs/assets/gallery/07.jpg" width="150" alt="Upcoming: concerts of your artists"> <img src="docs/assets/gallery/08.jpg" width="150" alt="Upcoming: vinyl, CDs and merch"> <img src="docs/assets/gallery/09.jpg" width="150" alt="Upcoming: follow your favourite artists"> <img src="docs/assets/gallery/10.jpg" width="150" alt="How compatible are we?"> <img src="docs/assets/gallery/11.jpg" width="150" alt="Card sizes and styles"> <img src="docs/assets/gallery/12.jpg" width="150" alt="Get Trackhop"> <img src="docs/assets/gallery/13.jpg" width="150" alt="Desktop and Docker: the web page"> <img src="docs/assets/gallery/14.jpg" width="150" alt="Desktop and Docker: the trackhop command"> <img src="docs/assets/gallery/15.jpg" width="150" alt="Desktop and Docker: the HTTP API"> <img src="docs/assets/gallery/16.jpg" width="150" alt="Desktop and Docker: MCP for AI assistants"> <img src="docs/assets/gallery/17.jpg" width="150" alt="Desktop and Docker: webhooks"> <img src="docs/assets/gallery/18.jpg" width="150" alt="Desktop and Docker: what your server is missing"><br><sub>Pictures marked <i>Upcoming</i> show what arrives in the next update; card sizes and styles are already here.</sub></p>
+<p align="center"><img src="docs/assets/gallery/01.jpg" width="150" alt="Trackhop: keep your playlists identical across music services"> <img src="docs/assets/gallery/02.jpg" width="150" alt="Your playlists, in sync everywhere"> <img src="docs/assets/gallery/03.jpg" width="150" alt="See every change before it happens"> <img src="docs/assets/gallery/04.jpg" width="150" alt="Nothing goes missing quietly: the review"> <img src="docs/assets/gallery/05.jpg" width="150" alt="Discover, from your own music"> <img src="docs/assets/gallery/06.jpg" width="150" alt="Your Wrapped, whenever you want"> <img src="docs/assets/gallery/07.jpg" width="150" alt="Concerts of your artists"> <img src="docs/assets/gallery/08.jpg" width="150" alt="Vinyl, CDs and merch"> <img src="docs/assets/gallery/09.jpg" width="150" alt="Follow your favourite artists"> <img src="docs/assets/gallery/10.jpg" width="150" alt="How compatible are we?"> <img src="docs/assets/gallery/11.jpg" width="150" alt="Card sizes and styles"> <img src="docs/assets/gallery/12.jpg" width="150" alt="Get Trackhop"> <img src="docs/assets/gallery/13.jpg" width="150" alt="Desktop and Docker: the web page"> <img src="docs/assets/gallery/14.jpg" width="150" alt="Desktop and Docker: the trackhop command"> <img src="docs/assets/gallery/15.jpg" width="150" alt="Desktop and Docker: the HTTP API"> <img src="docs/assets/gallery/16.jpg" width="150" alt="Desktop and Docker: MCP for AI assistants"> <img src="docs/assets/gallery/17.jpg" width="150" alt="Desktop and Docker: webhooks"> <img src="docs/assets/gallery/18.jpg" width="150" alt="Desktop and Docker: what your server is missing"></p>
 
 ## Supported services and their limits
 

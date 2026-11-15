@@ -2643,4 +2643,18 @@
     <string name="own_image_copied">请求已复制：如果没有自动填入就粘贴，然后保存图片并在这里选择。</string>
     <string name="own_image_copied_only">请求已复制：打开 ChatGPT 或 Gemini 粘贴，保存图片后在这里选择。</string>
     <string name="own_image_preparing">正在读取歌单以写出请求…</string>
+    <string name="whats_new_20_celebrate_title">Trackhop 上架 Google Play 啦！</string>
+    <string name="whats_new_20_celebrate_body">为了庆祝，2.0 提前到来。来看看有哪些新内容。</string>
+    <string name="whats_new_20_wrapped_title">根据你真正听的歌生成 Wrapped</string>
+    <string name="whats_new_20_wrapped_body">可以从 Last.fm、ListenBrainz、Spotify、Deezer、TIDAL、Apple Music 或你自己的服务器生成月度、半年或年度 Wrapped。歌单海报会把你听得最多的歌放在最前面。</string>
+    <string name="whats_new_20_alerts_title">关注你的艺人</string>
+    <string name="whats_new_20_alerts_body">在“发现”里点艺人旁边的铃铛：每天一次告诉你他们的新发行、附近的演唱会、唱片和周边。</string>
+    <string name="whats_new_20_podcasts_title">播客</string>
+    <string name="whats_new_20_podcasts_body">把关注的播客导出为 OPML，任何播客应用都能用；迁移时按订阅源匹配节目。</string>
+    <string name="whats_new_20_covers_title">封面无处不在</string>
+    <string name="whats_new_20_covers_body">同步现在也会把歌单封面复制到 YouTube、TIDAL、Jellyfin、Emby 和 Plex。</string>
+    <string name="whats_new_20_library_title">更多音乐库内容</string>
+    <string name="whats_new_20_library_body">TIDAL 喜欢的曲目、Apple Music 收藏和最近播放、ListenBrainz 为你生成的歌单，都可以作为同步来源。</string>
+    <string name="whats_new_20_backup_title">加密的完整备份</string>
+    <string name="whats_new_20_backup_body">备份与恢复还可以保存你的登录信息和定时同步，用你自己的密码保护。同一个文件可在应用、Desktop 和 Docker 之间通用。</string>
 </resources>

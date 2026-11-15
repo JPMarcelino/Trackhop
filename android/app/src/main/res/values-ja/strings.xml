@@ -2643,4 +2643,18 @@
     <string name="own_image_copied">リクエストをコピーしました。入っていなければ貼り付け、画像を保存してここで選んでください。</string>
     <string name="own_image_copied_only">リクエストをコピーしました。ChatGPT か Gemini を開いて貼り付け、画像を保存してここで選んでください。</string>
     <string name="own_image_preparing">リクエストを書くためにプレイリストを読み込み中…</string>
+    <string name="whats_new_20_celebrate_title">Trackhop が Google Play に登場！</string>
+    <string name="whats_new_20_celebrate_body">お祝いに、2.0 を前倒しでお届けします。新機能はこちら。</string>
+    <string name="whats_new_20_wrapped_title">本当に聴いた曲から作る Wrapped</string>
+    <string name="whats_new_20_wrapped_body">Last.fm、ListenBrainz、Spotify、Deezer、TIDAL、Apple Music、または自分のサーバーから、月ごと・半年ごと・年ごとの Wrapped を作れます。プレイリストのポスターはよく聴く曲を先頭に並べます。</string>
+    <string name="whats_new_20_alerts_title">アーティストをフォロー</string>
+    <string name="whats_new_20_alerts_body">発見でアーティストの横のベルをタップすると、新作、近くのコンサート、レコードやグッズを毎日まとめてお知らせします。</string>
+    <string name="whats_new_20_podcasts_title">ポッドキャスト</string>
+    <string name="whats_new_20_podcasts_body">フォロー中のポッドキャストを OPML で書き出して、どのポッドキャストアプリでも使えます。移すときは番組をフィードで見つけます。</string>
+    <string name="whats_new_20_covers_title">どこでもカバー画像</string>
+    <string name="whats_new_20_covers_body">同期でプレイリストのカバーを YouTube、TIDAL、Jellyfin、Emby、Plex にもコピーします。</string>
+    <string name="whats_new_20_library_title">ライブラリをもっと</string>
+    <string name="whats_new_20_library_body">TIDAL のお気に入りの曲、Apple Music のお気に入りと最近再生した曲、ListenBrainz があなた向けに作ったプレイリストを同期のソースにできます。</string>
+    <string name="whats_new_20_backup_title">暗号化したフルバックアップ</string>
+    <string name="whats_new_20_backup_body">バックアップと復元で、ログイン情報と予約した同期も、自分のパスワードで守って保存できます。同じファイルをアプリ、Desktop、Docker で使えます。</string>
 </resources>

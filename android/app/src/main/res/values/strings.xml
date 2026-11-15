@@ -2698,4 +2698,18 @@
     <string name="own_image_copied">Request copied: paste it if it is not there yet, then save the picture and choose it here.</string>
     <string name="own_image_copied_only">Request copied: open ChatGPT or Gemini, paste it, then save the picture and choose it here.</string>
     <string name="own_image_preparing">Reading the playlist to write the request…</string>
+    <string name="whats_new_20_celebrate_title">Trackhop is on Google Play!</string>
+    <string name="whats_new_20_celebrate_body">To celebrate, 2.0 comes early. Here is what it brings.</string>
+    <string name="whats_new_20_wrapped_title">Your Wrapped, from what you really play</string>
+    <string name="whats_new_20_wrapped_body">Make it from Last.fm, ListenBrainz, Spotify, Deezer, TIDAL, Apple Music or your own server, for the month, the half year or the year. The playlist poster puts the songs you play most first.</string>
+    <string name="whats_new_20_alerts_title">Follow your artists</string>
+    <string name="whats_new_20_alerts_body">Tap the bell next to an artist in Discover: once a day you hear about their new releases, concerts near you, records and merch.</string>
+    <string name="whats_new_20_podcasts_title">Podcasts</string>
+    <string name="whats_new_20_podcasts_body">Your followed podcasts exported as OPML for any podcast app, and shows matched by their feed when you move them.</string>
+    <string name="whats_new_20_covers_title">Covers everywhere</string>
+    <string name="whats_new_20_covers_body">A sync now copies the playlist\'s cover to YouTube, TIDAL, Jellyfin, Emby and Plex too.</string>
+    <string name="whats_new_20_library_title">More of your library</string>
+    <string name="whats_new_20_library_body">TIDAL liked tracks, Apple Music favorites and recent plays, and ListenBrainz\'s playlists made for you, as sources for your syncs.</string>
+    <string name="whats_new_20_backup_title">Encrypted full backup</string>
+    <string name="whats_new_20_backup_body">Backup &amp; restore can also keep your sign-ins and scheduled syncs, locked with a password of yours. The same file moves between the app, Desktop and Docker.</string>
 </resources>

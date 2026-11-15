@@ -2696,4 +2696,18 @@
     <string name="own_image_copied">Anfrage kopiert: füge sie ein, falls sie fehlt, speichere dann das Bild und wähle es hier.</string>
     <string name="own_image_copied_only">Anfrage kopiert: öffne ChatGPT oder Gemini, füge sie ein, speichere das Bild und wähle es hier.</string>
     <string name="own_image_preparing">Die Playlist wird gelesen, um die Anfrage zu schreiben…</string>
+    <string name="whats_new_20_celebrate_title">Trackhop ist jetzt bei Google Play!</string>
+    <string name="whats_new_20_celebrate_body">Zur Feier kommt die 2.0 früher als geplant. Das bringt sie mit.</string>
+    <string name="whats_new_20_wrapped_title">Dein Wrapped aus dem, was du wirklich hörst</string>
+    <string name="whats_new_20_wrapped_body">Aus Last.fm, ListenBrainz, Spotify, Deezer, TIDAL, Apple Music oder deinem eigenen Server, für den Monat, das Halbjahr oder das Jahr. Das Playlist-Poster zeigt zuerst die Songs, die du am meisten hörst.</string>
+    <string name="whats_new_20_alerts_title">Folge deinen Künstlern</string>
+    <string name="whats_new_20_alerts_body">Tippe in Entdecken auf die Glocke neben einem Künstler: Einmal am Tag erfährst du von neuen Veröffentlichungen, Konzerten in deiner Nähe, Platten und Merch.</string>
+    <string name="whats_new_20_podcasts_title">Podcasts</string>
+    <string name="whats_new_20_podcasts_body">Deine gefolgten Podcasts als OPML für jede Podcast-App, und Sendungen, die beim Übertragen über ihren Feed gefunden werden.</string>
+    <string name="whats_new_20_covers_title">Cover überall</string>
+    <string name="whats_new_20_covers_body">Ein Sync kopiert das Cover der Playlist jetzt auch zu YouTube, TIDAL, Jellyfin, Emby und Plex.</string>
+    <string name="whats_new_20_library_title">Mehr aus deiner Mediathek</string>
+    <string name="whats_new_20_library_body">Lieblingstitel von TIDAL, Favoriten und zuletzt Gespieltes von Apple Music und die für dich gemachten Playlists von ListenBrainz als Quellen für deine Syncs.</string>
+    <string name="whats_new_20_backup_title">Verschlüsseltes Komplett-Backup</string>
+    <string name="whats_new_20_backup_body">Sicherung &amp; Wiederherstellung kann auch deine Anmeldungen und geplanten Syncs sichern, geschützt mit einem Passwort deiner Wahl. Dieselbe Datei funktioniert in der App, in Desktop und in Docker.</string>
 </resources>

@@ -64,8 +64,8 @@ description (architecture, matching, services and their limits) stays in the
 - [Fix greyed-out songs](fix-greyed-out-songs): unplayable tracks swapped for versions that play.
 - [Your Wrapped, whenever you want](wrapped-anytime), from any service, with history.
 
-**Coming in the next update**
-- [Your Wrapped from what you really play](wrapped-anytime#coming-in-the-next-update): Last.fm, ListenBrainz, your own server and more.
+**New in 2.0**
+- [Your Wrapped from what you really play](wrapped-anytime#from-what-you-really-play): Last.fm, ListenBrainz, your own server and more.
 - [Your phone and your Trackhop server](phone-and-server): take turns on each playlist, hand a sync over to the server and bring it back.
 - [A playlist shared by a group](shared-playlists): one playlist for friends who each use their own service.
 - [New releases from your playlist's artists](new-releases), in a playlist on any service, now or every week.

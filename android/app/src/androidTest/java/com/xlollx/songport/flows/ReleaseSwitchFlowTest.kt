@@ -36,7 +36,7 @@ open class ReleaseSwitchFlowTest : FlowTest() {
     protected open val shown: Boolean get() = preview2
 
     @Before fun aBuildWithoutThem() {
-        // A 1.18 build (-PV2=true) has them on anyway: nothing to check here then.
+        // From 2.0 every build has them on (V2 defaults to true): these run only on a -PV2=false build.
         assumeFalse(BuildConfig.V2)
         app.getSharedPreferences("poster", android.content.Context.MODE_PRIVATE).edit().clear().commit()
     }

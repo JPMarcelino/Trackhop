@@ -19,7 +19,7 @@ them.
 
 An **OPML** file of podcasts from AntennaPod, Pocket Casts or Podcast Addict imports like a
 playlist file, and a sync to *Followed podcasts* on Spotify or Deezer follows its shows there.
-*Coming in the next update:* your followed podcasts exported as OPML too; when a service does not
+Your followed podcasts export as OPML too; when a service does not
 give a show's feed, it is looked up in Apple's public podcast directory.
 
 ## Back up everything

@@ -2704,4 +2704,18 @@
     <string name="own_image_copied">Pedido copiado: cole se ainda não estiver lá, depois salve a imagem e escolha aqui.</string>
     <string name="own_image_copied_only">Pedido copiado: abra o ChatGPT ou o Gemini, cole, salve a imagem e escolha aqui.</string>
     <string name="own_image_preparing">Lendo a playlist para escrever o pedido…</string>
+    <string name="whats_new_20_celebrate_title">O Trackhop chegou ao Google Play!</string>
+    <string name="whats_new_20_celebrate_body">Para comemorar, a 2.0 chega antes da hora. Veja o que ela traz.</string>
+    <string name="whats_new_20_wrapped_title">Seu Wrapped, com o que você ouve de verdade</string>
+    <string name="whats_new_20_wrapped_body">A partir do Last.fm, ListenBrainz, Spotify, Deezer, TIDAL, Apple Music ou do seu próprio servidor, do mês, do semestre ou do ano. O pôster da playlist põe primeiro as músicas que você mais ouve.</string>
+    <string name="whats_new_20_alerts_title">Siga seus artistas</string>
+    <string name="whats_new_20_alerts_body">Toque no sino ao lado de um artista em Descobrir: uma vez por dia você fica sabendo dos lançamentos, shows perto de você, discos e merch.</string>
+    <string name="whats_new_20_podcasts_title">Podcasts</string>
+    <string name="whats_new_20_podcasts_body">Os podcasts que você segue exportados em OPML para qualquer app de podcast, e programas reconhecidos pelo feed quando você os transfere.</string>
+    <string name="whats_new_20_covers_title">Capas em todo lugar</string>
+    <string name="whats_new_20_covers_body">Uma sync agora copia a capa da playlist também para YouTube, TIDAL, Jellyfin, Emby e Plex.</string>
+    <string name="whats_new_20_library_title">Mais da sua biblioteca</string>
+    <string name="whats_new_20_library_body">As faixas curtidas do TIDAL, os favoritos e as reproduções recentes do Apple Music e as playlists feitas para você do ListenBrainz, como fontes das suas syncs.</string>
+    <string name="whats_new_20_backup_title">Backup completo criptografado</string>
+    <string name="whats_new_20_backup_body">Backup e restauração também pode guardar seus logins e as syncs agendadas, protegidos por uma senha sua. O mesmo arquivo funciona no app, no Desktop e no Docker.</string>
 </resources>

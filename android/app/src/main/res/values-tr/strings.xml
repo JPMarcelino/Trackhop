@@ -2694,4 +2694,18 @@
     <string name="own_image_copied">İstek kopyalandı: yoksa yapıştır, sonra görseli kaydet ve burada seç.</string>
     <string name="own_image_copied_only">İstek kopyalandı: ChatGPT ya da Gemini\'yi aç, yapıştır, görseli kaydet ve burada seç.</string>
     <string name="own_image_preparing">İsteği yazmak için çalma listesi okunuyor…</string>
+    <string name="whats_new_20_celebrate_title">Trackhop artık Google Play\'de!</string>
+    <string name="whats_new_20_celebrate_body">Kutlamak için 2.0 erken geliyor. İşte getirdikleri.</string>
+    <string name="whats_new_20_wrapped_title">Gerçekten dinlediklerinden Wrapped</string>
+    <string name="whats_new_20_wrapped_body">Last.fm, ListenBrainz, Spotify, Deezer, TIDAL, Apple Music ya da kendi sunucundan; ay, altı ay ya da yıl için. Çalma listesi posteri en çok dinlediğin şarkıları başa koyar.</string>
+    <string name="whats_new_20_alerts_title">Sanatçılarını takip et</string>
+    <string name="whats_new_20_alerts_body">Keşfet\'te bir sanatçının yanındaki zile dokun: günde bir kez yeni çıkanlarını, yakınındaki konserlerini, plaklarını ve merch\'lerini öğren.</string>
+    <string name="whats_new_20_podcasts_title">Podcastler</string>
+    <string name="whats_new_20_podcasts_body">Takip ettiğin podcastler her podcast uygulaması için OPML olarak dışa aktarılır, taşırken programlar beslemelerinden tanınır.</string>
+    <string name="whats_new_20_covers_title">Her yerde kapaklar</string>
+    <string name="whats_new_20_covers_body">Bir eşitleme artık çalma listesinin kapağını YouTube, TIDAL, Jellyfin, Emby ve Plex\'e de kopyalar.</string>
+    <string name="whats_new_20_library_title">Kitaplığından daha fazlası</string>
+    <string name="whats_new_20_library_body">TIDAL\'da beğendiğin parçalar, Apple Music favorileri ve son dinlenenler, ListenBrainz\'in senin için hazırladığı listeler eşitlemelerine kaynak olur.</string>
+    <string name="whats_new_20_backup_title">Şifreli tam yedek</string>
+    <string name="whats_new_20_backup_body">Yedekleme ve geri yükleme, oturumlarını ve zamanlanmış eşitlemelerini de kendi şifrenle koruyarak saklayabilir. Aynı dosya uygulamada, Desktop\'ta ve Docker\'da çalışır.</string>
 </resources>

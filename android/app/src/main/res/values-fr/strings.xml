@@ -2704,4 +2704,18 @@
     <string name="own_image_copied">Demande copiée : colle-la si elle n\'y est pas, puis enregistre l\'image et choisis-la ici.</string>
     <string name="own_image_copied_only">Demande copiée : ouvre ChatGPT ou Gemini, colle-la, enregistre l\'image et choisis-la ici.</string>
     <string name="own_image_preparing">Lecture de la playlist pour écrire la demande…</string>
+    <string name="whats_new_20_celebrate_title">Trackhop est sur Google Play !</string>
+    <string name="whats_new_20_celebrate_body">Pour fêter ça, la 2.0 arrive en avance. Voici ce qu\'elle apporte.</string>
+    <string name="whats_new_20_wrapped_title">Ton Wrapped, d\'après ce que tu écoutes vraiment</string>
+    <string name="whats_new_20_wrapped_body">Depuis Last.fm, ListenBrainz, Spotify, Deezer, TIDAL, Apple Music ou ton propre serveur, pour le mois, le semestre ou l\'année. L\'affiche de la playlist met en premier les titres que tu écoutes le plus.</string>
+    <string name="whats_new_20_alerts_title">Suis tes artistes</string>
+    <string name="whats_new_20_alerts_body">Touche la cloche à côté d\'un artiste dans Découvrir : une fois par jour, tu apprends ses nouveautés, ses concerts près de chez toi, ses disques et son merch.</string>
+    <string name="whats_new_20_podcasts_title">Podcasts</string>
+    <string name="whats_new_20_podcasts_body">Tes podcasts suivis exportés en OPML pour n\'importe quelle app de podcasts, et des émissions reconnues par leur flux quand tu les transfères.</string>
+    <string name="whats_new_20_covers_title">Des pochettes partout</string>
+    <string name="whats_new_20_covers_body">Une sync copie maintenant la pochette de la playlist aussi sur YouTube, TIDAL, Jellyfin, Emby et Plex.</string>
+    <string name="whats_new_20_library_title">Plus de ta bibliothèque</string>
+    <string name="whats_new_20_library_body">Les titres aimés de TIDAL, les favoris et les écoutes récentes d\'Apple Music, et les playlists faites pour toi par ListenBrainz, comme sources de tes syncs.</string>
+    <string name="whats_new_20_backup_title">Sauvegarde complète chiffrée</string>
+    <string name="whats_new_20_backup_body">Sauvegarde et restauration peut aussi garder tes connexions et tes syncs programmées, protégées par un mot de passe à toi. Le même fichier passe de l\'app à Desktop et Docker.</string>
 </resources>

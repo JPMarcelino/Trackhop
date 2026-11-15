@@ -1,12 +1,30 @@
 # Trackhop Desktop & Server: changes
 
 Docker (`ghcr.io/xlollx/trackhop`) and Trackhop Desktop share this version (`server/VERSION`) and are
-released together as `server-v<version>`. The app keeps its own (`v1.x`), and the engine each
+released together as `server-v<version>`. The app keeps its own (`v1.x`, `v2.x`), and the engine each
 server version runs is the app's of the same commit, shown in the page footer. Up to the app's 1.3.8
 the Docker image carried the app's version.
 
-## Unreleased
+## 2.0.0
 
+Released together with the app's 2.0. Discover from your music (new releases, concerts, setlists, records and
+merch, Wrapped from what you really play, followed artists), shared playlists' mailboxes, syncs handed over from
+the phone, podcasts, covers on more services and an encrypted full backup; then two-way pairs, favourites and
+labels, Lyrion and Mopidy, Missing on my server and more.
+
+- **New releases**: Tools › New releases lists the new albums, EPs and singles of a playlist's artists from Deezer and MusicBrainz, and what is announced; make them a playlist on any service, or a weekly *New releases* sync that keeps every track. `GET /api/v1/releases`, `trackhop releases` and the MCP tool `find_new_releases`; a new notification event tells when a weekly New releases sync found new music.
+- **Concerts**: Tools › Concerts lists the upcoming dates of a playlist's artists in a country, from Ticketmaster and MusicBrainz, with ticket-site searches for artists without dates; your own Ticketmaster key in Settings or `TICKETMASTER_API_KEY`. `GET /api/v1/concerts`, `trackhop concerts` and the MCP tool `find_concerts`.
+- **Setlists**: Tools › Setlists shows what a playlist's artists played live, from setlist.fm, and saves a setlist as a File playlist to send to any service. It needs your own free setlist.fm key, in Settings or `SETLISTFM_API_KEY`. `GET /api/v1/setlists`, `trackhop setlists` and the MCP tool `find_setlists`.
+- **Records and merch**: Tools › Records and merch finds a playlist's artists' CDs, vinyl and cassettes on Discogs, the official sites and shops MusicBrainz links them to, and searches on Bandcamp, Discogs, eBay and the web; plain links. With your own Discogs token (Settings), the copies for sale and the lowest price. `GET /api/v1/records`, `trackhop records` and the MCP tool `find_records`.
+- **Wrapped, playlist poster and followed artists**: Tools › Wrapped makes your Wrapped from what you really played (Last.fm, ListenBrainz, your own server's play counts, Spotify, Deezer, TIDAL, YouTube Music) with its card as a PNG; Tools › Playlist poster lists the songs you play most in the cover's colours, to print; Tools › Followed artists tells your notification channels of your artists' new releases, concerts, merch and records, checked every day. Concerts also reads Spotify's tour dates where Spotify (web) is connected. In the API, the `trackhop` command and MCP.
+- **Shared playlists' mailboxes**: a group sharing a playlist can meet on your server. The app makes the group's mailbox with your API token and gets the group's key, shown once; that key only reads and writes the signed items of its own group, nothing else on the server, and a new key ends the old one. `GET`/`POST /api/v1/groups`, `GET`/`DELETE /api/v1/groups/{group}`, `POST /api/v1/groups/{group}/key` and `GET`/`POST /api/v1/groups/{group}/items`.
+- **Hand-over from the app**: a phone can hand a sync over to your server and bring it back. `POST /api/v1/syncs` takes an `id` of your own, which makes the call safe to repeat: sent again, it answers the sync made the first time.
+- **Review choices shared with the app**: `GET`/`POST /api/v1/syncs/{sync}/decisions` give and take in the review's choices (ignored, matched by hand, kept), each with its time; for each track the newest choice wins on both sides.
+- **Podcasts**: YouTube Music's followed podcasts as a source; followed podcasts exported as OPML, with their feeds looked up.
+- **Playlist covers on more services**: Spotify (web), YouTube Music, TIDAL, YouTube, Jellyfin, Emby and Plex take the source's cover.
+- **More of your library**: TIDAL liked tracks, Apple Music favorites and recent plays, ListenBrainz's playlists made for you.
+- **Encrypted full backup**: Backup & restore › Your set-up can save the file with the sign-ins (`tokens.json`), client secrets and pasted web cookies, locked with a password (AES-256-GCM, PBKDF2 with 600,000 rounds); restoring one asks its password and whether this server replaces the other device. `POST /api/v1/config/encrypted`, `POST /api/v1/config` with the `X-Backup-Password` header, `trackhop config --encrypted` and `trackhop config import <file> --replaces-device --replace-sign-ins`. A phone's Bridge sessions are not used on a server, and the other way round.
+- **Synced lyrics from your server**: Tools › Synced lyrics lists the songs of a connected Navidrome (and other Subsonic servers), Jellyfin, Emby, Plex or Lyrion server without lyrics, looks them up on LRCLIB and shows what it found before anything is written. Jellyfin takes them through its API; for Navidrome, Emby and Plex they are saved as `.lrc` (synced) or `.txt` (plain) next to the audio file, once the server's music folder is mapped to a folder here (mounted read-write on Docker). Nothing is ever replaced. Mopidy has no lyrics. `GET /api/v1/tools/nolyrics`, `POST /api/v1/tools/nolyrics/lookup` and `/save`, `trackhop nolyrics` and the MCP tool `find_songs_without_lyrics`.
 - **Two-way pairs on the web page**: make a two-way pair from the page; the pair is turned on or off and deleted as one. A pair can follow removals too: a track removed on one side goes from the other, and removals held back for a check are confirmed from the page. A playlist renamed on either side updates both halves of the pair.
 - **Favourites, labels and tags**: star a sync, name a colour as a label, add key/value tags; filter and search by them on the page, and in the API (filters, run a group by tag or label), the `trackhop` command and the MCP tools.
 - **No more doubles from two devices**: a set-up brought in from another device keeps its scheduled syncs paused, shown as *Scheduled on* and the device's name; a playlist is read again just before it is written; a track a sync added twice is removed by the next run.

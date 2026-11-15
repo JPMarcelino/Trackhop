@@ -84,7 +84,7 @@ draws images with open models (Stable Diffusion, FLUX). Set it up as an OpenAI-c
 (its address, for example `http://192.168.1.10:8080/v1`) and put its image model's name in
 **Image model**: covers cost nothing and never leave your network.
 
-**Free, with any AI (from Trackhop 1.18):** a free Cloudflare account draws covers with FLUX.1
+**Free, with any AI (from Trackhop 2.0):** a free Cloudflare account draws covers with FLUX.1
 schnell (Workers AI), even when your AI is Claude, Groq or OpenRouter. In the AI setup, under
 **Free covers with Cloudflare**, put two things from your Cloudflare account:
 
@@ -100,7 +100,7 @@ schnell (Workers AI), even when your AI is Claude, Groq or OpenRouter. In the AI
 Trackhop asks Cloudflare first and, if it refuses (the daily free allowance used up), the AI above
 when it draws. The token stays encrypted on the phone, like the AI's key.
 
-**Your image (from Trackhop 1.18):** free and with no key. Choose **Your image**, then **Ask ChatGPT**
+**Your image (from Trackhop 2.0):** free and with no key. Choose **Your image**, then **Ask ChatGPT**
 or **Ask Gemini**: Trackhop writes the request (a wordless cover for the playlist) and opens the app
 with it, or copies it and opens the site when the app is not installed. Make the picture there with
 your own account, save it, and tap **Choose image** to put it on the poster or the roast card. Any

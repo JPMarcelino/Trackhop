@@ -22,8 +22,7 @@ In the app: **Settings › Notifications › Notification channels › Add a cha
    - a sync failed;
    - tracks to review;
    - removals waiting for your confirmation;
-   - new releases of your artists (a weekly [New releases](new-releases) sync found new music;
-     New releases arrives in the next update).
+   - new releases of your artists (a weekly [New releases](new-releases) sync found new music).
 4. Tap **Send test**: a test message arrives, or the channel's line says why it didn't.
 
 Add as many channels as you like, each with its own events: failures to your phone through ntfy,

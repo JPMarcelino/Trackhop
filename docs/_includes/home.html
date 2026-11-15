@@ -3,7 +3,7 @@ The home page, in the page's language: its text comes from _data/home/<lang>.yml
 a language lacks). index.html and the translated homes (it/index.html…) only include this.
 The Desktop version is set here, once, for every language.
 {%- endcomment -%}
-{%- assign dv = "1.9.2" -%}
+{%- assign dv = "2.0.0" -%}
 {%- assign dl = "https://github.com/xlollx/Trackhop/releases/download/server-v" | append: dv -%}
 {%- assign hl = page.lang | default: "en" | slice: 0, 2 -%}
 {%- assign en = site.data.home.en -%}
@@ -207,7 +207,6 @@ The Desktop version is set here, once, for every language.
 <section class="section gallery" id="gallery">
   <div class="wrap">
     <h2>{{ h.gallery_title | default: en.gallery_title }}</h2>
-    <p class="muted">{{ h.gallery_note | default: en.gallery_note }}</p>
     <div class="gallery-row">
       <img src="/assets/gallery/01.webp" width="270" height="338" loading="lazy" alt="Trackhop: keep your playlists identical across music services">
       <img src="/assets/gallery/02.webp" width="270" height="338" loading="lazy" alt="Your playlists, in sync everywhere">
@@ -215,9 +214,9 @@ The Desktop version is set here, once, for every language.
       <img src="/assets/gallery/04.webp" width="270" height="338" loading="lazy" alt="Nothing goes missing quietly: the review">
       <img src="/assets/gallery/05.webp" width="270" height="338" loading="lazy" alt="Discover, from your own music">
       <img src="/assets/gallery/06.webp" width="270" height="338" loading="lazy" alt="Your Wrapped, whenever you want">
-      <img src="/assets/gallery/07.webp" width="270" height="338" loading="lazy" alt="Upcoming: concerts of your artists">
-      <img src="/assets/gallery/08.webp" width="270" height="338" loading="lazy" alt="Upcoming: vinyl, CDs and merch">
-      <img src="/assets/gallery/09.webp" width="270" height="338" loading="lazy" alt="Upcoming: follow your favourite artists">
+      <img src="/assets/gallery/07.webp" width="270" height="338" loading="lazy" alt="Concerts of your artists">
+      <img src="/assets/gallery/08.webp" width="270" height="338" loading="lazy" alt="Vinyl, CDs and merch">
+      <img src="/assets/gallery/09.webp" width="270" height="338" loading="lazy" alt="Follow your favourite artists">
       <img src="/assets/gallery/10.webp" width="270" height="338" loading="lazy" alt="How compatible are we?">
       <img src="/assets/gallery/11.webp" width="270" height="338" loading="lazy" alt="Card sizes and styles">
       <img src="/assets/gallery/12.webp" width="270" height="338" loading="lazy" alt="Get Trackhop">

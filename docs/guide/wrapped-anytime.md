@@ -45,10 +45,10 @@ that have no Wrapped at all, and it can mix several of them into one card if you
 
 A big library takes a little while to read; the page shows how many songs it has found so far.
 
-## Coming in the next update
+## From what you really play
 
-The next update makes the card from what you really **play**, when a connected service knows it.
-Trackhop then picks the best one you have:
+Since Trackhop 2.0 the card is made from what you really **play**, when a connected service knows it.
+Trackhop picks the best one you have:
 
 1. **Last.fm** or **ListenBrainz**: every play counted (scrobbles), for the **last month**, **6
    months** or **12 months**.

@@ -49,9 +49,9 @@ scheda.
 
 Una libreria grande richiede un po' di tempo; la pagina mostra quanti brani ha trovato finora.
 
-## In arrivo con il prossimo aggiornamento
+## Da quello che ascolti davvero
 
-Con il prossimo aggiornamento la scheda nasce da quello che **ascolti** davvero, quando un servizio
+Da Trackhop 2.0 la scheda nasce da quello che **ascolti** davvero, quando un servizio
 collegato lo sa. Trackhop sceglie il migliore che hai:
 
 1. **Last.fm** o **ListenBrainz**: ogni ascolto contato (scrobble), per l'**ultimo mese**, **6

@@ -2704,4 +2704,18 @@
     <string name="own_image_copied">Petición copiada: pégala si no está, luego guarda la imagen y elígela aquí.</string>
     <string name="own_image_copied_only">Petición copiada: abre ChatGPT o Gemini, pégala, guarda la imagen y elígela aquí.</string>
     <string name="own_image_preparing">Leyendo la playlist para escribir la petición…</string>
+    <string name="whats_new_20_celebrate_title">¡Trackhop ya está en Google Play!</string>
+    <string name="whats_new_20_celebrate_body">Para celebrarlo, la 2.0 llega antes de tiempo. Esto es lo que trae.</string>
+    <string name="whats_new_20_wrapped_title">Tu Wrapped, con lo que escuchas de verdad</string>
+    <string name="whats_new_20_wrapped_body">Desde Last.fm, ListenBrainz, Spotify, Deezer, TIDAL, Apple Music o tu propio servidor, del mes, del semestre o del año. El póster de la lista pone primero las canciones que más escuchas.</string>
+    <string name="whats_new_20_alerts_title">Sigue a tus artistas</string>
+    <string name="whats_new_20_alerts_body">Toca la campana junto a un artista en Descubrir: una vez al día te enterarás de sus novedades, conciertos cerca de ti, discos y merch.</string>
+    <string name="whats_new_20_podcasts_title">Pódcasts</string>
+    <string name="whats_new_20_podcasts_body">Tus pódcasts seguidos exportados en OPML para cualquier app de pódcasts, y programas reconocidos por su feed al moverlos.</string>
+    <string name="whats_new_20_covers_title">Portadas en todas partes</string>
+    <string name="whats_new_20_covers_body">Una sync ahora copia la portada de la playlist también a YouTube, TIDAL, Jellyfin, Emby y Plex.</string>
+    <string name="whats_new_20_library_title">Más de tu biblioteca</string>
+    <string name="whats_new_20_library_body">Las canciones que te gustan de TIDAL, los favoritos y lo escuchado hace poco en Apple Music y las playlists hechas para ti de ListenBrainz, como fuentes de tus syncs.</string>
+    <string name="whats_new_20_backup_title">Copia completa cifrada</string>
+    <string name="whats_new_20_backup_body">Copia de seguridad y restauración puede guardar también tus inicios de sesión y las syncs programadas, protegidos con una contraseña tuya. El mismo archivo sirve en la app, en Desktop y en Docker.</string>
 </resources>
