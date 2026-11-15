@@ -1464,7 +1464,7 @@
     <string name="provider_note_anghami">Anghami の公開プレイリストを読み取り専用・ログインなしで：プレイリストのリンク（play.anghami.com/playlist/…）を同期の元として貼り付けます。公式のインターフェースではないため、サイトが変わると動かなくなることがあります。</string>
     <string name="anghami_not_public">この Anghami プレイリストは非公開か存在しません：公開リンクのみ使えます</string>
     <string name="anghami_changed">Anghami のサイトが変わりました。Trackhop の更新が必要です</string>
-    <string name="provider_note_anghami_web">Anghami には公開 API がありません。Anghami のページでサインインすると、Trackhop はウェブプレーヤーのセッションを使います。公式の方法ではなく、Anghami の規約に反し、動かなくなることがあります。アルファ版。自分のプレイリストとお気に入りの曲を読み書きします。サインインが終わらない場合は、パソコンで play.anghami.com の gateway.php リクエストのアドレス（sid=… を含む）をコピーし、「貼り付け」を使ってください。</string>
+    <string name="provider_note_anghami_web">Anghami には公開 API がありません。Anghami のページでサインインすると、Trackhop はウェブプレーヤーのセッションを使います。公式の方法ではなく、Anghami の規約に反し、動かなくなることがあります。自分のプレイリストとお気に入りの曲を読み書きします。サインインが終わらない場合は、パソコンで play.anghami.com の gateway.php リクエストのアドレス（sid=… を含む）をコピーし、「貼り付け」を使ってください。</string>
     <string name="whats_new_18_schedule_title">思いどおりのスケジュール</string>
     <string name="whats_new_18_schedule_body">毎時、6時間ごと、毎日、毎週、または選んだ曜日に、好きな時刻で。</string>
     <string name="whats_new_18_daylist_title">自動で変わるプレイリスト</string>
@@ -1524,7 +1524,7 @@
     <string name="capture_site_open">開く</string>
     <string name="capture_unlocked">キャプチャツールを有効にしました：開発者向けオプション › ウェブサイトをキャプチャ。</string>
     <string name="capture_already_unlocked">キャプチャツールはすでに有効です。</string>
-    <string name="provider_note_qobuz_web">Qobuz は API をパートナーにしか公開していません。Qobuz のページでサインインすると、Trackhop はウェブプレーヤーのセッションを使います。公式の方法ではなく、Qobuz の規約に反し、動かなくなることがあります。アルファ版。自分のプレイリストとお気に入りのトラック（お気に入りの曲として）を読み書きし、ISRC で検索します。サインインが終わらない場合は、パソコンの開発者ツールで www.qobuz.com/api.json へのリクエストを（cURL として、X-User-Auth-Token を含む）コピーし、「貼り付け」を使ってください。</string>
+    <string name="provider_note_qobuz_web">Qobuz は API をパートナーにしか公開していません。Qobuz のページでサインインすると、Trackhop はウェブプレーヤーのセッションを使います。公式の方法ではなく、Qobuz の規約に反し、動かなくなることがあります。自分のプレイリストとお気に入りのトラック（お気に入りの曲として）を読み書きし、ISRC で検索します。サインインが終わらない場合は、パソコンの開発者ツールで www.qobuz.com/api.json へのリクエストを（cURL として、X-User-Auth-Token を含む）コピーし、「貼り付け」を使ってください。</string>
     <string name="whats_new_111_qobuz_title">Qobuz</string>
     <string name="whats_new_111_qobuz_body">Qobuz にログイン（Google でも可）して、プレイリストやお気に入りの曲を他のサービスと同期できます。Qobuz のウェブプレーヤー経由で、開発者キーは不要です。</string>
     <string name="note_slow_ordered_adds">%1$s は順序を保つため、お気に入りの曲を1曲ずつ保存します。%2$d 曲の追加には約 %3$d 分かかります。これは正常で、時間がかかるのは大きな最初の同期だけです。Trackhop はバックグラウンドのままで大丈夫です。</string>

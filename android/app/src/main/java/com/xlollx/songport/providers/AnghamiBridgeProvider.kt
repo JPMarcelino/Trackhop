@@ -36,7 +36,6 @@ class AnghamiBridgeProvider(override val slot: String = "") : MusicProvider, Web
     override val familyName: String get() = "Anghami"
     override val brandColor = 0xFF8D35F5
     override val noteName = "provider_note_anghami_web"
-    override val alpha = true
     override val supportsLikedSongs = true
     override val supportsLikedTarget = true
     /** Another account: where the WebView keeps profiles apart and the connectors take a slot (see [WebAccounts]). */

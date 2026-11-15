@@ -98,8 +98,8 @@ F-Droid builds, Desktop and Docker (and, for the store apps on Google Play and A
 | | ✓ | — | — | Paste a public set or likes link, no account | GitHub, F-Droid, Desktop, Docker |
 | **NetEase Cloud Music, QQ Music** | ✓ | — | — | Paste a public playlist link | GitHub, F-Droid, Desktop, Docker · plugin |
 | **JioSaavn** | ✓ | — | — | Paste a public playlist, album or song link | GitHub, F-Droid, Desktop, Docker · plugin |
-| **Anghami** | ✓ | ✓ | ✓ | Quick sign-in with your Anghami account: your playlists and likes (alpha) | GitHub, F-Droid, Desktop, Docker · plugin |
-| **Qobuz** | ✓ | ✓ | ✓ | Quick sign-in with your Qobuz account (Google too): your playlists and favourite tracks (alpha) | GitHub, F-Droid, Desktop, Docker · plugin |
+| **Anghami** | ✓ | ✓ | ✓ | Quick sign-in with your Anghami account: your playlists and likes | GitHub, F-Droid, Desktop, Docker · plugin |
+| **Qobuz** | ✓ | ✓ | ✓ | Quick sign-in with your Qobuz account (Google too): your playlists and favourite tracks | GitHub, F-Droid, Desktop, Docker · plugin |
 | | ✓ | — | — | Paste a public playlist link, no account | GitHub, F-Droid, Desktop, Docker · plugin |
 | **TikTok** | ✓ | — | — | Share a video: Trackhop reads the song it uses, or recognises it from the audio | GitHub, F-Droid, Desktop, Docker · plugin |
 | **Internet radio, Shazam** | ✓ | — | — | What a station plays, or every song you Shazam | All builds |

@@ -612,7 +612,7 @@ $removals"""
         val more = Providers.services().filter { s -> Accounts.allowsAnother(s) && added.any { it.serviceId == s.serviceId } && s !in available }
         if (available.isNotEmpty() || more.isNotEmpty()) {
             body.append("""<h2>Add a service</h2><form method="post" action="/connectors/add" class="card"><select name="service">""")
-            available.forEach { body.append("""<option value="${h(it.id)}">${h(it.displayName)}${if (it is CookieConnector) " (unofficial, alpha)" else ""}</option>""") }
+            available.forEach { body.append("""<option value="${h(it.id)}">${h(it.displayName)}${if (it is CookieConnector) (if (it.alpha) " (unofficial, alpha)" else " (unofficial)") else ""}</option>""") }
             more.forEach { body.append("""<option value="${h(it.serviceId + Accounts.ANOTHER)}">${h(it.displayName)}: ${h(env.text("account_add"))}</option>""") }
             body.append("""</select><label>${h(env.text("connector_name_label"))} (optional)</label><input type="text" name="name" maxlength="80" autocomplete="off">""")
             body.append("""<p><button>Add</button></p></form>""")

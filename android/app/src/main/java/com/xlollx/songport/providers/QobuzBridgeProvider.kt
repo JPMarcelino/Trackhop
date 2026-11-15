@@ -38,7 +38,6 @@ class QobuzBridgeProvider(override val slot: String = "") : MusicProvider, WebAc
     override val familyName: String get() = "Qobuz"
     override val brandColor = BRAND
     override val noteName = "provider_note_qobuz_web"
-    override val alpha = true
     override val supportsLikedSongs = true
     override val supportsLikedTarget = true
     /** Another account: where the WebView keeps profiles apart and the connectors take a slot (see [WebAccounts]). */

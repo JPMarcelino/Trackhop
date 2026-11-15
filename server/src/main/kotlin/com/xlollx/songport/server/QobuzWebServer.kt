@@ -29,7 +29,6 @@ class QobuzWebServerProvider(override val slot: String = "") : CookieConnector {
     override val familyName: String get() = "Qobuz"
     override val brandColor = 0xFF141414
     override val noteName = "provider_note_qobuz_web"
-    override val alpha: Boolean get() = true
     override val supportsLikedSongs = true
     override val supportsLikedTarget = true
     /** Another account: its own cookies, kv file and caches (see [ServerWebHost]). */

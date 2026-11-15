@@ -28,7 +28,6 @@ class AnghamiWebServerProvider(override val slot: String = "") : CookieConnector
     override val familyName: String get() = "Anghami"
     override val brandColor = 0xFF8D35F5
     override val noteName = "provider_note_anghami_web"
-    override val alpha: Boolean get() = true
     override val supportsLikedSongs = true
     override val supportsLikedTarget = true
     /** Another account: its own cookies, kv file and caches (see [ServerWebHost]). */
