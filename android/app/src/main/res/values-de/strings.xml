@@ -2711,4 +2711,6 @@
     <string name="whats_new_20_backup_title">Verschlüsseltes Komplett-Backup</string>
     <string name="whats_new_20_backup_body">Sicherung &amp; Wiederherstellung kann auch deine Anmeldungen und geplanten Syncs sichern, geschützt mit einem Passwort deiner Wahl. Dieselbe Datei funktioniert in der App, in Desktop und in Docker.</string>
     <string name="nf_todo_removals">öffne die Vorschau des Syncs in Trackhop und bestätige die Entfernungen, wenn sie wirklich weg sollen.</string>
+    <string name="plugins_source_title">Trackhop auf GitHub</string>
+    <string name="plugins_source_desc">Die Connector-Schnittstelle, dokumentiert mit dem Quellcode von Trackhop</string>
 </resources>

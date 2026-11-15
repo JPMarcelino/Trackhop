@@ -2709,4 +2709,6 @@
     <string name="whats_new_20_backup_title">Şifreli tam yedek</string>
     <string name="whats_new_20_backup_body">Yedekleme ve geri yükleme, oturumlarını ve zamanlanmış eşitlemelerini de kendi şifrenle koruyarak saklayabilir. Aynı dosya uygulamada, Desktop\'ta ve Docker\'da çalışır.</string>
     <string name="nf_todo_removals">Trackhop\'ta senkronun önizlemesini aç ve gerçekten kaldırılmaları gerekiyorsa kaldırmaları onayla.</string>
+    <string name="plugins_source_title">GitHub’da Trackhop</string>
+    <string name="plugins_source_desc">Bağlayıcı arayüzü, Trackhop’un kaynak koduyla belgelenmiştir</string>
 </resources>

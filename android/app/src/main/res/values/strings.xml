@@ -2713,4 +2713,6 @@
     <string name="whats_new_20_backup_title">Encrypted full backup</string>
     <string name="whats_new_20_backup_body">Backup &amp; restore can also keep your sign-ins and scheduled syncs, locked with a password of yours. The same file moves between the app, Desktop and Docker.</string>
     <string name="nf_todo_removals">open the sync\'s preview in Trackhop and confirm the removals, if they really should go.</string>
+    <string name="plugins_source_title">Trackhop on GitHub</string>
+    <string name="plugins_source_desc">The connector interface, documented with Trackhop’s source code</string>
 </resources>

@@ -406,7 +406,7 @@ fun SettingsScreen(
                     BridgePlugin.installedPlugins(ctx).map { it to if (it.packageName == active) services else emptyList() }
                 }
             }
-            // What a plugin is, above the list; nothing about where plugins come from.
+            // What a plugin is, above the list; no plugin is named or linked, only Trackhop's own source.
             PrefSection(stringResource(R.string.plugins_title), accent = JobColor.PINK, description = stringResource(R.string.plugins_desc), footer = stringResource(R.string.plugins_where), help = { HelpButton(Helps.plugins) }) {
                 val list = plugins
                 if (list != null && list.isEmpty()) PrefRow(Icons.Filled.Extension, stringResource(R.string.plugins_none))
@@ -421,6 +421,8 @@ fun SettingsScreen(
                         onClick = launch?.let { i -> { runCatching { ctx.startActivity(i) } } },
                     )
                 }
+                // Trackhop's own source, where the connector interface is documented: never a plugin's page.
+                PrefRow(Icons.Filled.Code, stringResource(R.string.plugins_source_title), stringResource(R.string.plugins_source_desc), trailing = { ExternalMark() }) { openUrl(ctx, SOURCE_URL) }
             }
         }
 

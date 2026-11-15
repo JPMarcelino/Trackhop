@@ -2658,4 +2658,6 @@
     <string name="whats_new_20_backup_title">暗号化したフルバックアップ</string>
     <string name="whats_new_20_backup_body">バックアップと復元で、ログイン情報と予約した同期も、自分のパスワードで守って保存できます。同じファイルをアプリ、Desktop、Docker で使えます。</string>
     <string name="nf_todo_removals">Trackhop で同期のプレビューを開き、本当に削除してよい場合は削除を確認してください。</string>
+    <string name="plugins_source_title">GitHub の Trackhop</string>
+    <string name="plugins_source_desc">コネクタのインターフェースと、その説明がある Trackhop のソースコード</string>
 </resources>

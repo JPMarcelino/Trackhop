@@ -2719,4 +2719,6 @@
     <string name="whats_new_20_backup_title">Sauvegarde complète chiffrée</string>
     <string name="whats_new_20_backup_body">Sauvegarde et restauration peut aussi garder tes connexions et tes syncs programmées, protégées par un mot de passe à toi. Le même fichier passe de l\'app à Desktop et Docker.</string>
     <string name="nf_todo_removals">ouvre l\'aperçu de la synchro dans Trackhop et confirme les suppressions, si elles doivent vraiment partir.</string>
+    <string name="plugins_source_title">Trackhop sur GitHub</string>
+    <string name="plugins_source_desc">L’interface des connecteurs, documentée avec le code source de Trackhop</string>
 </resources>

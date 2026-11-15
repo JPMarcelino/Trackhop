@@ -2711,4 +2711,6 @@
     <string name="whats_new_20_backup_title">Backup completo cifrato</string>
     <string name="whats_new_20_backup_body">Backup e ripristino può salvare anche i tuoi accessi e le sync programmate, protetti da una tua password. Lo stesso file passa tra l\'app, Desktop e Docker.</string>
     <string name="nf_todo_removals">apri l\'anteprima della sync in Trackhop e conferma le rimozioni, se vanno tolte davvero.</string>
+    <string name="plugins_source_title">Trackhop su GitHub</string>
+    <string name="plugins_source_desc">L’interfaccia dei connettori, documentata con il codice di Trackhop</string>
 </resources>
