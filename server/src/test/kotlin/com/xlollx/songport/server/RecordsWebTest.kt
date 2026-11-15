@@ -57,7 +57,7 @@ class RecordsWebTest {
     }
 
     @After fun stop() {
-        Features.v2 = false
+        Features.v2 = Features.START
         server.stop(0)
         LocalKey.reset()
     }

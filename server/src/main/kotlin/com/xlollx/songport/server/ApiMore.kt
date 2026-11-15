@@ -109,6 +109,7 @@ internal fun Web.apiMore(ex: HttpExchange, method: String, rest: List<String>, q
         }
         // The set-up with its sign-ins, sealed with the body's password (1.18; Features.hidesCall keeps it hidden without).
         rest == listOf("config", "encrypted") && method == "POST" -> {
+            if (unprotected) return true.also { error(403, NEEDS_PASSWORD) }
             val b = body() ?: return true.also { badJson() }
             val password = (b["password"] as? kotlinx.serialization.json.JsonPrimitive)?.contentOrNull.orEmpty()
             if (password.length < com.xlollx.songport.data.EncryptedBackup.MIN_PASSWORD) return true.also { error(400, "\"password\" needs at least ${com.xlollx.songport.data.EncryptedBackup.MIN_PASSWORD} characters.") }
@@ -423,16 +424,32 @@ internal fun zipOf(files: List<java.io.File>, format: ExportFormat): ByteArray {
 }
 
 /**
+ * The password of an encrypted file, as the request carries it, in the order to try: the
+ * `X-Backup-Password-Base64` header (the Base64 of its UTF-8 bytes: any language's password, through
+ * any client), else `X-Backup-Password`. The server reads a header's bytes as Latin-1: UTF-8 sent
+ * raw (curl) is read back first, then the header as it came (the old way).
+ */
+internal fun backupPasswords(plain: String?, base64: String?): List<String> {
+    if (!base64.isNullOrBlank()) return listOfNotNull(runCatching { String(java.util.Base64.getDecoder().decode(base64.trim()), Charsets.UTF_8) }.getOrNull())
+    if (plain.isNullOrEmpty()) return emptyList()
+    return listOf(String(plain.toByteArray(Charsets.ISO_8859_1), Charsets.UTF_8), plain).distinct()
+}
+
+/**
  * `POST /config` with an encrypted file: its password in the `X-Backup-Password` header (never in
  * the address, where logs keep it); `replacesDevice=true` keeps the file's scheduled syncs on,
  * `replaceSignIns=true` replaces the sign-ins already here, `dryRun=true` only says what it holds.
  */
 private fun Web.configEncrypted(ex: HttpExchange, text: String, query: Map<String, String>, json: (Int, JsonElement) -> Unit, error: (Int, String) -> Unit) {
     if (!Features.v2) return error(400, FullBackupServer.NEWER)
-    val password = ex.requestHeaders.getFirst("X-Backup-Password")
-    if (password.isNullOrEmpty()) return error(400, "This file is encrypted: send its password in the X-Backup-Password header.")
+    val tries = backupPasswords(ex.requestHeaders.getFirst("X-Backup-Password"), ex.requestHeaders.getFirst("X-Backup-Password-Base64"))
+    if (tries.isEmpty()) return error(400, "This file is encrypted: send its password in the X-Backup-Password header.")
     val opened = try {
-        FullBackupServer.open(env, text, password.toCharArray())
+        try {
+            FullBackupServer.open(env, text, tries.first().toCharArray())
+        } catch (e: com.xlollx.songport.data.EncryptedBackup.WrongPassword) {
+            FullBackupServer.open(env, text, (tries.getOrNull(1) ?: throw e).toCharArray())
+        }
     } catch (e: IllegalArgumentException) {
         return error(400, e.message ?: "Not a Trackhop configuration file.")
     }

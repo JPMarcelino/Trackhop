@@ -84,6 +84,12 @@ class Web(
     @Volatile private var localHosts: Set<String>? = null
 
     /**
+     * A server without a password that the network can reach (not Desktop, which answers this
+     * computer only): anyone there opens its pages. It does not hand out the sign-ins, sealed or not.
+     */
+    internal val unprotected: Boolean get() = password == null && localHosts == null
+
+    /**
      * Serves the pages on [port] (0: any free port, for tests); returns the running server.
      * [loopbackOnly] (desktop): listens on 127.0.0.1 only and answers only requests addressed to it
      * by that name or as localhost, so a web page that points its own domain at 127.0.0.1 (DNS

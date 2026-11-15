@@ -20,6 +20,7 @@ internal fun Web.configPage(r: Web.Req) {
             // 1.18 (Features.v2): the same file with the sign-ins, sealed with the password typed twice.
             "encrypted" -> {
                 if (!Features.v2) return redirect(r.ex, "/tools/backup")
+                if (unprotected) return redirect(r.ex, "/tools/backup?err=${q(NEEDS_PASSWORD)}")
                 val password = r.form["password"].orEmpty()
                 val problem = EncryptedBackup.passwordProblem(password.toCharArray(), r.form["password2"].orEmpty().toCharArray())
                 if (problem != null) return redirect(r.ex, "/tools/backup?err=${q(if (problem == EncryptedBackup.PasswordProblem.SHORT) "The password needs at least ${EncryptedBackup.MIN_PASSWORD} characters." else "The two passwords are not the same.")}")
@@ -97,10 +98,12 @@ ${Html.postButton("/tools/config", "Import", fields = mapOf("action" to "import"
 }
 
 /** The set-up's two cards, on the Backup & restore page (with the encrypted one's form from 1.18). */
-internal fun configCards(): String =
+internal const val NEEDS_PASSWORD = "Set SONGPORT_PASSWORD first: this server has no password, so anyone who reaches it could take a file with every sign-in."
+
+internal fun Web.configCards(): String =
     """<h2>Your set-up</h2><div class="card"><p class="muted">Everything Trackhop knows, in one .trackhop file: the syncs, the services added, the matches you chose, the tracks you ignored, the settings, the notification channels and the File playlists. Not your sign-ins, passwords or tokens. The app, Docker and Trackhop Desktop all read it.</p>
 <form method="get" action="/tools/config"><input type="hidden" name="download" value="1"><label class="check"><input type="checkbox" name="history"> Also the run history</label><p><button>Save the set-up to a file</button></p></form></div>
-${if (Features.v2) encryptedCard() else ""}<form method="post" action="/tools/config" enctype="multipart/form-data" class="card"><input type="hidden" name="action" value="read">
+${if (!Features.v2) "" else if (unprotected) """<div class="card"><p><b>Include sign-ins and schedules (encrypted)</b></p><p class="muted">$NEEDS_PASSWORD</p></div>""" else encryptedCard()}<form method="post" action="/tools/config" enctype="multipart/form-data" class="card"><input type="hidden" name="action" value="read">
 <p class="muted">Restore one, from this or another Trackhop, phone or computer: you see what is in it before anything changes.</p>
 <input type="file" name="file" accept=".trackhop,application/json" required><p><button class="secondary">Restore a set-up from a file</button></p></form>"""
 

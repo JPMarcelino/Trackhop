@@ -938,11 +938,15 @@ internal class CliCommands(
     private fun configImportEncrypted(f: File, bytes: ByteArray, dryRun: Boolean, o: Cli.Opts): Int {
         val pw = password("Password of ${f.name}", false) ?: throw Cli.Failure(2, "${f.name} is encrypted: set TRACKHOP_BACKUP_PASSWORD, or run this in a terminal")
         val query = listOfNotNull("dryRun=true".takeIf { dryRun }, "replacesDevice=true".takeIf { o.has("replaces-device") }, "replaceSignIns=true".takeIf { o.has("replace-sign-ins") }).joinToString("&")
-        val r = try {
-            Json.parseToJsonElement(api.raw("POST", "config" + if (query.isEmpty()) "" else "?$query", bytes, mapOf("X-Backup-Password" to String(pw)))).jsonObject
+        val answer = try {
+            api.raw("POST", "config" + if (query.isEmpty()) "" else "?$query", bytes, mapOf(Cli.passwordHeader(pw)))
+        } catch (e: IllegalArgumentException) {
+            // The HTTP client quotes a header it refuses in its message: never printed.
+            throw Cli.Failure(2, "the password of ${f.name} could not be sent: import the file from the web page")
         } finally {
             pw.fill('\u0000')
         }
+        val r = Json.parseToJsonElement(answer).jsonObject
         if (asJson) return print(r).let { 0 }
         val what = "${r.n("syncs")} syncs, ${r.n("matches")} matches chosen by hand, ${r.n("files")} File playlists, ${r.n("channels")} notification channels, ${r.n("signIns")} sign-ins, ${r.n("webSignIns")} web sign-ins"
         val conflicts = r["conflicts"]?.jsonArray?.mapNotNull { it.str() }.orEmpty()

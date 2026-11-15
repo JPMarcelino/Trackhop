@@ -58,7 +58,7 @@ class GroupMailboxesTest {
     }
 
     @After fun stop() {
-        Features.v2 = false
+        Features.v2 = Features.START
         server.stop(0)
         GroupMailboxes.maxItems = GroupMailboxes.MAX_ITEMS
         GroupMailboxes.maxTotalBytes = GroupMailboxes.MAX_TOTAL_BYTES
@@ -104,6 +104,22 @@ class GroupMailboxesTest {
     private fun items(key: String, since: Long = 0): JsonObject = api("GET", "groups/$groupId/items?since=$since", bearer = key).also { assertEquals(it.text, 200, it.code) }.obj
 
     private fun JsonObject.count(k: String) = this[k]!!.jsonArray.size
+
+    /** On a shared server, a person without the API permission has no mailbox for a group's key to open. */
+    @Test fun aGroupKeyIsRefusedWhereTheApiIsNotAllowed() {
+        val key = make()
+        assertEquals(200, api("GET", "groups/$groupId/items", bearer = key).code)
+        val noApi = ServerEnv(env.dataDir, Strings(emptyMap()), "https://songport.example.org", Permissions.DEFAULT - Permissions.API)
+        val other = Web(noApi, Runner(noApi), Auth(noApi), "sekret", "test").start(0)
+        try {
+            val res = client.send(
+                HttpRequest.newBuilder(URI("http://127.0.0.1:${other.address.port}/api/v1/groups/$groupId/items")).header("Authorization", "Bearer $key").build(),
+                HttpResponse.BodyHandlers.ofString(),
+            )
+            assertEquals(res.body(), 403, res.statusCode())
+            assertTrue(res.body(), res.body().contains("API is off"))
+        } finally { other.stop(0) }
+    }
 
     @Test fun theGroupKeyOpensItsOwnItemsAndNothingElse() {
         val key = make()
