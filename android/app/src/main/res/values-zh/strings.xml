@@ -1296,7 +1296,7 @@
     <string name="tour_results">运行后，卡片会显示数字，“未找到”之类的标签会带你去需要查看的地方。更多内容见“设置 › 使用说明”。</string>
     <string name="plugins_where">插件由各自的作者发布，而不是由本应用提供：在 GitHub 上它们带有主题“trackhop-plugin”。</string>
     <string name="provider_note_deezer_bridge">在 Deezer 自己的页面上登录：无需创建开发者应用（Deezer 已不再注册新应用）。使用网页播放器的会话：这不是官方途径，违反 Deezer 的条款，可能随时失效。Alpha 测试版。使用你自己应用 ID 的官方途径仍以“Deezer”提供。</string>
-    <string name="provider_note_liveone">LiveOne 没有公开 API：在 LiveOne 自己的页面登录后，Trackhop 使用网页播放器的会话。这不是官方途径，违反 LiveOne 的条款，可能随时失效。Alpha 版。免费账户同步其预设，显示为喜欢的歌曲（只添加，不删除）；自己的歌单需要付费方案。如果用 Google 登录无法完成，请在电脑上复制 www.liveone.com 本地存储中的 slackerUser 条目，然后使用“粘贴”。</string>
+    <string name="provider_note_liveone">LiveOne 没有公开 API：在 LiveOne 自己的页面登录后，Trackhop 使用网页播放器的会话。这不是官方途径，违反 LiveOne 的条款，可能随时失效。Beta 版。免费账户同步其预设，显示为喜欢的歌曲（只添加，不删除）；自己的歌单需要付费方案。如果用 Google 登录无法完成，请在电脑上复制 www.liveone.com 本地存储中的 slackerUser 条目，然后使用“粘贴”。</string>
     <string name="provider_note_soundcloud_account">在 SoundCloud 自己的页面上登录：你的歌单和喜欢的曲目可作为来源和目标。使用网页应用的会话：这不是官方接口，违反 SoundCloud 的条款，可能随时失效。Beta 测试版。SoundCloud 上很少有曲目带 ISRC，因此匹配依据标题、艺人和时长。</string>
     <string name="alpha">Alpha 测试版</string>
     <string name="alpha_note">Alpha 测试版：尚未在真实账号上测试。请先用测试歌单试用，并报告遇到的问题。</string>
@@ -1464,7 +1464,7 @@
     <string name="provider_note_anghami">Anghami 的公开歌单，只读且无需登录：把歌单链接（play.anghami.com/playlist/…）粘贴为同步的来源。这不是官方接口：网站变化时可能失效。</string>
     <string name="anghami_not_public">这个 Anghami 歌单是私密的或不存在：只支持公开链接</string>
     <string name="anghami_changed">Anghami 改了网站，Trackhop 需要更新</string>
-    <string name="provider_note_anghami_web">Anghami 没有公开 API：在 Anghami 自己的页面登录后，Trackhop 使用网页播放器的会话。这不是官方途径，违反 Anghami 的条款，可能随时失效。读写你自己的歌单和喜欢的歌曲。如果登录无法完成，请在电脑上复制 play.anghami.com 的一个 gateway.php 请求地址（包含 sid=…），然后使用“粘贴”。</string>
+    <string name="provider_note_anghami_web">Anghami 没有公开 API：在 Anghami 自己的页面登录后，Trackhop 使用网页播放器的会话。这不是官方途径，违反 Anghami 的条款，可能随时失效。Beta 版。读写你自己的歌单和喜欢的歌曲。如果登录无法完成，请在电脑上复制 play.anghami.com 的一个 gateway.php 请求地址（包含 sid=…），然后使用“粘贴”。</string>
     <string name="whats_new_18_schedule_title">随心安排同步时间</string>
     <string name="whats_new_18_schedule_body">每小时、每 6 小时、每天、每周或你选的日子，在你定的时间。</string>
     <string name="whats_new_18_daylist_title">会自己变化的歌单</string>
@@ -1524,7 +1524,7 @@
     <string name="capture_site_open">打开</string>
     <string name="capture_unlocked">已解锁抓取工具：开发者选项 › 抓取网站流量。</string>
     <string name="capture_already_unlocked">抓取工具已解锁。</string>
-    <string name="provider_note_qobuz_web">Qobuz 只向合作伙伴开放 API：在 Qobuz 自己的页面登录后，Trackhop 使用网页播放器的会话。这不是官方途径，违反 Qobuz 的条款，可能随时失效。读写你自己的歌单和收藏的曲目（作为喜欢的歌曲），并按 ISRC 搜索。如果登录无法完成，请在电脑的开发者工具中复制一个发往 www.qobuz.com/api.json 的请求（复制为 cURL，包含 X-User-Auth-Token），然后使用“粘贴”。</string>
+    <string name="provider_note_qobuz_web">Qobuz 只向合作伙伴开放 API：在 Qobuz 自己的页面登录后，Trackhop 使用网页播放器的会话。这不是官方途径，违反 Qobuz 的条款，可能随时失效。Beta 版。读写你自己的歌单和收藏的曲目（作为喜欢的歌曲），并按 ISRC 搜索。如果登录无法完成，请在电脑的开发者工具中复制一个发往 www.qobuz.com/api.json 的请求（复制为 cURL，包含 X-User-Auth-Token），然后使用“粘贴”。</string>
     <string name="whats_new_111_qobuz_title">Qobuz</string>
     <string name="whats_new_111_qobuz_body">登录 Qobuz（也可用 Google），将歌单和收藏的曲目与任何其他服务同步。通过 Qobuz 自己的网页播放器，无需开发者密钥。</string>
     <string name="note_slow_ordered_adds">%1$s 会逐首保存喜欢的歌曲以保持顺序：添加 %2$d 首歌曲大约需要 %3$d 分钟。这是正常的，只有首次大量同步才会这么慢，可以让 Trackhop 在后台运行。</string>

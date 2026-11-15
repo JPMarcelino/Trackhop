@@ -23,6 +23,7 @@ import java.net.URLEncoder
  * Unofficial: it can stop working when the player changes.
  */
 class AnghamiWebServerProvider(override val slot: String = "") : CookieConnector {
+    override val beta: Boolean get() = true
     override val serviceId = SERVICE
     override val displayName = "Anghami (web)"
     override val familyName: String get() = "Anghami"

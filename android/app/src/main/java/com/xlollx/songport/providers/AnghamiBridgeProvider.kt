@@ -29,6 +29,7 @@ import kotlinx.serialization.json.JsonElement
  * changes. The sign-in screen shows the notice first.
  */
 class AnghamiBridgeProvider(override val slot: String = "") : MusicProvider, WebAccounts.Connector, StartsOver {
+    override val beta = true
     override val serviceId = SERVICE
     override val displayName = if (BridgePlugin.builtIn) "Anghami (web)" else "Anghami (plugin)"
     override val route: MusicProvider.Route? get() = MusicProvider.Route.EASY

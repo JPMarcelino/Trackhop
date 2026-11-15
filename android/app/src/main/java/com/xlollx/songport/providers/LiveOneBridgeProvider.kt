@@ -27,6 +27,7 @@ import kotlinx.serialization.json.JsonElement
  * the presets is not either. Same service id as the server's connector, so a sync means the same.
  */
 class LiveOneBridgeProvider(override val slot: String = "") : MusicProvider, WebAccounts.Connector, StartsOver {
+    override val beta = true
     override val serviceId = SERVICE
     override val displayName = if (BridgePlugin.builtIn) "LiveOne (web)" else "LiveOne (plugin)"
     override val route: MusicProvider.Route? get() = MusicProvider.Route.EASY
@@ -34,7 +35,6 @@ class LiveOneBridgeProvider(override val slot: String = "") : MusicProvider, Web
     override val familyName: String get() = "LiveOne"
     override val brandColor = 0xFFE4002B
     override val noteName = "provider_note_liveone"
-    override val alpha = true
     override val supportsLikedSongs = true
     override val supportsLikedTarget = true
     /** Another account: where the WebView keeps profiles apart and the connectors take a slot (see [WebAccounts]). */

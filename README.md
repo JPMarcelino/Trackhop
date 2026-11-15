@@ -85,7 +85,7 @@ F-Droid builds, Desktop and Docker (and, for the store apps on Google Play and A
 | **Amazon Music** | ✓ | ✓ | ✓ | Quick sign-in with your Amazon account (no public API) | GitHub, F-Droid · plugin |
 | **TIDAL** | ✓ | ✓ | ✓ | Official: your own free developer key | All builds |
 | **Deezer** | ✓ | ✓ | ✓ | Official (beta), or quick sign-in | All builds · quick sign-in: GitHub, F-Droid, Desktop, Docker, plugin |
-| **LiveOne** | ✓ | ✓ | — | Quick sign-in (liked songs only, alpha) | GitHub, F-Droid, Desktop, Docker · plugin |
+| **LiveOne** | ✓ | ✓ | — | Quick sign-in (liked songs only, beta) | GitHub, F-Droid, Desktop, Docker · plugin |
 | **Navidrome / Subsonic** (Airsonic, Gonic, Ampache, LMS, Funkwhale) | ✓ | ✓ | ✓ | Your server's address and login | All builds |
 | **Jellyfin** | ✓ | ✓ | ✓ | Your server's address and login | All builds |
 | **Emby** (beta) | ✓ | ✓ | ✓ | Your server's address and login | All builds |
@@ -98,8 +98,8 @@ F-Droid builds, Desktop and Docker (and, for the store apps on Google Play and A
 | | ✓ | — | — | Paste a public set or likes link, no account | GitHub, F-Droid, Desktop, Docker |
 | **NetEase Cloud Music, QQ Music** | ✓ | — | — | Paste a public playlist link | GitHub, F-Droid, Desktop, Docker · plugin |
 | **JioSaavn** | ✓ | — | — | Paste a public playlist, album or song link | GitHub, F-Droid, Desktop, Docker · plugin |
-| **Anghami** | ✓ | ✓ | ✓ | Quick sign-in with your Anghami account: your playlists and likes | GitHub, F-Droid, Desktop, Docker · plugin |
-| **Qobuz** | ✓ | ✓ | ✓ | Quick sign-in with your Qobuz account (Google too): your playlists and favourite tracks | GitHub, F-Droid, Desktop, Docker · plugin |
+| **Anghami** | ✓ | ✓ | ✓ | Quick sign-in with your Anghami account: your playlists and likes (beta) | GitHub, F-Droid, Desktop, Docker · plugin |
+| **Qobuz** | ✓ | ✓ | ✓ | Quick sign-in with your Qobuz account (Google too): your playlists and favourite tracks (beta) | GitHub, F-Droid, Desktop, Docker · plugin |
 | | ✓ | — | — | Paste a public playlist link, no account | GitHub, F-Droid, Desktop, Docker · plugin |
 | **TikTok** | ✓ | — | — | Share a video: Trackhop reads the song it uses, or recognises it from the audio | GitHub, F-Droid, Desktop, Docker · plugin |
 | **Internet radio, Shazam** | ✓ | — | — | What a station plays, or every song you Shazam | All builds |
@@ -371,7 +371,7 @@ The technical side of each connector (for a quick overview, see [Music services 
 | Amazon Music | complete, built in (GitHub/F-Droid) or via the [Trackhop Bridge](https://github.com/xlollx/Trackhop-Bridge) | Amazon sign-in on Amazon's page | nothing | Amazon's official Web API is a closed beta for approved partners, so the Bridge uses the web player's interface (library playlists, playlist rows with their entry ids, search, create, add, remove, rename, delete). Not an official API, may break without notice. |
 | TIDAL | complete | OAuth PKCE | `TIDAL_CLIENT_ID` | API v2 (JSON:API) still evolving; endpoints isolated in `TidalProvider.kt`. |
 | Deezer | beta | OAuth implicit | `DEEZER_APP_ID` and an https redirect page (`docs/deezer-redirect.html`) | Registration of new apps may be closed. Playlists read from Deezer carry no ISRC. Beta: limited real-world use. |
-| LiveOne (web) | presets (liked songs): read and add, alpha; GitHub/F-Droid, Docker and Desktop only | LiveOne's own page in the app (Docker/Desktop: paste the `slackerUser` entry) | nothing | No public API: the web player's backend, unofficial. Playlists of one's own need LiveOne's paid plan (not handled yet); no removal; stations play only in the US. |
+| LiveOne (web) | presets (liked songs): read and add, beta; GitHub/F-Droid, Docker and Desktop only | LiveOne's own page in the app (Docker/Desktop: paste the `slackerUser` entry) | nothing | No public API: the web player's backend, unofficial. Playlists of one's own need LiveOne's paid plan (not handled yet); no removal; stations play only in the US. |
 | Subsonic / Navidrome (Airsonic, Gonic, Ampache, LMS, Funkwhale) | complete | server URL, user, password (md5+salt token) | nothing | Starred tracks = likes. Koel speaks the Subsonic API too: sign in with your Koel email and, as the password, the Subsonic API key from your Koel profile (as Koel documents; not tried here). Ampache checks the token against the separate *Subsonic password* (or the API key) from *Preferences → Account*, not the account password; the app says so when Ampache refuses the login. |
 | Jellyfin | complete | server URL, user, password | nothing | Favourites supported. |
 | Emby | beta | server URL, user, password | nothing | Jellyfin's API (Emby is where Jellyfin forked from) under `/emby`, with `X-Emby-Authorization`/`X-Emby-Token`; favourites supported. Not yet tried on a real Emby server. |

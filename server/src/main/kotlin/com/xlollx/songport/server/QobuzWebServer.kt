@@ -24,6 +24,7 @@ import java.net.URLEncoder
  * Unofficial: it can stop working when the player changes.
  */
 class QobuzWebServerProvider(override val slot: String = "") : CookieConnector {
+    override val beta: Boolean get() = true
     override val serviceId = SERVICE
     override val displayName = "Qobuz (web)"
     override val familyName: String get() = "Qobuz"
