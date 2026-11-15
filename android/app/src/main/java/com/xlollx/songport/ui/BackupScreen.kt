@@ -265,7 +265,19 @@ private fun FullBackupSaveRow(snackbar: SnackbarHostState) {
     // The password between the dialog and the file picker's answer; cleared once used.
     var chosen by remember { mutableStateOf<CharArray?>(null) }
     val saveFull = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/octet-stream")) { uri ->
-        val password = chosen ?: return@rememberLauncherForActivityResult
+        val password = chosen
+        if (password == null) {
+            // Android closed the app behind the picker and the password went with it (it is never
+            // saved): the file the picker already made would be an empty "backup". Removed, and said.
+            if (uri != null) {
+                runCatching { android.provider.DocumentsContract.deleteDocument(ctx.contentResolver, uri) }
+                scope.launch {
+                    val again = snackbar.showSnackbar(ctx.getString(R.string.error_generic), actionLabel = ctx.getString(R.string.net_try_again))
+                    if (again == androidx.compose.material3.SnackbarResult.ActionPerformed) asking = true
+                }
+            }
+            return@rememberLauncherForActivityResult
+        }
         chosen = null
         if (uri == null) { password.fill('\u0000'); return@rememberLauncherForActivityResult }
         scope.launch {
@@ -382,7 +394,7 @@ private fun FullBackupDialogs(snackbar: SnackbarHostState, locked: String?, onLo
                                 val webHere = if (web?.platform == EncryptedBackup.WEB_BRIDGE) FullBackup.webServices(web) else emptyList()
                                 FullPending(
                                     snap, com.xlollx.songport.notify.Notify.inBackup(opened.plain), opened.secrets,
-                                    EncryptedBackup.conflicts(ctx.env, opened.secrets, EncryptedBackup.WEB_BRIDGE).map(FullBackup::signInName) + webHere,
+                                    EncryptedBackup.conflicts(ctx.env, opened.secrets, EncryptedBackup.WEB_BRIDGE).map { FullBackup.signInName(ctx, it) } + webHere,
                                 )
                             }.also { pw.fill('\u0000') }
                         }
@@ -390,7 +402,7 @@ private fun FullBackupDialogs(snackbar: SnackbarHostState, locked: String?, onLo
                         r.onSuccess { full = it; wrong = false; onLockedDone() }
                             .onFailure { e ->
                                 if (e is EncryptedBackup.WrongPassword) wrong = true
-                                else { onLockedDone(); snackbar.showSnackbar(e.message ?: ctx.getString(R.string.backup_config_invalid)) }
+                                else { onLockedDone(); snackbar.showSnackbar(ctx.getString(if (e is EncryptedBackup.Newer) R.string.backup_full_newer else R.string.backup_config_invalid)) }
                             }
                     }
                 }) { Text(stringResource(R.string.backup_full_unlock)) }

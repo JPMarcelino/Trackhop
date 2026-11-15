@@ -42,9 +42,9 @@ object FullBackup {
     }
 
     /** A vault id or a client secret ([EncryptedBackup.conflicts]) as people read it. */
-    fun signInName(id: String): String = when {
-        id.startsWith(EncryptedBackup.CLIENT_SECRET) -> id.removePrefix(EncryptedBackup.CLIENT_SECRET).let { k -> (Providers.byId(k)?.displayName ?: k) + " (client secret)" }
-        id.startsWith("notify:") -> "Notifications"
+    fun signInName(ctx: Context, id: String): String = when {
+        id.startsWith(EncryptedBackup.CLIENT_SECRET) -> id.removePrefix(EncryptedBackup.CLIENT_SECRET).let { k -> (Providers.byId(k)?.displayName ?: k) + " (" + ctx.getString(com.xlollx.songport.R.string.setup_field_secret) + ")" }
+        id.startsWith("notify:") -> ctx.getString(com.xlollx.songport.R.string.settings_section_notifications)
         else -> Providers.byId(id)?.displayName ?: id.trim('_')
     }
 
@@ -111,7 +111,7 @@ object FullBackup {
         if (!BridgePlugin.knows(EXPORT)) return Web(null, WebGap.NOT_HANDED)
         val b = runCatching { sessionsCall(ctx, EXPORT, null) }.getOrNull()
         if (b == null) {
-            Diagnostics.log(ctx, "backup", "the web sessions were not asked: no official Trackhop Bridge answers")
+            Diagnostics.log(ctx, "backup", "the web sessions were not asked: no official connector plugin answers")
             return Web(null, WebGap.NOT_HANDED)
         }
         b.getString("error")?.let { e ->

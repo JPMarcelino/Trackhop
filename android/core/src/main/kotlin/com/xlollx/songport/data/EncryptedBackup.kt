@@ -84,6 +84,9 @@ object EncryptedBackup {
     class Opened(val plain: String, val secrets: Secrets)
 
     /** The password is not the file's, or the file was changed: nothing was read. */
+    /** A file this Trackhop is too old to open: the app says so in the person's language. */
+    class Newer(message: String) : IllegalArgumentException(message)
+
     class WrongPassword : IllegalArgumentException("Wrong password, or the file was changed: nothing was imported.")
 
     /** An encrypted file where only a plain one is read (the release switch off, an older path). */
@@ -139,8 +142,8 @@ object EncryptedBackup {
         val e = runCatching { json.decodeFromString(Envelope.serializer(), text.removePrefix("﻿")) }
             .getOrElse { throw IllegalArgumentException("Not a Trackhop configuration file.") }
         require(e.format == FORMAT) { "Not a Trackhop configuration file." }
-        require(e.version <= VERSION) { "This file comes from a newer Trackhop: update this one first." }
-        require(e.cipher == CIPHER && e.kdf.name == KDF && e.kdf.keyBits == KEY_BITS && e.kdf.iterations in MIN_ITERATIONS..MAX_ITERATIONS) { "This encrypted file uses settings this Trackhop does not know." }
+        if (e.version > VERSION) throw Newer("This file comes from a newer Trackhop: update this one first.")
+        if (!(e.cipher == CIPHER && e.kdf.name == KDF && e.kdf.keyBits == KEY_BITS && e.kdf.iterations in MIN_ITERATIONS..MAX_ITERATIONS)) throw Newer("This encrypted file uses settings this Trackhop does not know.")
         val b64 = Base64.getDecoder()
         val salt: ByteArray
         val nonce: ByteArray
