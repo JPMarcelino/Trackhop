@@ -13,21 +13,29 @@
   <p class="guide-search-count" id="guide-count" aria-live="polite"></p>
   <ul class="guide-results" id="guide-results"></ul>
 </form>
-<script type="application/json" id="guide-index">[
-{%- for p in guide_pages -%}{%- if p.url != page.url -%}
-{"t":{{ p.title | default: p.name | jsonify }},"d":{{ p.description | default: "" | jsonify }},"u":{{ p.url | relative_url | jsonify }},"c":{{ p.content | strip_html | normalize_whitespace | truncatewords: 120, "" | jsonify }}},
-{%- endif -%}{%- endfor -%}
-null]</script>
 <script>
   (function () {
-    var form = document.getElementById('guide-search'), data = document.getElementById('guide-index');
-    if (!form || !data || !window.JSON || !''.normalize) return;
-    var pages;
-    try { pages = JSON.parse(data.textContent).filter(Boolean); } catch (e) { return; }
+    // The index is written into the script by Liquid when the site is built ("</" escaped so no
+    // text can end the script): never read back from the page.
+    var pages = [
+{%- for p in guide_pages -%}{%- if p.url != page.url -%}
+{"t":{{ p.title | default: p.name | jsonify | replace: "</", "<\/" }},"d":{{ p.description | default: "" | jsonify | replace: "</", "<\/" }},"u":{{ p.url | relative_url | jsonify | replace: "</", "<\/" }},"c":{{ p.content | strip_html | normalize_whitespace | truncatewords: 120, "" | jsonify | replace: "</", "<\/" }}},
+{%- endif -%}{%- endfor -%}
+null].filter(Boolean);
+    var form = document.getElementById('guide-search');
+    if (!form || !''.normalize) return;
     var input = document.getElementById('guide-q'), clear = document.getElementById('guide-clear');
     var count = document.getElementById('guide-count'), list = document.getElementById('guide-results');
     // Case, accents and the Turkish dotless i don't count: "citta" finds "città".
     function fold(s) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/ı/g, 'i'); }
+    // A result only ever links to a path on this site: anything else (another host, javascript:,
+    // data:) is left out of the search.
+    pages = pages.filter(function (p) {
+      try { var u = new URL(p.u, location.href); } catch (e) { return false; }
+      if (u.origin !== location.origin || (u.protocol !== 'https:' && u.protocol !== 'http:')) return false;
+      p.path = u.pathname + u.hash;
+      return true;
+    });
     pages.forEach(function (p) { p.ft = fold(p.t); p.fd = fold(p.d); p.fc = fold(p.c); });
     // What the page shows after the search (read when typing: this script runs before the rest is
     // parsed), hidden while results are on screen.
@@ -58,11 +66,7 @@ null]</script>
       if (!hits.length) rest.forEach(function (el) { el.hidden = false; });
       hits.slice(0, 40).forEach(function (h) {
         var li = document.createElement('li'), a = document.createElement('a'), d = document.createElement('span');
-        // The index is built from this site's own pages, but a link only ever goes to a path on this
-        // site: anything else (another host, javascript:, data:) is left out.
-        var url = new URL(h.p.u, location.href);
-        if (url.origin !== location.origin || (url.protocol !== 'https:' && url.protocol !== 'http:')) return;
-        a.href = url.pathname + url.hash; a.textContent = h.p.t; d.textContent = h.p.d;
+        a.href = h.p.path; a.textContent = h.p.t; d.textContent = h.p.d;
         li.appendChild(a); li.appendChild(d); list.appendChild(li);
       });
     }
