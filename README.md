@@ -49,7 +49,7 @@ On your phone, on a schedule. No account, no server, no subscription.</p>
 
 <p align="center"><b>♥ Thank you</b> to the people who keep Trackhop free:<br>
 <!-- supporters:start -->
-THE ICON · Michel Henke · Pisqui❤️ · BjörnH. · Bougtib · Anonymous Mixtape · Anonymous Encore · Anonymous B-side · Ingo Wolf · Villordsutch · Il terronazzo · Alan · Anonymous Bassline
+THE ICON · Michel Henke · Pisqui❤️ · BjörnH. · Bougtib · Anonymous Mixtape · Anonymous Encore · Anonymous B-side · Ingo Wolf · Villordsutch · Il terronazzo · Alan · Anonymous Bassline · Anonymous Night Owl
 <!-- supporters:end -->
 <br><sub>Want your name here? <a href="https://ko-fi.com/xlollx">Ko-fi</a> (card or PayPal) or <a href="https://github.com/sponsors/xlollx">GitHub Sponsors</a>.</sub></p>
 
@@ -81,7 +81,7 @@ F-Droid builds, Desktop and Docker (and, for the store apps on Google Play and A
 | **YouTube Music** | ✓ | ✓ | ✓ | Quick sign-in with your Google account | GitHub, F-Droid, Desktop, Docker · plugin |
 | | ✓ | ✓ | ✓ | Official: your own Google API key | All builds |
 | **Apple Music** | ✓ | ✓ | ✓ | Quick sign-in with your Apple ID | GitHub, F-Droid · plugin |
-| | ✓ | ✓ | — | Official: Apple developer token (Apple's API cannot remove tracks) | All builds |
+| | ✓ | ✓ | — | Official: Apple developer token (Apple's API cannot remove tracks) | All apps (not Desktop or Docker) |
 | **Amazon Music** | ✓ | ✓ | ✓ | Quick sign-in with your Amazon account (no public API) | GitHub, F-Droid · plugin |
 | **TIDAL** | ✓ | ✓ | ✓ | Official: your own free developer key | All builds |
 | **Deezer** | ✓ | ✓ | ✓ | Official (beta), or quick sign-in | All builds · quick sign-in: GitHub, F-Droid, Desktop, Docker, plugin |
