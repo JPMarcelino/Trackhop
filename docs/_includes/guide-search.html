@@ -58,7 +58,11 @@ null]</script>
       if (!hits.length) rest.forEach(function (el) { el.hidden = false; });
       hits.slice(0, 40).forEach(function (h) {
         var li = document.createElement('li'), a = document.createElement('a'), d = document.createElement('span');
-        a.href = h.p.u; a.textContent = h.p.t; d.textContent = h.p.d;
+        // The index is built from this site's own pages, but a link only ever goes to a path on this
+        // site: anything else (another host, javascript:, data:) is left out.
+        var url = new URL(h.p.u, location.href);
+        if (url.origin !== location.origin || (url.protocol !== 'https:' && url.protocol !== 'http:')) return;
+        a.href = url.pathname + url.hash; a.textContent = h.p.t; d.textContent = h.p.d;
         li.appendChild(a); li.appendChild(d); list.appendChild(li);
       });
     }
