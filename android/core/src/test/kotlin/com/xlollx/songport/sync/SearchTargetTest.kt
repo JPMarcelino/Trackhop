@@ -114,6 +114,21 @@ class SearchTargetTest {
         assertEquals(emptyList<String?>(), amazon.searches)
     }
 
+    /**
+     * A match chosen by hand before the kind was in the key: no search finds it again, so it is read
+     * under the old key as long as the saved albums list that very id. A mirror sync keeps the album.
+     */
+    @Test fun aHandMadeAlbumMatchFromBeforeTheKindIsKeptWhileTheTargetListsIt() = runBlocking {
+        src.lists["albums"] = mutableListOf(album("s9", "Greatest Hits"))
+        dst.lists[MusicProvider.ALBUMS_ID] = mutableListOf(album("x9", "The Best Of (Deluxe)"))
+        env.store.putMatches(mapOf(FileStore.cacheKey("msrc", "s9", "mdst") to "x9"))
+        val r = SyncEngine(env).run(job("mirror-albums", "albums", MusicProvider.ALBUMS_ID).copy(mirrorRemovals = true).also { env.store.upsertJob(it) })
+        assertEquals(0, r.removed)
+        assertEquals(emptyList<String>(), r.unmatched)
+        assertEquals(listOf("x9"), dst.lists[MusicProvider.ALBUMS_ID]!!.map { it.id })
+        assertEquals("x9", env.store.cachedMatch("msrc", "s9", FileStore.matchTarget("mdst", MusicProvider.ALBUMS_ID)))
+    }
+
     @Test fun anAlbumOnlyMatchedForTheSavedAlbumsIsSearchedAsASongForAPlaylist() = runBlocking {
         val amazon = SongsOrAlbums()
         Providers.testDoubles = listOf(src, amazon)

@@ -3,6 +3,7 @@ package com.xlollx.songport.sync
 import com.xlollx.songport.model.MatchPolicy
 import com.xlollx.songport.model.Track
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -447,5 +448,14 @@ class Part57BoundsTest {
         // The same piece in other spellings still matches.
         val same = Track("o", "Oxygène, Part IV", listOf("Jean-Michel Jarre"), "Oxygène", 300_000)
         assertTrue(Matcher.score(Track("x", "Oxygene, Pt. 4", listOf("Jean-Michel Jarre"), "Oxygène", 300_000), same) >= Matcher.DEFAULT_THRESHOLD)
+    }
+
+    /** "Pt. 2" (Kanye West), "Part II" (Paramore): the part is the whole title, and the song is still found. */
+    @Test fun aTitleThatIsOnlyItsPartNumberStillMatches() {
+        fun t(id: String, title: String, artist: String) = Track(id = id, title = title, artists = listOf(artist), durationMs = 200_000)
+        assertNotNull(Matcher.best(t("s", "Pt. 2", "Kanye West"), listOf(t("c", "Pt. 2", "Kanye West"))))
+        assertNotNull(Matcher.best(t("s", "Part II", "Paramore"), listOf(t("c", "Part 2", "Paramore"))))
+        // Another part is still another song.
+        assertNull(Matcher.best(t("s", "Pt. 2", "Kanye West"), listOf(t("c", "Pt. 3", "Kanye West"))))
     }
 }

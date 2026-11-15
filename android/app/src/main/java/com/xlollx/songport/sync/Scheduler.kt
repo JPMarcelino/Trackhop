@@ -441,4 +441,17 @@ object Scheduler {
             .build()
         WorkManager.getInstance(ctx).enqueueUniqueWork("run-$batchId", ExistingWorkPolicy.KEEP, req)
     }
+
+    /**
+     * Several syncs asked for at once (automation by tag or label): one worker for them all, since
+     * "one per account" only holds inside one worker. Offline, waiting for the connection or handed
+     * over to the server, each goes the way [runNow] takes it.
+     */
+    fun runTogether(ctx: Context, jobIds: List<String>) {
+        OfflineQueue.init(ctx)
+        val offline = com.xlollx.songport.net.Connectivity.isOffline
+        val (batch, alone) = jobIds.partition { !offline && it !in OfflineQueue.waiting.value && ServerLink.handedOver(ctx, it) == null }
+        alone.forEach { runNow(ctx, it) }
+        if (batch.size > 1) runInSequence(ctx, batch) else batch.forEach { runNow(ctx, it) }
+    }
 }

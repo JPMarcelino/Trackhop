@@ -428,9 +428,11 @@ object AiClient {
         val cf = imageKey(env)?.takeIf { com.xlollx.songport.Features.v2 }
         val own = c?.takeIf { imageSupport(it) == ImageSupport.YES }
         if (cf == null) return generateImage(own ?: throw ProviderException("No AI that draws images"), prompt)
-        return try { cloudflareImage(cf, prompt) } catch (e: ProviderException) {
+        return try { cloudflareImage(cf, prompt) } catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (x: Exception) {
+            // A timeout, an error page that is not JSON, a bad picture: the own AI is tried for those too.
+            val e = x as? ProviderException ?: ProviderException("Cloudflare: ${x.message ?: x.javaClass.simpleName}")
             if (own == null) throw e
-            runCatching { generateImage(own, prompt) }.getOrElse { throw e }
+            try { generateImage(own, prompt) } catch (c: kotlinx.coroutines.CancellationException) { throw c } catch (_: Exception) { throw e }
         }
     }
 

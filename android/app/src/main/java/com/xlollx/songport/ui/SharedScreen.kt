@@ -338,10 +338,14 @@ private fun groupRuns(g: SharedGroup): GroupRuns {
 @Composable
 private fun GroupCard(g: SharedGroup, onOpen: () -> Unit) {
     val ctx = LocalContext.current
-    val st = remember(g.id) { SharedGroups.load(ctx.env, g.id) }
-    val curator = SharedGroups.role(g, st) == SharedGroups.Role.CURATOR
-    val count = SharedGroups.members(g, st).count { !it.left }
     val runs = groupRuns(g)
+    // Off the main thread: load waits for the group's lock, which a refresh holds for its whole
+    // network read. Read again after each sync, so the role and the count follow it.
+    val st by androidx.compose.runtime.produceState<com.xlollx.songport.shared.GroupState?>(null, g.id, runs.last) {
+        value = withContext(Dispatchers.IO) { SharedGroups.load(ctx.env, g.id) }
+    }
+    val curator = st?.let { SharedGroups.role(g, it) == SharedGroups.Role.CURATOR }
+    val count = st?.let { s -> SharedGroups.members(g, s).count { !it.left } }
     val dark = LocalAppDark.current
     androidx.compose.material3.Card(
         onClick = onOpen,
@@ -358,13 +362,13 @@ private fun GroupCard(g: SharedGroup, onOpen: () -> Unit) {
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(g.name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 androidx.compose.foundation.layout.FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    StatusPill(stringResource(if (curator) R.string.shared_role_curator else R.string.shared_role_follower), if (curator) Tone.Accent else Tone.Neutral)
+                    if (curator != null) StatusPill(stringResource(if (curator) R.string.shared_role_curator else R.string.shared_role_follower), if (curator) Tone.Accent else Tone.Neutral)
                     if (runs.failed) StatusPill(stringResource(R.string.pill_error), Tone.Error, Icons.Filled.Warning)
                 }
                 Text(
-                    listOf(
+                    listOfNotNull(
                         transportLabel(g.transport),
-                        pluralStringResource(R.plurals.shared_members_n, count, count),
+                        count?.let { pluralStringResource(R.plurals.shared_members_n, it, it) },
                         if (runs.last > 0) stringResource(R.string.pill_last_run, relativeTime(runs.last)) else stringResource(R.string.last_run_never),
                     ).joinToString(" · "),
                     style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -485,6 +489,7 @@ private fun CreateGroupDialog(from: SharedUi.Request.Create?, onDismiss: () -> U
     // The user's own Trackhop server, when "Coordinate with my server" is set: a third way to meet.
     val myServer = remember { ServerLocks.config(ctx.env)?.address }
     var busy by remember { mutableStateOf(false) }
+    val kept = remember { MadePlaylist() }
     var error by remember { mutableStateOf<String?>(null) }
     val pick = rememberFolderPicker { uri, n -> folder = uri.toString(); folderName = n }
     val service = serviceId?.let { Providers.byId(it) }
@@ -547,7 +552,7 @@ private fun CreateGroupDialog(from: SharedUi.Request.Create?, onDismiss: () -> U
                         val made = withContext(Dispatchers.IO) {
                             runCatching {
                                 val local = if (pl != null) PlaylistRef(p.id, pl.id, pl.name)
-                                else p.createPlaylist(ctx.env, name, MusicProvider.description(ctx.getString(R.string.app_name))).let { PlaylistRef(p.id, it.id, it.name) }
+                                else kept.reuse(p.id, name) { p.createPlaylist(ctx.env, name, MusicProvider.description(ctx.getString(R.string.app_name))).let { PlaylistRef(p.id, it.id, it.name) } }
                                 when (transport) {
                                     Invite.NTFY -> SharedGroups.create(ctx.env, name, server, NtfyServer.hostOf(server), myName, p.displayName, local, Invite.NTFY, signIn.auth)
                                     Invite.SERVER -> SharedGroups.create(ctx.env, name, myServer!!, NtfyServer.hostOf(myServer), myName, p.displayName, local, Invite.SERVER)
@@ -583,6 +588,7 @@ private fun JoinGroupDialog(initial: String, onDismiss: () -> Unit, onRekeyed: (
     var folder by rememberSaveable { mutableStateOf<String?>(null) }
     var folderName by rememberSaveable { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
+    val kept = remember { MadePlaylist() }
     var error by remember { mutableStateOf<String?>(null) }
     val pick = rememberFolderPicker { uri, n -> folder = uri.toString(); folderName = n }
     val invite = remember(link) { Invite.parse(link) }
@@ -677,8 +683,8 @@ private fun JoinGroupDialog(initial: String, onDismiss: () -> Unit, onRekeyed: (
                             runCatching {
                                 if (SharedGroups.group(ctx.env, inv.groupId) != null) throw com.xlollx.songport.model.ProviderException(ctx.getString(R.string.shared_error_already, inv.name))
                                 // The member's own copy: a new playlist on their service, filled by the first sync.
-                                val made = p.createPlaylist(ctx.env, inv.name, MusicProvider.description(ctx.getString(R.string.app_name)))
-                                SharedGroups.join(ctx.env, inv, folder.orEmpty(), folderName, myName, p.displayName, PlaylistRef(p.id, made.id, made.name), signIn.auth?.takeIf { inv.transport == Invite.NTFY })
+                                val local = kept.reuse(p.id, inv.name) { p.createPlaylist(ctx.env, inv.name, MusicProvider.description(ctx.getString(R.string.app_name))).let { PlaylistRef(p.id, it.id, it.name) } }
+                                SharedGroups.join(ctx.env, inv, folder.orEmpty(), folderName, myName, p.displayName, local, signIn.auth?.takeIf { inv.transport == Invite.NTFY })
                             }
                         }
                         busy = false
@@ -691,6 +697,20 @@ private fun JoinGroupDialog(initial: String, onDismiss: () -> Unit, onRekeyed: (
     )
 }
 
+/**
+ * The playlist a Create or Join made on the service, kept while the dialog is open: when the group
+ * then cannot be reached, a retry uses it again and does not leave one more empty playlist behind.
+ */
+internal class MadePlaylist {
+    @PublishedApi internal var wanted: Pair<String, String>? = null
+    @PublishedApi internal var ref: PlaylistRef? = null
+
+    inline fun reuse(account: String, name: String, create: () -> PlaylistRef): PlaylistRef {
+        ref?.takeIf { wanted == account to name }?.let { return it }
+        return create().also { ref = it; wanted = account to name }
+    }
+}
+
 /** A group's page: sync, invite, members and roles, the follower's choice, the log, the folder, leaving. */
 @OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 @Composable
@@ -699,12 +719,16 @@ private fun GroupPage(group: SharedGroup, snackbar: SnackbarHostState, onLeft: (
     val env = ctx.env
     val scope = rememberCoroutineScope()
     var version by remember { mutableIntStateOf(0) }
-    var state by remember(group.id) { mutableStateOf(SharedGroups.load(env, group.id)) }
+    // Read off the main thread: load waits for the group's lock, which a refresh (here or in a
+    // background sync) holds for its whole network read.
+    var loaded by remember(group.id) { mutableStateOf<com.xlollx.songport.shared.GroupState?>(null) }
     var problem by remember { mutableStateOf<String?>(null) }
     LaunchedEffect(group.id, group.folder, version) {
+        if (loaded == null) loaded = withContext(Dispatchers.IO) { SharedGroups.load(env, group.id) }
         val r = withContext(Dispatchers.IO) { runCatching { SharedGroups.refresh(env, group) } }
-        r.onSuccess { state = it; problem = null }.onFailure { problem = it.message }
+        r.onSuccess { loaded = it; problem = null }.onFailure { problem = it.userMessage(ctx) }
     }
+    val state = loaded ?: run { CircularProgressIndicator(Modifier.size(24.dp)); return }
     fun act(block: () -> Unit) {
         scope.launch {
             withContext(Dispatchers.IO) { runCatching(block) }.onFailure { snackbar.showSnackbar(it.userMessage(ctx)) }

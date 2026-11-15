@@ -268,6 +268,11 @@ data class SyncReport(
     val ignored: Int = 0,
     /** Abbinamenti incerti da confermare o cambiare. */
     val reviewTracks: List<MatchReview> = emptyList(),
+    /**
+     * Among [reviewTracks], the source ids a recent run of this sync already asked about (an old
+     * match that now reads as a live version, not settled yet): still listed, not announced again.
+     */
+    val reviewAsked: List<String> = emptyList(),
     /** Brani tolti dalla destinazione con "rispecchia rimozioni": si possono ripristinare. */
     val removedTracks: List<Track> = emptyList(),
     /** What this run added, for the list behind the "added" figure (the first 500). */
@@ -340,6 +345,8 @@ data class SyncPlan(
     val duplicates: List<Track> = emptyList(),
     /** A two-way pair that follows removals: what this run knows of the pair's common state; null otherwise. */
     val twoWay: TwoWayPlan? = null,
+    /** Among [uncertain], the source ids a recent run already asked about (see [SyncReport.reviewAsked]). */
+    val reviewAsked: Set<String> = emptySet(),
 )
 
 /**

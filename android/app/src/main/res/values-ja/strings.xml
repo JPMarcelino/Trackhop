@@ -2657,4 +2657,5 @@
     <string name="whats_new_20_library_body">TIDAL のお気に入りの曲、Apple Music のお気に入りと最近再生した曲、ListenBrainz があなた向けに作ったプレイリストを同期のソースにできます。</string>
     <string name="whats_new_20_backup_title">暗号化したフルバックアップ</string>
     <string name="whats_new_20_backup_body">バックアップと復元で、ログイン情報と予約した同期も、自分のパスワードで守って保存できます。同じファイルをアプリ、Desktop、Docker で使えます。</string>
+    <string name="nf_todo_removals">Trackhop で同期のプレビューを開き、本当に削除してよい場合は削除を確認してください。</string>
 </resources>

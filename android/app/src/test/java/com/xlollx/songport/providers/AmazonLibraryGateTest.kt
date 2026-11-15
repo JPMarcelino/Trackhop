@@ -9,7 +9,7 @@ import org.junit.Test
 
 /**
  * Saved albums and followed artists on Amazon Music (11/2026): listed and changed through the Bridge
- * from its 1.11.0 (versionCode 57), or built in. An album row is searched among albums only on its
+ * from its 1.11.0 (versionCode 58), or built in. An album row is searched among albums only on its
  * way to the saved albums, an artist among artists only on its way to the followed artists: synced
  * into an Amazon playlist, which takes songs only, they are searched as songs.
  */
@@ -18,13 +18,13 @@ class AmazonLibraryGateTest {
     private val artist = Track(id = "", title = "Bring Me The Horizon", kind = Track.KIND_ARTIST)
     private val song = Track(id = "", title = "Lo Files", artists = listOf("Dream Events"))
 
-    @Test fun savedAlbumsAndFollowedArtistsFromBridge57OrBuiltIn() {
-        assertEquals(57, BridgePlugin.AMAZON_LIBRARY_VERSION)
+    @Test fun savedAlbumsAndFollowedArtistsFromBridge58OrBuiltIn() {
+        assertEquals(58, BridgePlugin.AMAZON_LIBRARY_VERSION)
         assertEquals(BridgePlugin.SITES_VERSION, BridgePlugin.AMAZON_LIBRARY_VERSION)
-        // Trackhop Bridge 1.10.2 (56), the search fix, and before: `__albums__` would be read as a playlist id.
-        assertFalse(AmazonBridgeProvider.libraryKinds(builtIn = false, version = 56))
+        // Trackhop Bridge 1.10.3 (57), the hotfix, and before: `__albums__` would be read as a playlist id.
+        assertFalse(AmazonBridgeProvider.libraryKinds(builtIn = false, version = 57))
         assertFalse(AmazonBridgeProvider.libraryKinds(builtIn = false, version = 0))
-        assertTrue(AmazonBridgeProvider.libraryKinds(builtIn = false, version = 57))
+        assertTrue(AmazonBridgeProvider.libraryKinds(builtIn = false, version = 58))
         assertTrue(AmazonBridgeProvider.libraryKinds(builtIn = false, version = 60))
         assertTrue(AmazonBridgeProvider.libraryKinds(builtIn = true, version = 0))
     }

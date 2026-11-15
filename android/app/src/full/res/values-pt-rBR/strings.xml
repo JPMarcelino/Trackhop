@@ -5,4 +5,6 @@
     <string name="setlists_browse">Navegar no setlist.fm</string>
     <string name="setlists_browse_hint">O site do setlist.fm. Abra um show e faça uma playlist dele.</string>
     <string name="setlists_browse_unread">Ainda não há músicas nesta página. Espere carregar ou abra um show com o setlist.</string>
+    <string name="security_fact_2">O Trackhop guarda só tokens de acesso revogáveis e, para os conectores web, a sessão do serviço, tudo criptografado com o Android Keystore.</string>
+    <string name="onboarding_security">Você entra na página de cada serviço. O Trackhop guarda só um token ou uma sessão web, criptografados e revogáveis, neste celular e não tem servidor próprio.</string>
 </resources>

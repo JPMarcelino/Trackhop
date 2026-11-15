@@ -2818,4 +2818,5 @@
     <string name="whats_new_20_library_body">Polubione utwory z TIDAL, ulubione i ostatnio odtwarzane z Apple Music oraz playlisty stworzone dla Ciebie przez ListenBrainz jako źródła synchronizacji.</string>
     <string name="whats_new_20_backup_title">Szyfrowana pełna kopia</string>
     <string name="whats_new_20_backup_body">Kopia zapasowa i przywracanie może zapisać też Twoje logowania i zaplanowane synchronizacje, chronione Twoim hasłem. Ten sam plik działa w aplikacji, w Desktop i w Dockerze.</string>
+    <string name="nf_todo_removals">otwórz podgląd synchronizacji w Trackhop i potwierdź usunięcia, jeśli naprawdę mają zniknąć.</string>
 </resources>

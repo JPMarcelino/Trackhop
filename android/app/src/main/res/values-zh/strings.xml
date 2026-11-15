@@ -2657,4 +2657,5 @@
     <string name="whats_new_20_library_body">TIDAL 喜欢的曲目、Apple Music 收藏和最近播放、ListenBrainz 为你生成的歌单，都可以作为同步来源。</string>
     <string name="whats_new_20_backup_title">加密的完整备份</string>
     <string name="whats_new_20_backup_body">备份与恢复还可以保存你的登录信息和定时同步，用你自己的密码保护。同一个文件可在应用、Desktop 和 Docker 之间通用。</string>
+    <string name="nf_todo_removals">在 Trackhop 中打开该同步的预览，如果确实应当移除，请确认删除。</string>
 </resources>

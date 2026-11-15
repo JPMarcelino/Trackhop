@@ -109,15 +109,22 @@ object TargetLocks {
      */
     suspend fun lockRun(keys: List<String>): Lease? {
         val held = ArrayList<Entry>()
-        for (k in keys) {
-            val e = entry(k)
-            e.mutex.lock()
-            held += e
-            val foreign = synchronized(e) { e.lease?.takeIf { it.until > clock() } }
-            if (foreign != null) {
-                held.forEach { it.mutex.unlock() }
-                return foreign
+        try {
+            for (k in keys) {
+                val e = entry(k)
+                e.mutex.lock()
+                held += e
+                val foreign = synchronized(e) { e.lease?.takeIf { it.until > clock() } }
+                if (foreign != null) {
+                    held.forEach { it.mutex.unlock() }
+                    return foreign
+                }
             }
+        } catch (e: Throwable) {
+            // Cancelled while waiting for the second playlist of a pair: the first must not stay
+            // locked until the process restarts.
+            held.forEach { it.mutex.unlock() }
+            throw e
         }
         return null
     }

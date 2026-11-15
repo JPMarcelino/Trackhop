@@ -2708,4 +2708,5 @@
     <string name="whats_new_20_library_body">TIDAL\'da beğendiğin parçalar, Apple Music favorileri ve son dinlenenler, ListenBrainz\'in senin için hazırladığı listeler eşitlemelerine kaynak olur.</string>
     <string name="whats_new_20_backup_title">Şifreli tam yedek</string>
     <string name="whats_new_20_backup_body">Yedekleme ve geri yükleme, oturumlarını ve zamanlanmış eşitlemelerini de kendi şifrenle koruyarak saklayabilir. Aynı dosya uygulamada, Desktop\'ta ve Docker\'da çalışır.</string>
+    <string name="nf_todo_removals">Trackhop\'ta senkronun önizlemesini aç ve gerçekten kaldırılmaları gerekiyorsa kaldırmaları onayla.</string>
 </resources>

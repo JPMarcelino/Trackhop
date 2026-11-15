@@ -55,4 +55,12 @@ class CloudflareImageTest {
         AiClient.saveImageKey(env, null)
         assertEquals(null, AiClient.imageKey(env))
     }
+
+    /** An error page that is not JSON (a gateway's 502) is a failure like the others, not a raw parse error. */
+    @Test fun anAnswerThatIsNotJsonIsAFailureLikeTheOthers() = runBlocking {
+        AiClient.saveImageKey(env, AiClient.ImageKey("acc1", "tok"))
+        mock.enqueue(MockResponse().setResponseCode(502).setBody("<html>Bad gateway</html>"))
+        val e = runCatching { AiClient.drawCover(env, claude, "x") }.exceptionOrNull()
+        assertTrue(e.toString(), e is ProviderException)
+    }
 }

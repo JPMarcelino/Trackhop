@@ -2816,4 +2816,5 @@
     <string name="whats_new_20_library_body">Любимые треки TIDAL, избранное и недавно прослушанное в Apple Music и плейлисты ListenBrainz, собранные для вас, — как источники синхронизаций.</string>
     <string name="whats_new_20_backup_title">Зашифрованная полная копия</string>
     <string name="whats_new_20_backup_body">«Резервная копия и восстановление» может сохранить и ваши входы, и запланированные синхронизации под вашим паролем. Тот же файл работает в приложении, Desktop и Docker.</string>
+    <string name="nf_todo_removals">откройте предпросмотр синхронизации в Trackhop и подтвердите удаления, если их действительно нужно удалить.</string>
 </resources>

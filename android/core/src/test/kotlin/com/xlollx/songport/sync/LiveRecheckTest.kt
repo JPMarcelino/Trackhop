@@ -54,8 +54,15 @@ class LiveRecheckTest {
         assertEquals(0, r.added)
         assertEquals(0, r.removed)
 
+        // Asked once: the next run lists it again, and has nothing new to announce.
+        assertEquals(setOf(com.xlollx.songport.notify.Notify.Event.REVIEW), com.xlollx.songport.notify.Notify.events(r))
+        val second = engine.run(env.store.job("j")!!)
+        assertEquals(listOf("s"), second.reviewTracks.map { it.source.id })
+        assertEquals(listOf("s"), second.reviewAsked)
+        assertTrue(com.xlollx.songport.notify.Notify.events(second).isEmpty())
+
         // Kept by the user: never asked again.
-        engine.confirmMatches(r.id, r.reviewTracks)
+        engine.confirmMatches(second.id, second.reviewTracks)
         val again = engine.run(env.store.job("j")!!)
         assertTrue(again.reviewTracks.isEmpty())
         assertEquals(listOf("l", "do"), dst.lists["t"]!!.map { it.id })

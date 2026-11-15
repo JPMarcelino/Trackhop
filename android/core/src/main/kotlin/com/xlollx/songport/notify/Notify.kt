@@ -325,7 +325,7 @@ object Notify {
         if (!r.ok) add(Event.FAILED)
         if (r.ok && releases && r.added > 0) add(Event.RELEASES)
         if (r.ok && !releases && (r.added > 0 || r.removed > 0)) add(Event.CHANGES)
-        if (r.reviewTracks.isNotEmpty()) add(Event.REVIEW)
+        if (r.reviewTracks.any { it.source.id !in r.reviewAsked }) add(Event.REVIEW)
         if (r.heldBack > 0) add(Event.REMOVALS)
     }
 

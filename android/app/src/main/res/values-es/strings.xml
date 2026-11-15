@@ -2718,4 +2718,5 @@
     <string name="whats_new_20_library_body">Las canciones que te gustan de TIDAL, los favoritos y lo escuchado hace poco en Apple Music y las playlists hechas para ti de ListenBrainz, como fuentes de tus syncs.</string>
     <string name="whats_new_20_backup_title">Copia completa cifrada</string>
     <string name="whats_new_20_backup_body">Copia de seguridad y restauración puede guardar también tus inicios de sesión y las syncs programadas, protegidos con una contraseña tuya. El mismo archivo sirve en la app, en Desktop y en Docker.</string>
+    <string name="nf_todo_removals">abre la vista previa de la sync en Trackhop y confirma las eliminaciones, si de verdad sobran.</string>
 </resources>

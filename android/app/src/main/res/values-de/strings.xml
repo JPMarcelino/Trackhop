@@ -2710,4 +2710,5 @@
     <string name="whats_new_20_library_body">Lieblingstitel von TIDAL, Favoriten und zuletzt Gespieltes von Apple Music und die für dich gemachten Playlists von ListenBrainz als Quellen für deine Syncs.</string>
     <string name="whats_new_20_backup_title">Verschlüsseltes Komplett-Backup</string>
     <string name="whats_new_20_backup_body">Sicherung &amp; Wiederherstellung kann auch deine Anmeldungen und geplanten Syncs sichern, geschützt mit einem Passwort deiner Wahl. Dieselbe Datei funktioniert in der App, in Desktop und in Docker.</string>
+    <string name="nf_todo_removals">öffne die Vorschau des Syncs in Trackhop und bestätige die Entfernungen, wenn sie wirklich weg sollen.</string>
 </resources>

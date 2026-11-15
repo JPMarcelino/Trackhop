@@ -48,10 +48,13 @@ object BridgePlugin {
     /**
      * A plugin reporting this "version" (or more) also browses setlist.fm for the store builds
      * ([SETLIST_ACTION]) and reads Vivaticket's gateway for Concerts (`vivaticket.read`), the two
-     * features the GitHub and F-Droid build carries itself. Trackhop Bridge does so since 1.11.0 (57;
-     * 56 is 1.10.2, the Amazon Music search fix, without them).
+     * features the GitHub and F-Droid build carries itself. Trackhop Bridge does so since 1.11.0 (58;
+     * 57 went to the hotfix 1.10.3 and 56 is 1.10.2, both without them).
      */
-    const val SITES_VERSION = 57
+    const val SITES_VERSION = 58
+
+    /** A plugin reporting this "version" (or more) also lists YouTube Music's followed podcasts (`__podcasts__`): Trackhop Bridge 1.11.0. */
+    const val YTM_PODCASTS_VERSION = 58
 
     /**
      * A plugin reporting this "version" (or more) also lists and changes Amazon Music's saved albums

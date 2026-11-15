@@ -177,11 +177,19 @@ class TwoDevicesTest {
 
     @Test fun aTrackTwiceOnTheTargetAndOnceInTheSourceLosesItsExtraCopy() = runBlocking {
         twice()
-        val r = engine.run(job())
+        val r = engine.run(job(mirror = true))
         assertEquals(listOf("i1", "i2", "i3", "i4", "i5"), dst.lists["t"]!!.map { it.itemId })
         assertTrue(r.notes.toString(), "note_duplicates_repaired(1)" in r.notes)
         assertEquals("not a mirror removal", 0, r.removed)
-        assertFalse(engine.run(job()).notes.any { it.startsWith("note_duplicates_repaired") })
+        assertFalse(engine.run(job(mirror = true)).notes.any { it.startsWith("note_duplicates_repaired") })
+    }
+
+    /** "Add only" never deletes: a second copy on the target may be there on purpose. */
+    @Test fun anAddOnlySyncLeavesTheExtraCopy() = runBlocking {
+        twice()
+        val r = engine.run(job())
+        assertEquals(6, dst.lists["t"]!!.size)
+        assertFalse(r.notes.any { it.startsWith("note_duplicates_repaired") })
     }
 
     @Test fun twiceInTheSourceTooItStaysTwice() = runBlocking {
@@ -215,7 +223,7 @@ class TwoDevicesTest {
         // A page the service sent twice: the same entry, not two.
         dst.lists["t"]!![5] = t("da", "Alpha", "i1")
         dst.lists["t"]!! += t("db", "Beta", null)
-        engine.run(job())
+        engine.run(job(mirror = true))
         assertEquals(7, dst.lists["t"]!!.size)
     }
 
@@ -223,14 +231,14 @@ class TwoDevicesTest {
         twice()
         engine.run(job(archive = true))
         assertEquals(6, dst.lists["t"]!!.size)
-        assertTrue(engine.plan(job(), createTarget = false, interactive = true).duplicates.isEmpty())
+        assertTrue(engine.plan(job(mirror = true), createTarget = false, interactive = true).duplicates.isEmpty())
     }
 
     @Test fun aTargetThatIsMostlyDuplicatesIsLeftAlone() = runBlocking {
         src.lists["p"] = mutableListOf(t("a", "Alpha"), t("b", "Beta"))
         dst.catalogue += listOf(t("da", "Alpha"), t("db", "Beta"))
         dst.lists["t"] = mutableListOf(t("da", "Alpha", "i1"), t("db", "Beta", "i2"), t("da", "Alpha", "i3"), t("db", "Beta", "i4"))
-        engine.run(job())
+        engine.run(job(mirror = true))
         assertEquals(4, dst.lists["t"]!!.size)
     }
 }

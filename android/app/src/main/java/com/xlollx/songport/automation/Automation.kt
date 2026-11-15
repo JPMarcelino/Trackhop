@@ -109,7 +109,7 @@ class AutomationReceiver : BroadcastReceiver() {
                 if (tag != null || label != null) {
                     val group = Automation.group(Store.get(ctx).data, tag, label)
                     Diagnostics.log(ctx, "automation", "run group ${listOfNotNull(tag, label).joinToString(" ").take(60)}: ${group.size}")
-                    group.forEach { Scheduler.runNow(ctx, it.id) }
+                    Scheduler.runTogether(ctx, group.map { it.id })
                     return
                 }
                 val key = intent.getStringExtra(Automation.EXTRA_SYNC).orEmpty()

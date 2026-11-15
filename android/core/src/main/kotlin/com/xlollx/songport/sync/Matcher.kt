@@ -377,7 +377,9 @@ object Matcher {
         val st = asPart(s.title, c.title); val ct = asPart(c.title, s.title)
         // Two numbered parts: "part 4" on both says nothing of the piece. "Chants Magnetiques, Pt. 4" is
         // not "Equinoxe, Part 4", not even as the closest one (#57, 14/11): the titles are compared without it.
-        val title = if (partOf(st) != null && partOf(ct) != null) similarity(PART_N.replace(st, " ").trim(), PART_N.replace(ct, " ").trim()).let { bare ->
+        // A title that is nothing but its part ("Pt. 2", "Part II") has nothing left to compare: as it is.
+        val sb = PART_N.replace(st, " ").trim(); val cb = PART_N.replace(ct, " ").trim()
+        val title = if (partOf(st) != null && partOf(ct) != null && !(sb.isEmpty() && cb.isEmpty())) similarity(sb, cb).let { bare ->
             if (bare >= 1.0 && partOf(st) == partOf(ct)) similarity(st, ct) else minOf(similarity(st, ct), bare)
         } else similarity(st, ct)
         val artist = artistScoreN(s.artists, c.artists)
