@@ -24,8 +24,7 @@ On your phone, on a schedule. No account, no server, no subscription.</p>
 </p>
 
 <p align="center">
-  <!-- Google Play: replace with the official badge linking to the listing once it is public. -->
-  <img src="docs/assets/badges/play-soon.svg" height="56" alt="Google Play: coming soon">
+  <a href="https://play.google.com/store/apps/details?id=com.xlollx.songport"><img src="docs/assets/badges/play.png" height="56" alt="Get it on Google Play"></a>
   <a href="https://appgallery.huawei.com/app/C119677919"><img src="docs/assets/badges/appgallery.svg" height="56" alt="Explore it on Huawei AppGallery"></a>
   <a href="https://f-droid.org/packages/com.xlollx.songport/"><img src="docs/assets/badges/fdroid.svg" height="56" alt="Get it on F-Droid"></a>
   <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/xlollx/Trackhop"><img src="docs/assets/badges/obtainium.svg" height="56" alt="Get it on Obtainium"></a>
@@ -129,7 +128,7 @@ move. Trackhop is for keeping playlists in step over time, without handing your 
 - **[Obtainium](https://github.com/ImranR98/Obtainium)**: add `https://github.com/xlollx/Trackhop` and
   each release reaches the phone by itself.
 - **[Releases](https://github.com/xlollx/Trackhop/releases/latest)**: the signed APK of every version.
-- **Google Play and AppGallery versions**: the same app limited to official APIs (store rules).
+- **[Google Play](https://play.google.com/store/apps/details?id=com.xlollx.songport) and [AppGallery](https://appgallery.huawei.com/app/C119677919) versions**: the same app limited to official APIs (store rules).
   Using one and want YouTube Music, Amazon Music, or Spotify and Apple Music without developer keys?
   Install the companion plugin **[Trackhop Bridge](https://github.com/xlollx/Trackhop-Bridge)**
   (GitHub only, read its notes first), or switch to the F-Droid/GitHub build above, which has them

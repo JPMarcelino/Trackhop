@@ -8,8 +8,8 @@ tabs_label: Où installer Trackhop
 tab_phone: Android
 tab_computer: Ordinateur
 tab_server: Auto-hébergé
-play_alt: "Google Play : bientôt disponible"
-play_note: 'En test'
+play_alt: "Disponible sur Google Play"
+play_note: 'Disponible'
 appgallery_alt: "Découvre-la sur Huawei AppGallery"
 appgallery_note: "Sans services Google"
 store_bridge: '<b>Google Play ou AppGallery ?</b> Ajoute Trackhop Bridge pour YouTube Music, Amazon Music et plus'

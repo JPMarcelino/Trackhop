@@ -8,8 +8,8 @@ tabs_label: 在哪里安装 Trackhop
 tab_phone: Android
 tab_computer: 桌面版
 tab_server: 自托管
-play_alt: "Google Play：即将上架"
-play_note: '测试中'
+play_alt: "在 Google Play 上获取"
+play_note: '现已上架'
 appgallery_alt: "在华为应用市场探索"
 appgallery_note: "无需 Google 服务"
 store_bridge: '<b>Google Play 或 AppGallery 版？</b>添加 Trackhop Bridge，即可使用 YouTube Music、Amazon Music 等'
