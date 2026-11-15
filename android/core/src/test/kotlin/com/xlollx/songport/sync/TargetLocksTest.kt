@@ -6,6 +6,7 @@ import com.xlollx.songport.model.SyncJob
 import com.xlollx.songport.model.Track
 import com.xlollx.songport.platform.Env
 import com.xlollx.songport.providers.Providers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -155,6 +156,17 @@ class TargetLocksTest {
         dst.onSearch = { assertTrue(held) }
         assertEquals(1, SyncEngine(env).run(job()).added)
         assertTrue(!held)
+    }
+
+    /** A half of a pair cancelled while it waits for its second playlist lets go of the first. */
+    @Test fun aRunCancelledWhileWaitingReleasesWhatItHeld() = runBlocking {
+        val x = "cancel|x"; val y = "cancel|y"
+        assertNull(TargetLocks.lockRun(listOf(y)))
+        val waiting = kotlinx.coroutines.GlobalScope.launch(kotlinx.coroutines.Dispatchers.Unconfined) { TargetLocks.lockRun(listOf(x, y)) }
+        assertTrue(TargetLocks.busyHere(listOf(x)))
+        waiting.cancel(); waiting.join()
+        assertTrue("the first lock is released", !TargetLocks.busyHere(listOf(x)))
+        TargetLocks.unlockRun(listOf(y))
     }
 
     @Test fun theKeyIsTheServiceNotTheRouteOrTheAccount() {
