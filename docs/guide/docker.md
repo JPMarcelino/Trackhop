@@ -112,7 +112,7 @@ playlist files. Back that folder up and you have backed up Trackhop.
 | YouTube Music | yes (unofficial, alpha) | The cookies of a browser where you are signed in: [see below](#youtube-music-unofficial) |
 | Spotify (web) | yes (unofficial, alpha) | The `sp_dc` cookie of a browser where you are signed in: [see below](#spotify-and-deezer-without-a-key-unofficial) |
 | Deezer (web) | yes (unofficial, alpha) | The `arl` cookie of a browser where you are signed in: [see below](#spotify-and-deezer-without-a-key-unofficial) |
-| LiveOne, Anghami, Qobuz (web) | yes (unofficial, alpha) | A session copied from a browser where you are signed in: [LiveOne](#liveone-unofficial), [Anghami](#anghami-unofficial), [Qobuz](#qobuz-unofficial) |
+| LiveOne, Anghami, Qobuz (web) | yes (unofficial, beta) | A session copied from a browser where you are signed in: [LiveOne](#liveone-unofficial), [Anghami](#anghami-unofficial), [Qobuz](#qobuz-unofficial) |
 | Amazon Music, Apple Music | no | See below |
 
 **Why not all of them.** The other quick routes (Amazon Music, Apple Music without a key) work by

@@ -92,7 +92,7 @@ As on the [server](docker#services): Spotify, YouTube and TIDAL with your own ke
 own app (it wants an `https` redirect); Navidrome and other Subsonic servers, Jellyfin, Emby, Plex;
 Last.fm (a source, and a target for loved tracks) and ListenBrainz as a source; SoundCloud, NetEase
 Cloud Music, QQ Music and Anghami public links; CSV files; YouTube Music, Spotify and Deezer with
-pasted cookies, and LiveOne, Anghami and Qobuz (unofficial, alpha). Amazon Music and Apple Music
+pasted cookies, and LiveOne, Anghami and Qobuz (unofficial, beta). Amazon Music and Apple Music
 are not there: they need the service's web player running inside the app, which only the phone
 app has.
 

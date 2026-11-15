@@ -31,7 +31,7 @@ It adds:
   longer registers new ones (the official route stays available in Trackhop).
 - **SoundCloud** with your account (beta): your sets and liked tracks as sources and destinations,
   and public SoundCloud links.
-- **LiveOne**, **Anghami** and **Qobuz** sign-in (alpha), which have no official route in Trackhop.
+- **LiveOne**, **Anghami** and **Qobuz** sign-in (beta), which have no official route in Trackhop.
 - The public **NetEase Cloud Music**, **QQ Music** and **Anghami** playlist links, and the songs of
   **TikTok** videos: the store builds reach those pages only through the plugin.
 
