@@ -329,7 +329,11 @@ class StoreScreenshots {
         open(main().setAction(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, "$linkA\n$linkB")) {
             step("shot $n") {
                 waitText(s(R.string.card_share), 30_000)
-                compose.onAllNodesWithText(s(R.string.card_share), substring = true).onFirst().performScrollTo()
+                // 2.0's tool shows Share (greyed) before the card is drawn: wait for it to be offered.
+                val drawn = androidx.compose.ui.test.hasText(s(R.string.card_share), substring = true) and androidx.compose.ui.test.isEnabled()
+                val until = System.currentTimeMillis() + 30_000
+                while (compose.onAllNodes(drawn).fetchSemanticsNodes().isEmpty() && System.currentTimeMillis() < until) Thread.sleep(250)
+                compose.onAllNodes(drawn).onFirst().performScrollTo()
             }
             snap(2000)
         }
