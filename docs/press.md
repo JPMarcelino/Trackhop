@@ -94,6 +94,7 @@ Trackhop Desktop (1440 × 810):
 <div class="press-row desk">
   <a href="/store/desktop/1-syncs.jpg"><img src="/store/desktop/1-syncs.jpg" alt="Trackhop Desktop: syncs" loading="lazy"></a>
   <a href="/store/desktop/2-sync-detail.jpg"><img src="/store/desktop/2-sync-detail.jpg" alt="Trackhop Desktop: a sync in detail" loading="lazy"></a>
+  <a href="/store/desktop/3-wrapped.jpg"><img src="/store/desktop/3-wrapped.jpg" alt="Trackhop Desktop: your Wrapped from what you really play" loading="lazy"></a>
 </div>
 
 All screenshots are in the [press kit](/assets/press/Trackhop-press-kit.zip).
