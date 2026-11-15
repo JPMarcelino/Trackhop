@@ -50,7 +50,7 @@ class YouTubeBridgeProvider(override val slot: String = "") : MusicProvider, Web
      * Followed podcasts, read only: the library's podcast tab is documented (ytmusicapi), following a
      * show is not, so they are a source and never a target.
      */
-    override val supportsPodcasts: Boolean get() = BridgePlugin.full
+    override val supportsPodcasts: Boolean get() = BridgePlugin.builtIn || BridgePlugin.reportedVersion >= BridgePlugin.YTM_PODCASTS_VERSION
     override fun supportsLibrary(playlistId: String?, asTarget: Boolean): Boolean =
         if (playlistId == MusicProvider.PODCASTS_ID && asTarget) false else super.supportsLibrary(playlistId, asTarget)
     /** The followed podcasts came with Trackhop 1.18: offered then ([com.xlollx.songport.Features]). */
