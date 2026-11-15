@@ -2696,4 +2696,5 @@
     <string name="own_image_copied">Anfrage kopiert: füge sie ein, falls sie fehlt, speichere dann das Bild und wähle es hier.</string>
     <string name="own_image_copied_only">Anfrage kopiert: öffne ChatGPT oder Gemini, füge sie ein, speichere das Bild und wähle es hier.</string>
     <string name="own_image_preparing">Die Playlist wird gelesen, um die Anfrage zu schreiben…</string>
+    <string name="nf_todo_removals">öffne die Vorschau des Syncs in Trackhop und bestätige die Entfernungen, wenn sie wirklich weg sollen.</string>
 </resources>

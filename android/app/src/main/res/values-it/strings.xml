@@ -2696,4 +2696,5 @@
     <string name="own_image_copied">Richiesta copiata: incollala se non c\'è già, poi salva l\'immagine e sceglila qui.</string>
     <string name="own_image_copied_only">Richiesta copiata: apri ChatGPT o Gemini, incollala, poi salva l\'immagine e sceglila qui.</string>
     <string name="own_image_preparing">Leggo la playlist per scrivere la richiesta…</string>
+    <string name="nf_todo_removals">apri l\'anteprima della sync in Trackhop e conferma le rimozioni, se vanno tolte davvero.</string>
 </resources>

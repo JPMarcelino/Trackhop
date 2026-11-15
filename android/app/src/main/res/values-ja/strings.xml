@@ -2643,4 +2643,5 @@
     <string name="own_image_copied">リクエストをコピーしました。入っていなければ貼り付け、画像を保存してここで選んでください。</string>
     <string name="own_image_copied_only">リクエストをコピーしました。ChatGPT か Gemini を開いて貼り付け、画像を保存してここで選んでください。</string>
     <string name="own_image_preparing">リクエストを書くためにプレイリストを読み込み中…</string>
+    <string name="nf_todo_removals">Trackhop で同期のプレビューを開き、本当に削除してよい場合は削除を確認してください。</string>
 </resources>

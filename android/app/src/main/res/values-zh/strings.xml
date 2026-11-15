@@ -2643,4 +2643,5 @@
     <string name="own_image_copied">请求已复制：如果没有自动填入就粘贴，然后保存图片并在这里选择。</string>
     <string name="own_image_copied_only">请求已复制：打开 ChatGPT 或 Gemini 粘贴，保存图片后在这里选择。</string>
     <string name="own_image_preparing">正在读取歌单以写出请求…</string>
+    <string name="nf_todo_removals">在 Trackhop 中打开该同步的预览，如果确实应当移除，请确认删除。</string>
 </resources>

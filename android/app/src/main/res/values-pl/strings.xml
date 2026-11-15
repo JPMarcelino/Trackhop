@@ -2804,4 +2804,5 @@
     <string name="own_image_copied">Prośba skopiowana: wklej ją, jeśli jej nie ma, zapisz obraz i wybierz go tutaj.</string>
     <string name="own_image_copied_only">Prośba skopiowana: otwórz ChatGPT lub Gemini, wklej ją, zapisz obraz i wybierz go tutaj.</string>
     <string name="own_image_preparing">Czytam playlistę, by napisać prośbę…</string>
+    <string name="nf_todo_removals">otwórz podgląd synchronizacji w Trackhop i potwierdź usunięcia, jeśli naprawdę mają zniknąć.</string>
 </resources>

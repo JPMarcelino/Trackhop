@@ -2642,4 +2642,5 @@
     <string name="own_image_copied">요청을 복사했어요. 없으면 붙여넣고, 이미지를 저장한 뒤 여기서 선택하세요.</string>
     <string name="own_image_copied_only">요청을 복사했어요. ChatGPT나 Gemini를 열어 붙여넣고, 이미지를 저장한 뒤 여기서 선택하세요.</string>
     <string name="own_image_preparing">요청을 쓰려고 플레이리스트를 읽는 중…</string>
+    <string name="nf_todo_removals">Trackhop에서 동기화의 미리보기를 열고, 정말 삭제해야 한다면 삭제를 확인하세요.</string>
 </resources>

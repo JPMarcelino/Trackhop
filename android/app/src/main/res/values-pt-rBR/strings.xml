@@ -2704,4 +2704,5 @@
     <string name="own_image_copied">Pedido copiado: cole se ainda não estiver lá, depois salve a imagem e escolha aqui.</string>
     <string name="own_image_copied_only">Pedido copiado: abra o ChatGPT ou o Gemini, cole, salve a imagem e escolha aqui.</string>
     <string name="own_image_preparing">Lendo a playlist para escrever o pedido…</string>
+    <string name="nf_todo_removals">abra a prévia da sync no Trackhop e confirme as remoções, se devem mesmo sair.</string>
 </resources>

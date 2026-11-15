@@ -2698,4 +2698,5 @@
     <string name="own_image_copied">Request copied: paste it if it is not there yet, then save the picture and choose it here.</string>
     <string name="own_image_copied_only">Request copied: open ChatGPT or Gemini, paste it, then save the picture and choose it here.</string>
     <string name="own_image_preparing">Reading the playlist to write the request…</string>
+    <string name="nf_todo_removals">open the sync\'s preview in Trackhop and confirm the removals, if they really should go.</string>
 </resources>

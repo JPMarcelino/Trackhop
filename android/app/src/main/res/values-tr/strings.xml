@@ -2694,4 +2694,5 @@
     <string name="own_image_copied">İstek kopyalandı: yoksa yapıştır, sonra görseli kaydet ve burada seç.</string>
     <string name="own_image_copied_only">İstek kopyalandı: ChatGPT ya da Gemini\'yi aç, yapıştır, görseli kaydet ve burada seç.</string>
     <string name="own_image_preparing">İsteği yazmak için çalma listesi okunuyor…</string>
+    <string name="nf_todo_removals">Trackhop\'ta senkronun önizlemesini aç ve gerçekten kaldırılmaları gerekiyorsa kaldırmaları onayla.</string>
 </resources>

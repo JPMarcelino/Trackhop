@@ -2704,4 +2704,5 @@
     <string name="own_image_copied">Petición copiada: pégala si no está, luego guarda la imagen y elígela aquí.</string>
     <string name="own_image_copied_only">Petición copiada: abre ChatGPT o Gemini, pégala, guarda la imagen y elígela aquí.</string>
     <string name="own_image_preparing">Leyendo la playlist para escribir la petición…</string>
+    <string name="nf_todo_removals">abre la vista previa de la sync en Trackhop y confirma las eliminaciones, si de verdad sobran.</string>
 </resources>
