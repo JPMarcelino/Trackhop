@@ -118,7 +118,19 @@ object Merch {
     internal data class Shop(val host: String, val collection: String = "")
 
     // Tests send every host to a local server ("http://127.0.0.1:port/<host>") and set the gap to 0.
-    @Volatile internal var hostBase: (String) -> String = { "https://$it" }
+    private val PUBLIC: (String) -> String = { "https://$it" }
+    @Volatile internal var hostBase: (String) -> String = PUBLIC
+
+    /**
+     * This machine or a device of the home network (loopback, site-local, link-local, IPv6 unique
+     * local). An artist's "official site" comes from public databases anyone can edit: it is never
+     * read at such an address.
+     */
+    internal fun inside(addresses: List<java.net.InetAddress>): Boolean = addresses.any {
+        it.isLoopbackAddress || it.isSiteLocalAddress || it.isLinkLocalAddress || it.isAnyLocalAddress ||
+            (it is java.net.Inet6Address && (it.address[0].toInt() and 0xfe) == 0xfc)
+    }
+
     @Volatile internal var hostGap = 1_000L
     private val paces = ConcurrentHashMap<String, Pacer>()
     /** Every Shopify catalogue call, all shops together (tests set a gap of 0). */
@@ -677,6 +689,10 @@ object Merch {
         val p = h + path.substringBefore('?')
         val shop = isShopify(path)
         var retried = false
+        // Only where the hosts are the real ones (the tests point them at a local server).
+        if (hostBase === PUBLIC && kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                runCatching { inside(java.net.InetAddress.getAllByName(h.substringBefore(':')).toList()) }.getOrDefault(false)
+            }) { t.steps += "$h: a private address, not read"; return null }
         while (true) {
             if (t.requests >= t.max) { if (t.requests++ == t.max) t.steps += "request cap reached"; return null }
             t.requests++
