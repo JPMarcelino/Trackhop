@@ -77,7 +77,7 @@ class DiscoverV2Test {
         server.stop(0)
         LocalKey.reset()
         ServerWrapped.fake = null
-        Features.v2 = false
+        Features.v2 = Features.START
     }
 
     private class Res(val code: Int, val text: String, val bytes: ByteArray = ByteArray(0)) {

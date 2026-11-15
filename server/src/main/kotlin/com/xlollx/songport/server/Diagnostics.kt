@@ -61,7 +61,9 @@ object Diagnostics {
 
     /** The addresses of the user's own servers (Navidrome, Jellyfin, Plex…), hidden wherever they appear. */
     private fun servers(env: ServerEnv): List<String> =
-        Providers.all().mapNotNull { p -> runCatching { env.tokens.get(p.id)?.extra?.get("url") }.getOrNull() }
+        Providers.all().mapNotNull { p -> runCatching { env.tokens.get(p.id)?.extra?.get("url") }.getOrNull() } +
+            // The notification channels' servers too: a failed send logs their host name.
+            runCatching { com.xlollx.songport.notify.Notify.channels(env).flatMap { it.addresses() } }.getOrDefault(emptyList())
 
     /** Cleans [text] as a report is: names (unless [names]), then secrets. */
     fun clean(env: ServerEnv, text: String, names: Boolean, hider: Names? = null): String =

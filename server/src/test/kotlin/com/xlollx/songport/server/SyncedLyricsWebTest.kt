@@ -11,6 +11,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -74,7 +75,7 @@ class SyncedLyricsWebTest {
     @After fun stop() {
         server.stop(0); fake.stop(0)
         LrcLib.api = savedApi
-        Features.v2 = false
+        Features.v2 = Features.START
     }
 
     private fun sub(inner: String) = """{"subsonic-response":{"status":"ok","version":"1.16.1"${if (inner.isEmpty()) "" else ",$inner"}}}"""
@@ -97,6 +98,33 @@ class SyncedLyricsWebTest {
     private fun connectNavidrome() {
         env.tokens.set("subsonic", com.xlollx.songport.data.Tokens(accessToken = "pw", userName = "me", extra = mapOf("url" to "http://127.0.0.1:${fake.address.port}")))
         env.store.updateSettings { it.copy(connectors = it.connectors + "subsonic") }
+    }
+
+    /** On a shared server only the admin maps the music folder and has .lrc files written into it. */
+    @Test fun onlyTheAdminWritesLyricFilesIntoTheMusicFolder() {
+        Features.v2 = true
+        connectNavidrome()
+        val navidrome = Providers.byId("subsonic")!!
+        ServerLyrics.setFolder(env, navidrome, "/music", tmp.newFolder("music-admin").path)
+        assertTrue(ServerLyrics.sidecars(env, navidrome) != null)
+        // A person without co-admin, with the same server connected and (somehow) a folder saved.
+        val person = ServerEnv(tmp.newFolder("person"), Strings(emptyMap()), "https://songport.example.org", Permissions.DEFAULT)
+        person.tokens.set("subsonic", env.tokens.get("subsonic")!!)
+        person.store.updateSettings { it.copy(connectors = it.connectors + "subsonic") }
+        ServerLyrics.setFolder(person, navidrome, "/music", tmp.newFolder("music-person").path)
+        assertNull(ServerLyrics.sidecars(person, navidrome))
+        assertFalse(ServerLyrics.canFill(person, navidrome))
+        val other = Web(person, Runner(person), Auth(person), "sekret", "test").start(0)
+        try {
+            val res = client.send(
+                HttpRequest.newBuilder(URI("http://127.0.0.1:${other.address.port}/tools/nolyrics"))
+                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString("any:sekret".toByteArray()))
+                    .header("Origin", "http://127.0.0.1:${other.address.port}").header("Content-Type", "application/x-www-form-urlencoded")
+                    .POST(HttpRequest.BodyPublishers.ofString("action=folder&service=subsonic&server=%2Fmusic&local=%2Ftmp")).build(),
+                HttpResponse.BodyHandlers.ofString(),
+            )
+            assertEquals(res.body().take(300), 403, res.statusCode())
+        } finally { other.stop(0) }
     }
 
     @Test fun hiddenWhileTheReleaseSwitchIsOff() {

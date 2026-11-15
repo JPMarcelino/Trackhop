@@ -24,7 +24,10 @@ internal object Features {
         get() = com.xlollx.songport.Features.build
         set(value) { com.xlollx.songport.Features.build = value }
 
-    init { v2 = fromEnvironment(System.getenv(), System.getProperty("trackhop.preview2")) }
+    /** The switch as this process started: [DEFAULT], or what the environment says. What a test that changed it puts back, so the classes after it run as the release does and not always off. */
+    val START: Boolean = fromEnvironment(System.getenv(), System.getProperty("trackhop.preview2"))
+
+    init { v2 = START }
 
     /** Called at start, so the engine's switch is set before anything asks it. */
     fun init() = Unit

@@ -49,7 +49,7 @@ class ApiCallsTest {
         File(data, "csv/Out.csv").writeText("title,artist\n")
     }
 
-    @After fun stop() { server.stop(0); Features.v2 = false }
+    @After fun stop() { server.stop(0); Features.v2 = Features.START }
 
     private class Answer(val code: Int, val text: String) {
         val obj: JsonObject get() = Json.parseToJsonElement(text).jsonObject
@@ -235,6 +235,12 @@ class ApiCallsTest {
         assertEquals(200, call("PATCH", "syncs/$id", """{"twoWay":true,"twoWayRemovals":true}""").code)
         assertEquals(2, env.store.data.jobs.size)
         assertTrue(env.store.job(id)!!.twoWayRemovals && env.store.job(twinId)!!.twoWayRemovals)
+
+        // The ↔ half switched off or on by itself takes the first with it.
+        assertEquals(200, call("PATCH", "syncs/$twinId", """{"enabled":true}""").code)
+        assertTrue(env.store.job(id)!!.enabled && env.store.job(twinId)!!.enabled)
+        assertEquals(200, call("PATCH", "syncs/$twinId", """{"enabled":false}""").code)
+        assertFalse(env.store.job(id)!!.enabled || env.store.job(twinId)!!.enabled)
 
         // Two-way is turned off on the first sync, not on its ↔ half; the half goes, with the pair's state.
         val refused = call("PATCH", "syncs/$twinId", """{"twoWay":false}""")

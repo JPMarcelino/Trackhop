@@ -81,8 +81,9 @@ internal fun Web.settlePair(before: SyncJob?, saved: SyncJob) {
     }
     val partner = store.job(linked)
     if (partner != null && twinOriginal(saved) != null) {
-        // The "↔" half changed on its own page: only the pair's own choice is shared from here.
-        if (partner.twoWayRemovals != saved.twoWayRemovals) store.upsertJob(partner.copy(twoWayRemovals = saved.twoWayRemovals))
+        // The "↔" half changed on its own page: only the pair's own choice is shared from here, and
+        // whether it is on (a pair with one half off would travel one way and still read "two-way").
+        if (partner.twoWayRemovals != saved.twoWayRemovals || partner.enabled != saved.enabled) store.upsertJob(partner.copy(twoWayRemovals = saved.twoWayRemovals, enabled = saved.enabled))
     } else {
         val twin = (partner?.copy(
             // Renamed with this sync only when it carries the name the editor gave it.
