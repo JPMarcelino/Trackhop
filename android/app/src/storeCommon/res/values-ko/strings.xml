@@ -15,4 +15,6 @@
     <string name="setlists_browse">setlist.fm 둘러보기</string>
     <string name="setlists_browse_need_plugin">setlist.fm을 둘러보려면 연결 플러그인의 최신 버전이 필요합니다. 업데이트한 뒤 다시 시도하세요.</string>
     <string name="setup_why_deezer">Deezer에서 더 이상 새 개발자 앱을 만들 수 없어요. 이미 있다면 여기에 그 Application ID를 쓰세요. 계속 작동해요. 없다면 Deezer (plugin) 옵션이 이미 설치한 커넥터 플러그인을 통해 앱 없이 작동해요. https 리디렉션 페이지는 프로젝트에서 제공해요.</string>
+    <string name="backup_full_web_missing">웹 로그인은 포함되지 않았습니다. 설치된 커넥터 플러그인이 넘겨주지 않았습니다(너무 오래되었거나 공식 앱이 아님). 업데이트한 뒤 다시 저장하세요.</string>
+    <string name="backup_full_web_failed">웹 로그인을 되돌리지 못했습니다(커넥터 플러그인이 없거나 너무 오래됨). 해당 서비스에 다시 로그인하세요.</string>
 </resources>

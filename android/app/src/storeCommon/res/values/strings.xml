@@ -16,4 +16,6 @@
     <string name="setlists_browse">Browse setlist.fm</string>
     <string name="setlists_browse_need_plugin">Browsing setlist.fm needs a newer version of the connector plugin: update it, then try again.</string>
     <string name="setup_why_deezer">Deezer no longer lets anyone create a new developer app. If you already have one, use its application ID here: it still works. If you don\'t, the Deezer (plugin) option works without one, through a connector plugin you already have. The https redirect page is provided by the project.</string>
+    <string name="backup_full_web_missing">The web sign-ins were not included: the installed connector plugin did not hand them over (it is too old, or not the official one). Update it, then save again.</string>
+    <string name="backup_full_web_failed">The web sign-ins could not be put back (the connector plugin is missing or too old): sign in to those services again.</string>
 </resources>

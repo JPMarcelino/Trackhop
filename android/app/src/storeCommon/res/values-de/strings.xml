@@ -14,4 +14,6 @@
     <string name="setlists_browse">setlist.fm durchsuchen</string>
     <string name="setlists_browse_need_plugin">Zum Durchsuchen von setlist.fm braucht es eine neuere Version des Verbindungs-Plugins: aktualisiere es und versuche es erneut.</string>
     <string name="setup_why_deezer">Deezer lässt keine neuen Entwickler-Apps mehr anlegen. Hast du schon eine, nutze hier ihre Application ID: Sie funktioniert weiter. Sonst funktioniert die Option Deezer (plugin) ohne App, über ein Connector-Plugin, das du bereits hast. Die https-Weiterleitungsseite stellt das Projekt bereit.</string>
+    <string name="backup_full_web_missing">Die Web-Anmeldungen sind nicht enthalten: Das installierte Connector-Plugin hat sie nicht herausgegeben (es ist zu alt oder nicht das offizielle). Aktualisiere es und speichere erneut.</string>
+    <string name="backup_full_web_failed">Die Web-Anmeldungen konnten nicht zurückgespielt werden (das Connector-Plugin fehlt oder ist zu alt): Melde dich bei diesen Diensten erneut an.</string>
 </resources>
