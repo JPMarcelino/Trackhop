@@ -268,8 +268,11 @@ open class SpotifyProvider(override val slot: String = "") : OAuthProvider() {
      * Spotify took that field away from Development Mode apps in February 2026, so when no entry of
      * the market read carries it, the read is compared with the plain one, position by position: an
      * entry whose id changed once the market applied is a relinked one. That costs one more read of
-     * the playlist, and only then.
+     * the playlist, and only then: once this app's sign-in has served `linked_from`, a playlist
+     * without it simply has no relinked track, and is not read twice.
      */
+    @Volatile private var linkedFromServedTo: String? = null
+
     override suspend fun unplayable(ctx: Env, playlistId: String): List<UnplayableEntry> {
         if (MusicProvider.isLibrary(playlistId) && playlistId != MusicProvider.LIKED_ID) return emptyList()
         val fieldsOf = "id,name,uri,duration_ms,is_local,is_playable,restrictions(reason),linked_from(id,uri),external_ids(isrc),artists(name),album(name,release_date)"
@@ -304,7 +307,9 @@ open class SpotifyProvider(override val slot: String = "") : OAuthProvider() {
             }
             url = j["next"].str
         }
-        if (sawLinkedFrom || playable.isEmpty()) return out
+        val app = clientId(ctx)
+        if (sawLinkedFrom) linkedFromServedTo = app
+        if (sawLinkedFrom || playable.isEmpty() || linkedFromServedTo == app) return out
         val listed = tracks(ctx, playlistId)
         if (listed.size != marketIds.size) {
             // The playlist changed between the two reads: positions no longer line up.

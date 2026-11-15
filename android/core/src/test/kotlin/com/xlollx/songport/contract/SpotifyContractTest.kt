@@ -200,6 +200,15 @@ class SpotifyContractTest : ContractTest() {
         next(); next(); noMoreRequests()
     }
 
+    /** An app that is served linked_from: a playlist with no relinked track is read once, not twice. */
+    @Test fun noSecondReadOnceLinkedFromWasServed() = runBlocking {
+        json(page(listOf("""{"item":{"id":"new","name":"Moved","is_playable":true,"linked_from":{"id":"old","uri":"spotify:track:old"}}}"""), null, 1))
+        json(page(listOf("""{"item":{"id":"c","name":"Fine","uri":"spotify:track:c","is_playable":true}}"""), null, 1))
+        assertEquals(1, sp.unplayable(env, "PL").size)
+        assertEquals(emptyList<Any>(), sp.unplayable(env, "PL2"))
+        next(); next(); noMoreRequests()
+    }
+
     @Test fun relinksNotGuessedWhenThePlaylistChangedBetweenTheReads() = runBlocking {
         json(page(listOf("""{"item":{"id":"new","name":"Moved","is_playable":true}}"""), null, 1))
         json(page(listOf("""{"item":{"id":"x","name":"X"}}""", """{"item":{"id":"old","name":"Moved"}}"""), null, 2))
