@@ -63,6 +63,7 @@ description (architecture, matching, services and their limits) stays in the
 - [Remove duplicate songs](remove-duplicates-spotify) from a playlist, on any service.
 - [Fix greyed-out songs](fix-greyed-out-songs): unplayable tracks swapped for versions that play.
 - [Your Wrapped, whenever you want](wrapped-anytime), from any service, with history.
+- [Without a paid service](without-a-paid-service): new music every week on free YouTube Music, Spotify, Deezer or SoundCloud accounts.
 
 **New in 2.0**
 - [Your Wrapped from what you really play](wrapped-anytime#from-what-you-really-play): Last.fm, ListenBrainz, your own server and more.
@@ -94,7 +95,7 @@ description (architecture, matching, services and their limits) stays in the
 - [Trasferire playlist tra Spotify, YouTube Music, Apple Music e Amazon Music](trasferire-playlist), gratis e sincronizzate.
 - [Alternativa gratuita a Soundiiz e TuneMyMusic](alternativa-soundiiz): niente account, niente limiti.
 - [Da Spotify ad Apple Music](trasferire-playlist-spotify-apple-music) e [da Spotify a YouTube Music](trasferire-playlist-spotify-youtube-music), gratis.
-- [Salvare Discover Weekly prima che cambi](salvare-discover-weekly) · [Backup automatico delle playlist](backup-playlist-spotify) · [Rimuovere i brani doppi](rimuovere-duplicati-playlist) · [Sistemare i brani in grigio](brani-non-riproducibili) · [Il tuo Wrapped, quando vuoi](wrapped-quando-vuoi).
+- [Salvare Discover Weekly prima che cambi](salvare-discover-weekly) · [Backup automatico delle playlist](backup-playlist-spotify) · [Rimuovere i brani doppi](rimuovere-duplicati-playlist) · [Sistemare i brani in grigio](brani-non-riproducibili) · [Il tuo Wrapped, quando vuoi](wrapped-quando-vuoi) · [Senza abbonamento](senza-abbonamento).
 
 **Maintaining it**
 - [Release process](release-process): version, changelogs, what CI does, F-Droid and Obtainium.
