@@ -155,6 +155,11 @@ class CardDensityFlowTest : FlowTest() {
     }
 
     /** A running tile opened, then its card tapped: the live view takes the card's place, never a second sheet on top. */
+    /** The live view is on screen: 2.0's sheet by its help button, the older one by its title. */
+    private fun liveShown(): Boolean = if (com.xlollx.songport.Features.v2)
+        compose.onAllNodes(androidx.compose.ui.test.hasContentDescription(s(R.string.live_help))).fetchSemanticsNodes().isNotEmpty()
+    else exists(s(R.string.live_title))
+
     @Test
     fun aRunningTilesLiveViewReplacesItsSheet() {
         seed(5)
@@ -166,12 +171,13 @@ class CardDensityFlowTest : FlowTest() {
             click("Sync number 1")
             waitFor("the card opened") { cards().isNotEmpty() }
             compose.onAllNodes(hasTestTag(JOB_CARD_TAG)).onFirst().performTouchInput { this.click(percentOffset(0.6f, 0.25f)) }
-            waitText(s(R.string.live_title))
+            waitFor("the live view") { liveShown() }
             waitFor("the card's sheet closed under it") { cards().isEmpty() }
         } finally {
             com.xlollx.songport.sync.SyncState.finish("job-1")
         }
-        waitFor("the live view closed with the run") { !exists(s(R.string.live_title)) }
+        // 2.0's live sheet stays open after the run with its summary; the older one closes with it.
+        if (!com.xlollx.songport.Features.v2) waitFor("the live view closed with the run") { !liveShown() }
     }
 
     @Test
