@@ -54,7 +54,7 @@ class FullBackupWebTest {
         env.tokens.set("ytm", Tokens(accessToken = "", extra = mapOf("cookies" to "cookie-a")))
     }
 
-    @After fun stop() { server.stop(0); Features.v2 = false }
+    @After fun stop() { server.stop(0); Features.v2 = Features.START }
 
     private fun get(path: String) = client.send(HttpRequest.newBuilder(URI("$base$path")).header("Authorization", auth).GET().build(), HttpResponse.BodyHandlers.ofString())
 
@@ -186,6 +186,43 @@ class FullBackupWebTest {
         assertEquals("token-c", fourth.tokens.get("spotify")?.accessToken)
     }
 
+    /** On a shared server, pasted cookies in a file are not restored for a person who may not use the unofficial connectors. */
+    @Test fun webCookiesAreSkippedWithoutTheUnofficialPermission() {
+        val text = sealed()
+        val limited = ServerEnv(tmp.newFolder("limited"), Strings(emptyMap()), "http://127.0.0.1", Permissions.DEFAULT - Permissions.UNOFFICIAL)
+        assertNull(FullBackupServer.webHere(limited))
+        val done = FullBackupServer.import(limited, FullBackupServer.open(limited, text, password.toCharArray()), replacesDevice = false, replaceSignIns = true, channels = true)
+        assertTrue(done.restored.webSkipped)
+        assertNull(limited.tokens.get("ytm"))
+        assertEquals("token-a", limited.tokens.get("lastfm")?.accessToken)
+    }
+
+    /** A server with no password that the network reaches hands out no file with the sign-ins; Desktop (this computer only) still does. */
+    @Test fun aServerWithoutAPasswordDoesNotExportTheSignIns() {
+        Features.v2 = true
+        fun tryOn(loopbackOnly: Boolean): Pair<HttpResponse<String>, String> {
+            val open = Web(env, Runner(env), Auth(env), null, "test").start(0, loopbackOnly)
+            try {
+                val at = "http://127.0.0.1:${open.address.port}"
+                val res = client.send(
+                    HttpRequest.newBuilder(URI("$at/tools/config")).header("Origin", at).header("Content-Type", "application/x-www-form-urlencoded")
+                        .POST(HttpRequest.BodyPublishers.ofString("action=encrypted&password=$password&password2=$password")).build(),
+                    HttpResponse.BodyHandlers.ofString(),
+                )
+                val page = client.send(HttpRequest.newBuilder(URI("$at/tools/backup")).GET().build(), HttpResponse.BodyHandlers.ofString()).body()
+                return res to page
+            } finally { open.stop(0) }
+        }
+        val (refused, page) = tryOn(loopbackOnly = false)
+        assertEquals(303, refused.statusCode())
+        assertTrue(location(refused), location(refused).contains("SONGPORT_PASSWORD"))
+        assertFalse(page.contains("action\" value=\"encrypted\""))
+        assertTrue(page.contains("SONGPORT_PASSWORD"))
+        val (file, desktop) = tryOn(loopbackOnly = true)
+        assertTrue(EncryptedBackup.isEncrypted(file.body()))
+        assertTrue(desktop.contains("action\" value=\"encrypted\""))
+    }
+
     @Test fun theApiExportsAndImportsWithThePasswordInAHeader() {
         Features.v2 = true
         assertEquals(400, api("POST", "config/encrypted", """{"password":"short"}""").statusCode())
@@ -231,5 +268,32 @@ class FullBackupWebTest {
         out.reset()
         assertEquals(0, Cli.run(listOf("config", "import", path, "--replace-sign-ins"), cliEnv, java.io.PrintStream(out), java.io.PrintStream(java.io.ByteArrayOutputStream())))
         assertEquals("token-a", env.tokens.get("lastfm")?.accessToken)
+    }
+
+    /** A password in any script: the command line sends it as Base64, curl's raw UTF-8 is read back, Latin-1 still opens. */
+    @Test fun aCyrillicPasswordTravelsInTheHeader() {
+        Features.v2 = true
+        val cyrillic = "пароль-12345"
+        val path = File(tmp.newFolder("cli-ru"), "set-up.trackhop").path
+        val cliEnv = mapOf("TRACKHOP_URL" to base, "TRACKHOP_TOKEN" to token, "TRACKHOP_BACKUP_PASSWORD" to cyrillic)
+        val out = java.io.ByteArrayOutputStream()
+        val err = java.io.ByteArrayOutputStream()
+        assertEquals(0, Cli.run(listOf("config", "--encrypted", path), cliEnv, java.io.PrintStream(out), java.io.PrintStream(err)))
+        env.tokens.set("lastfm", Tokens(accessToken = "token-b"))
+        val imported = Cli.run(listOf("config", "import", path, "--replace-sign-ins"), cliEnv, java.io.PrintStream(out), java.io.PrintStream(err))
+        assertEquals(err.toString(), 0, imported)
+        assertEquals("token-a", env.tokens.get("lastfm")?.accessToken)
+        // curl sends the UTF-8 bytes raw, the server reads them as Latin-1: read back, and Latin-1 as it came stays the second try.
+        val raw = String(cyrillic.toByteArray(Charsets.UTF_8), Charsets.ISO_8859_1)
+        assertEquals(listOf(cyrillic, raw), backupPasswords(raw, null))
+        assertEquals(listOf("é-horse-12345"), backupPasswords("é-horse-12345", null).drop(1))
+        assertEquals(listOf(password), backupPasswords(password, null))
+
+        // A password the HTTP client refuses (a control character) is never printed.
+        val odd = "secret\u0001-horse-1"
+        err.reset(); out.reset()
+        val code = Cli.run(listOf("config", "import", path), cliEnv + ("TRACKHOP_BACKUP_PASSWORD" to odd), java.io.PrintStream(out), java.io.PrintStream(err))
+        assertTrue(code != 0)
+        assertFalse((out.toString() + err.toString()).contains("horse"))
     }
 }

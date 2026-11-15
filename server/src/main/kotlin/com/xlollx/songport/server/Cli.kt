@@ -248,6 +248,15 @@ object Cli {
      * The encrypted backup's password (1.18): TRACKHOP_BACKUP_PASSWORD for scripts, else asked on the
      * terminal without showing it ([twice] for a new file). Null when there is neither.
      */
+    /**
+     * A backup password as a header carries it. Java's HTTP client sends ASCII only (and refuses
+     * the rest with a message that quotes the value): a plain password goes in X-Backup-Password as
+     * it always did, any other as the Base64 of its UTF-8 bytes in X-Backup-Password-Base64.
+     */
+    internal fun passwordHeader(pw: CharArray): Pair<String, String> =
+        if (pw.all { it.code in 0x20..0x7E }) "X-Backup-Password" to String(pw)
+        else "X-Backup-Password-Base64" to java.util.Base64.getEncoder().encodeToString(String(pw).toByteArray(Charsets.UTF_8))
+
     internal fun backupPassword(env: Map<String, String>): (prompt: String, twice: Boolean) -> CharArray? = { prompt, twice ->
         env["TRACKHOP_BACKUP_PASSWORD"]?.takeIf { it.isNotEmpty() }?.toCharArray() ?: System.console()?.let { c ->
             val first = c.readPassword("%s: ", prompt) ?: return@let null
@@ -320,6 +329,10 @@ object Cli {
         } catch (f: Failure) {
             err.println("trackhop: ${f.message}")
             f.code
+        } catch (e: IllegalArgumentException) {
+            // No stack trace and no message: the HTTP client's can quote a header (a password).
+            err.println("trackhop: the request could not be sent (${e.javaClass.simpleName})")
+            1
         }
     }
 

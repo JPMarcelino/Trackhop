@@ -747,7 +747,8 @@ also reads the tour dates on Spotify's artist pages when you have **Spotify (web
 | `GET /api/v1/backup` | The full backup: running, last run, schedule. |
 | `POST /api/v1/backup` | Back up every playlist now (a background task). |
 | `GET /api/v1/config` | The whole set-up as a .trackhop file; history=true with the runs. |
-| `POST /api/v1/config` | Bring a .trackhop file back in (the body); dryRun=true only says what it holds. |
+| `POST /api/v1/config` | Bring a .trackhop file back in (the body); dryRun=true only says what it holds. An encrypted file needs its password in the `X-Backup-Password` header (never in the address), or, for a password with characters outside ASCII, the Base64 of its UTF-8 bytes in `X-Backup-Password-Base64`; replacesDevice=true keeps its scheduled syncs on, replaceSignIns=true replaces the sign-ins already here. |
+| `POST /api/v1/config/encrypted` | The whole set-up with its sign-ins (tokens, client secrets, pasted web cookies) as an encrypted .trackhop file, locked with the `password` of the JSON body (at least 10 characters; lost, nobody can open the file). |
 
 **Settings**
 
