@@ -24,7 +24,7 @@ On your phone, on a schedule. No account, no server, no subscription.</p>
 </p>
 
 <p align="center">
-  <a href="https://play.google.com/store/apps/details?id=com.xlollx.songport"><img src="docs/assets/badges/play.png" height="56" alt="Get it on Google Play"></a>
+  <a href="https://play.google.com/store/apps/details?id=com.xlollx.songport"><img src="docs/assets/badges/play.svg" height="56" alt="Get it on Google Play"></a>
   <a href="https://appgallery.huawei.com/app/C119677919"><img src="docs/assets/badges/appgallery.svg" height="56" alt="Explore it on Huawei AppGallery"></a>
   <a href="https://f-droid.org/packages/com.xlollx.songport/"><img src="docs/assets/badges/fdroid.svg" height="56" alt="Get it on F-Droid"></a>
   <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/xlollx/Trackhop"><img src="docs/assets/badges/obtainium.svg" height="56" alt="Get it on Obtainium"></a>
