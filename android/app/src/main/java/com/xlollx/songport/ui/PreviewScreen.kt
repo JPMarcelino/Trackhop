@@ -116,7 +116,9 @@ fun PreviewScreen(job: SyncJob, onClose: () -> Unit, onRun: (SyncJob) -> Unit) {
     // 1.18: the preview goes on when the page is left ([Previews]); the card says how far it is.
     val background = com.xlollx.songport.Features.v2
     val runs by Previews.state.collectAsState()
-    val bgRun = Previews.of(runs[job.id], job)?.takeIf { background }
+    // The sync as stored now: a run since the page was opened (card, widget, schedule) is seen here.
+    val current = data.jobs.firstOrNull { it.id == job.id } ?: job
+    val bgRun = Previews.of(runs[job.id], current)?.takeIf { background }
     LaunchedEffect(bgRun) {
         bgRun ?: return@LaunchedEffect
         progress = bgRun.progress; waitingFor = bgRun.waitingFor
@@ -127,7 +129,7 @@ fun PreviewScreen(job: SyncJob, onClose: () -> Unit, onRun: (SyncJob) -> Unit) {
         if (plan != null) return@LaunchedEffect
         if (!online && com.xlollx.songport.sync.OfflineQueue.needsInternet(job)) { error = ctx.getString(R.string.net_offline); return@LaunchedEffect }
         error = null
-        if (background) { Previews.start(ctx.applicationContext, job, again = attempt > 0); return@LaunchedEffect }
+        if (background) { Previews.start(ctx.applicationContext, current, again = attempt > 0); return@LaunchedEffect }
         try { plan = engine.plan(job, { progress = it }, createTarget = false, interactive = true, onWait = { waitingFor = it }) }
         catch (e: kotlinx.coroutines.CancellationException) { throw e } catch (e: Exception) { error = e.userMessage(ctx) }
     }
@@ -277,7 +279,7 @@ fun PreviewScreen(job: SyncJob, onClose: () -> Unit, onRun: (SyncJob) -> Unit) {
                                 onKeep = {
                                     // Settled here: remembered, so the run does not ask again.
                                     engine.rematchInPlan(job, review, review.chosen)
-                                    plan = p.copy(uncertain = p.uncertain - review)
+                                    plan = p.copy(uncertain = p.uncertain - review).also { Previews.settled(job.id, it) }
                                 },
                                 search = { q -> engine.searchOnTarget(job, q, review.source) },
                                 webSearchUrl = webSearch,
@@ -286,7 +288,7 @@ fun PreviewScreen(job: SyncJob, onClose: () -> Unit, onRun: (SyncJob) -> Unit) {
                                     plan = p.copy(
                                         uncertain = p.uncertain - review,
                                         toAdd = p.toAdd.filter { it.id != review.chosen.id } + chosen,
-                                    )
+                                    ).also { Previews.settled(job.id, it) }
                                 },
                                 onError = { m -> scope.launch { snackbar.showSnackbar(m.ifBlank { ctx.getString(R.string.error_generic) }) } },
                             )
@@ -424,9 +426,10 @@ object Previews {
 
     private const val KEEP_MS = 30 * 60_000L
 
-    /** [run] previews [job] as it is now: same lists, same matching and removals (a new colour or a run's date change nothing). */
+    /** [run] previews [job] as it is now: same lists, same matching and removals (a new colour changes nothing). A plan made before the sync last ran is of no use: that run changed the lists. */
     fun of(run: Run?, job: SyncJob): Run? = run?.takeIf {
         val a = it.job
+        !(it.plan != null && job.lastRunEpoch > it.at) &&
         a.source == job.source && a.target == job.target && a.policy == job.policy && a.mirrorRemovals == job.mirrorRemovals &&
             a.twoWayRemovals == job.twoWayRemovals && a.ignoredSourceIds == job.ignoredSourceIds && a.keepOrder == job.keepOrder
     }
@@ -435,6 +438,9 @@ object Previews {
     val state = kotlinx.coroutines.flow.MutableStateFlow<Map<String, Run>>(emptyMap())
 
     private fun update(id: String, f: (Run) -> Run) = state.update { m -> m[id]?.let { m + (id to f(it)) } ?: m }
+
+    /** A match settled in the page: kept in the plan, so it is not "to review" again when the page reopens. */
+    fun settled(id: String, plan: SyncPlan) = update(id) { if (it.plan != null) it.copy(plan = plan) else it }
 
     fun clear(id: String) { tasks.remove(id)?.cancel(); state.update { it - id } }
 
