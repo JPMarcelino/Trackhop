@@ -175,6 +175,8 @@ object SharedGroups {
 
     /** How far ahead of this device's clock an action may be dated and still count now. */
     const val MAX_AHEAD_MS = 24 * 60 * 60 * 1000L
+    /** How many "the channel moved" words one refresh follows, one after the other. */
+    private const val MAX_MOVES = 3
     /** Members kept on the list at most. */
     const val MAX_MEMBERS = 256
     /** Per member, how many of their highest numbers are checked for a signature before giving up this time. */
@@ -227,7 +229,10 @@ object SharedGroups {
      * file again when it changed (their card, the newest curators' list, every event: a member who
      * leaves does not take the group's history with them).
      */
-    fun refresh(env: Env, group: SharedGroup, write: Boolean = true): GroupState = synchronized(lockOf(group.id)) {
+    fun refresh(env: Env, group: SharedGroup, write: Boolean = true): GroupState = refresh(env, group, write, MAX_MOVES)
+
+    /** [moves]: how many "the channel moved" words are still followed in this refresh (a curator cannot keep it busy for ever). */
+    private fun refresh(env: Env, group: SharedGroup, write: Boolean, moves: Int): GroupState = synchronized(lockOf(group.id)) {
         val transport = SharedTransports.open(env, group)
         val before = load(env, group.id)
         val files = try {
@@ -275,13 +280,14 @@ object SharedGroups {
         // followed here (a member joining with an old invite follows too; a stale word sends them to
         // a server whose newer word sends them on, so they end where the group is).
         val move = (transport as? NtfyTransport)?.moves
-            ?.filter { it.by in roster.curators && it.at > group.movedAt && !sameServer(it.server, group.folder) }
+            // Dated more than a day ahead, like an event, it is not followed: stored as the last move, no honest later one would be.
+            ?.filter { moves > 0 && it.by in roster.curators && it.at > group.movedAt && it.at <= latest && !sameServer(it.server, group.folder) }
             ?.maxByOrNull { it.at }
         if (move != null) {
             save(env, group.id, state)
             val moved = switchServer(env, group, move.server, null, move.at)
             env.log("shared", "${group.name}: the channel moved to ${moved.folderName}, as a curator said")
-            return@synchronized runCatching { refresh(env, moved, write) }.getOrElse { state }
+            return@synchronized runCatching { refresh(env, moved, write, moves - 1) }.getOrElse { state }
         }
         if (write) state = publish(env, group, state, transport)
         save(env, group.id, state)

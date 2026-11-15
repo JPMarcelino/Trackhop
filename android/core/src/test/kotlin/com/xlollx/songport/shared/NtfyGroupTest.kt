@@ -294,4 +294,18 @@ class NtfyGroupTest {
             server2.shutdown()
         }
     }
+
+    /** A curator's "moved" word dated years ahead is not followed: kept as the last move, no honest later one would be. */
+    @Test fun aMoveDatedFarAheadIsNotFollowed() {
+        val invite = create("1")
+        join(ben, invite)
+        ben.refresh(); ana.refresh()
+        val anaMe = Identity.of(ana.env.tokens.get(SharedGroups.tokenKey(ana.groupId))!!.accessToken)!!
+        val anaCard = SharedGroups.load(ana.env, ana.groupId).members.first { it.member == anaMe.id }
+        NtfyTransport(ana.env, ana.groupId, address, SharedTransports.groupKey(ana.env, ana.group)!!)
+            .announce(anaCard, NtfyMove(ana.groupId, "https://ntfy.example.org", now + 10 * 365 * 24 * 3_600_000L, false).signed(anaMe))
+        ben.refresh()
+        assertEquals(address, ben.group.folder)
+        assertEquals(0L, ben.group.movedAt)
+    }
 }

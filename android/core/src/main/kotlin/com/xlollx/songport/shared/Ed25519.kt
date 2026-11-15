@@ -182,8 +182,9 @@ object Ed25519 {
                 val key = java.security.KeyFactory.getInstance("Ed25519").generatePublic(java.security.spec.X509EncodedKeySpec(X509_PREFIX + publicKey))
                 java.security.Signature.getInstance("Ed25519").run { initVerify(key); update(message); verify(signature) }
             }.getOrElse { e ->
-                // A malformed key or signature is a "no"; a provider that cannot do it at all hands over to the Kotlin code.
-                if (e is java.security.SignatureException || e is java.security.spec.InvalidKeySpecException || e is java.security.InvalidKeyException) false else null
+                // A malformed signature is a "no". The key was checked before the platform was asked
+                // (usableKey): a provider that refuses it cannot do this, and hands over to the Kotlin code.
+                if (e is java.security.SignatureException) false else null
             }
         }
     }
