@@ -56,6 +56,8 @@ private const val MAX_SEARCH_SPACING_MS = 10_000L
 private const val SLOW_ADD_NOTE_FROM = 60
 /** How many added tracks a report keeps for its list: enough to read, small enough for a stored report. */
 private const val MAX_LISTED = 500
+/** How many of a sync's last runs count as "already asked" for an old match that now reads as live: a failed run in between does not make it news again. */
+private const val RECENT_RUNS = 3
 private const val RESET_AFTER_CHUNKS = 15
 /** Punteggio fittizio di un "non trovato" preso dalla cache dei fallimenti, mai mostrato. */
 private const val MISS_SCORE = -1.0
@@ -531,7 +533,11 @@ class SyncEngine(
         // 1) brani gia' presenti nella destinazione
         for (s in srcTracks) {
             val key = FileStore.cacheKey(src.id, s.id, dstKey)
+            // A library target's key carries its kind since 2.0. A match under the old key (the bare
+            // service) still counts when this target lists that very id: one chosen by hand is not found
+            // again by a search, and a mirror would then unsave it. A song id is never in an album listing.
             val cachedId = store.cachedMatch(src.id, s.id, dstKey)
+                ?: (if (dstKey != dst.id) store.cachedMatch(src.id, s.id, dst.id)?.takeIf { it in dstById } else null)
             if (cachedId != null && cachedId !in dstById && unlistedPresent(cachedId)) {
                 matchedDstIds += cachedId
                 newCache[key] = cachedId
@@ -568,6 +574,13 @@ class SyncEngine(
         val toAdd = LinkedHashMap<String, Track>()
         val unmatched = ArrayList<Track>()
         val uncertain = ArrayList<MatchReview>(liveSuspects)
+        // A suspect one of this sync's last runs already listed and the user has not settled: listed
+        // again, but it is no news (no "to review" message on every run).
+        val reviewAsked = if (liveSuspects.isEmpty()) emptySet() else {
+            val before = store.data.reports.filter { it.jobId == job.id && !it.partial }.sortedByDescending { it.startedEpoch }.take(RECENT_RUNS)
+                .flatMapTo(HashSet()) { r -> r.reviewTracks.map { it.source.id } }
+            liveSuspects.mapNotNullTo(HashSet()) { it.source.id.takeIf { id -> id in before } }
+        }
         var searched = 0
         val interrupted = searchMissing(src, dst, targetId, toSearch, job.policy, onProgress, direct) { s, found, score ->
             searched++
@@ -690,8 +703,10 @@ class SyncEngine(
         // take out one entry by its own id and the two copies have different ones; never when the
         // source has the track twice too, in an archive, or on a playlist another sync also fills; and
         // not in a run that removes other tracks (where entries are named by position, a removal moves them).
+        // Only for a sync that may remove (mirror, or a two-way pair): an add-only one never deletes
+        // anything, a second copy kept on purpose included.
         val duplicates = ArrayList<Track>()
-        if (!interactive && !targetCreated && !job.archive && toRemove.isEmpty() && dst.canRemoveTracks && dst.removesSingleEntry && sharing.isEmpty() && interrupted == null && !MusicProvider.isLibrary(targetId)) {
+        if ((job.mirrorRemovals || pairOn) && !interactive && !targetCreated && !job.archive && toRemove.isEmpty() && dst.canRemoveTracks && dst.removesSingleEntry && sharing.isEmpty() && interrupted == null && !MusicProvider.isLibrary(targetId)) {
             val sourceCopies = HashMap<String, Int>()
             for (s in srcTracks) presentLinks[s.id]?.let { sourceCopies.merge(it, 1, Int::plus) }
             for ((id, copies) in dstTracks.groupBy { it.id }) {
@@ -731,7 +746,7 @@ class SyncEngine(
         )
         if (twoWay != null && twoWay.first && twoWay.complete) notes += str("note_two_way_started")
         return SyncPlan(
-            twoWay = twoWay, targetReadAt = targetReadAt, targetVersion = targetVersion, duplicates = duplicates,
+            twoWay = twoWay, targetReadAt = targetReadAt, targetVersion = targetVersion, duplicates = duplicates, reviewAsked = reviewAsked,
             targetPlaylistId = targetId,
             sourceCount = srcTracks.size,
             alreadyPresent = srcTracks.size - srcTracks.count { it.id in queued } - awaitingRemoval.size,
@@ -1455,6 +1470,7 @@ class SyncEngine(
             unmatchedTracks = unmatched,
             ignored = plan.ignored,
             reviewTracks = reviews,
+            reviewAsked = reviews.map { it.source.id }.filter { it in plan.reviewAsked },
             removedTracks = removedList,
             // Favourites are added last-first: listed back in the source's order.
             addedTracks = (if (MusicProvider.isLibrary(targetId)) addedList.asReversed() else addedList).take(MAX_LISTED),
