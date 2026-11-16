@@ -42,6 +42,8 @@ jobs:
           echo "ret: $(jq -c .ret <<<"$info")"
           # Shape only: every string value is replaced by its length, so no URL or name is printed.
           jq -c 'walk(if type=="string" then ("s" + (length|tostring)) else . end) | {appInfo: (.appInfo|keys?), languages: [.languages[]? | {lang: .lang, keys: keys}] }' <<<"$info" || true
+          # Where the app is offered (country codes only, nothing private).
+          jq -r '"publishCountry: " + ((.appInfo.publishCountry // "not in the answer") | tostring)' <<<"$info" || true
           jq -r '.languages[]? | .lang as $l | (.deviceMaterials // [])[] | "\($l) device=\(.deviceType) screenshots=\((.screenShots // [])|length) shotRes=\(.screenShotsResolution // .imageResolution // "?")"' <<<"$info" || true
           jq -c '.languages[]? | {showType, videoShowType, materials: [(.deviceMaterials // [])[] | (to_entries | map({key, value: (if (.value|type)=="string" then ("s"+(.value|length|tostring)) elif (.value|type)=="array" then ("array" + (.value|length|tostring)) else .value end)}) | from_entries)]}' <<<"$info" || true
           [ "$MODE" = "screenshots" ] || exit 0
