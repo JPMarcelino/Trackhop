@@ -72,10 +72,16 @@ Do whatever the website allows, slowly, one at a time:
 3. Search for a song.
 4. Create a test playlist.
 5. Add a song to it, then remove it.
-6. Rename the test playlist, then delete it.
+6. Open your liked songs (favourites). Like a song, then un-like it.
+7. Rename the test playlist, then delete it.
 
-Useful too, if the service has them: like a song and un-like it, save an album, follow an artist,
-and open your liked songs. A step the website does not allow is useful information as well: say so.
+If you have a few more minutes, these help too:
+
+- **Follow and unfollow**, one at a time: an artist, an album, a podcast, someone else's playlist.
+- **Edit the test playlist** before deleting it: change its cover, its description and its title,
+  and switch it between public and private.
+
+A step the website does not allow is useful information as well: say so.
 
 ## How to send it
 
