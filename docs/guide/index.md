@@ -23,6 +23,7 @@ description (architecture, matching, services and their limits) stays in the
 - [Troubleshooting](troubleshooting): the errors people actually meet, and what to do about each.
 - [Is it safe?](security): every download checked on VirusTotal, the files' SHA-256 and how Trackhop is built.
 - [Reporting a problem](reporting-a-problem): the diagnostic report, and what makes a report useful.
+- [Help add a service from your country](help-add-a-service): Yandex Music, NetEase, Pandora and other services the developer cannot sign in to; how to record the website safely and what to send.
 - [Cards](cards): "how compatible are we?" between two playlists, and the playlist poster with a QR code.
 - [Unplayable tracks](unplayable-tracks): the greyed-out tracks in your playlists, and how Trackhop replaces them.
 - [Trackhop Desktop (Windows, macOS, Linux)](desktop): the engine as a program on your computer, no Docker needed.

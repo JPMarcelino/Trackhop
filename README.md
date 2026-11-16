@@ -239,6 +239,10 @@ reports are what make it better: if something does not work as it should, say so
 - **Known rough edges**: see [Known limits](#known-limits). Matching depends on each catalogue's search:
   a track "not found" is usually missing or titled differently on the destination, and the review
   screen exists for those.
+- **A service from your country**: Yandex Music, VK Music, NetEase Cloud Music with an account, QQ Music,
+  Melon, KKBOX, Pandora and other services that only work in some countries cannot be reached from here.
+  If you use one, a capture of its website (the app records it for you) is what makes a connector
+  possible: [how to capture it and what to send](https://trackhop.org/guide/help-add-a-service).
 
 ---
 
